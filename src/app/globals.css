@@ -88,8 +88,237 @@
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+    --animate-fd-fade-in: fd-fade-in 300ms ease;
+    --color-fd-background: hsl(0, 0%, 98%);
+    --color-fd-foreground: hsl(0, 0%, 3.9%);
+    --color-fd-muted: hsl(0, 0%, 96.1%);
+    --color-fd-muted-foreground: hsl(0, 0%, 45.1%);
+    --color-fd-popover: hsl(0, 0%, 100%);
+    --color-fd-popover-foreground: hsl(0, 0%, 15.1%);
+    --color-fd-card: hsl(0, 0%, 99.7%);
+    --color-fd-card-foreground: hsl(0, 0%, 3.9%);
+    --color-fd-border: hsl(0, 0%, 89.8%);
+    --color-fd-primary: hsl(0, 0%, 9%);
+    --color-fd-primary-foreground: hsl(0, 0%, 98%);
+    --color-fd-secondary: hsl(0, 0%, 96.1%);
+    --color-fd-secondary-foreground: hsl(0, 0%, 9%);
+    --color-fd-accent: hsl(0, 0%, 94.1%);
+    --color-fd-accent-foreground: hsl(0, 0%, 9%);
+    --color-fd-ring: hsl(0, 0%, 63.9%);
+
+  --animate-fd-fade-out: fd-fade-out 300ms ease;
+
+  --animate-fd-dialog-in: fd-dialog-in 200ms cubic-bezier(0.32, 0.72, 0, 1);
+
+  --animate-fd-dialog-out: fd-dialog-out 300ms cubic-bezier(0.32, 0.72, 0, 1);
+
+  --animate-fd-popover-in: fd-popover-in 150ms ease;
+
+  --animate-fd-popover-out: fd-popover-out 150ms ease;
+
+  --animate-fd-collapsible-down: fd-collapsible-down 150ms ease-out;
+
+  --animate-fd-collapsible-up: fd-collapsible-up 150ms ease-out;
+
+  --animate-fd-accordion-down: fd-accordion-down 200ms ease-out;
+
+  --animate-fd-accordion-up: fd-accordion-up 200ms ease-out;
+
+  --animate-fd-nav-menu-in: fd-nav-menu-in 200ms ease;
+
+  --animate-fd-nav-menu-out: fd-nav-menu-out 200ms ease;
+
+  --animate-fd-enterFromLeft: fd-enterFromLeft 250ms ease;
+
+  --animate-fd-enterFromRight: fd-enterFromRight 250ms ease;
+
+  --animate-fd-exitToLeft: fd-exitToLeft 250ms ease;
+
+  --animate-fd-exitToRight: fd-exitToRight 250ms ease;
+
+  @keyframes fd-collapsible-down {
+    from {
+      height: 0;
+      opacity: 0;
+    }
+    to {
+      height: var(--radix-collapsible-content-height);
+    }
+  }
+
+  @keyframes fd-collapsible-up {
+    from {
+      height: var(--radix-collapsible-content-height);
+    }
+    to {
+      height: 0;
+      opacity: 0;
+    }
+  }
+
+  @keyframes fd-accordion-down {
+    from {
+      height: 0;
+      opacity: 0.5;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+
+  @keyframes fd-accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+      opacity: 0.5;
+    }
+  }
+
+  @keyframes fd-dialog-in {
+    from {
+      transform: scale(0.95);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes fd-dialog-out {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(0.95);
+      opacity: 0;
+    }
+  }
+
+  @keyframes fd-popover-in {
+    from {
+      opacity: 0;
+      transform: scale(0.98) translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  @keyframes fd-popover-out {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+  }
+
+  @keyframes fd-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fd-fade-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes fd-enterFromRight {
+    from {
+      opacity: 0;
+      transform: translateX(200px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fd-enterFromLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-200px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fd-exitToRight {
+    from {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateX(200px);
+    }
+  }
+
+  @keyframes fd-exitToLeft {
+    from {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateX(-200px);
+    }
+  }
+
+  @keyframes fd-nav-menu-in {
+    from {
+      opacity: 0;
+      height: 0px;
+    }
+    to {
+      opacity: 1;
+      height: var(--radix-navigation-menu-viewport-height);
+    }
+  }
+
+  @keyframes fd-nav-menu-out {
+    from {
+      opacity: 1;
+      height: var(--radix-navigation-menu-viewport-height);
+    }
+    to {
+      opacity: 0;
+      height: 0px;
+    }
+  }
   }
   .dark {
+    --color-fd-background: hsl(0, 0%, 2%);
+    --color-fd-foreground: hsl(0, 0%, 98%);
+    --color-fd-muted: hsl(0, 0%, 8%);
+    --color-fd-muted-foreground: hsl(0, 0%, 60%);
+    --color-fd-popover: hsl(0, 0%, 4%);
+    --color-fd-popover-foreground: hsl(0, 0%, 98%);
+    --color-fd-card: hsl(0, 0%, 4%);
+    --color-fd-card-foreground: hsl(0, 0%, 98%);
+    --color-fd-border: hsl(0, 0%, 14%);
+    --color-fd-primary: hsl(0, 0%, 98%);
+    --color-fd-primary-foreground: hsl(0, 0%, 9%);
+    --color-fd-secondary: hsl(0, 0%, 12.9%);
+    --color-fd-secondary-foreground: hsl(0, 0%, 98%);
+    --color-fd-accent: hsl(0, 0%, 15%);
+    --color-fd-accent-foreground: hsl(0, 0%, 100%);
+    --color-fd-ring: hsl(0, 0%, 34.9%);
     --space-1: calc(4px * var(--scaling));
     --space-2: calc(8px * var(--scaling));
     --space-3: calc(12px * var(--scaling));
@@ -182,6 +411,203 @@
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+    --animate-fd-fade-in: fd-fade-in 300ms ease;
+
+  --animate-fd-fade-out: fd-fade-out 300ms ease;
+
+  --animate-fd-dialog-in: fd-dialog-in 200ms cubic-bezier(0.32, 0.72, 0, 1);
+
+  --animate-fd-dialog-out: fd-dialog-out 300ms cubic-bezier(0.32, 0.72, 0, 1);
+
+  --animate-fd-popover-in: fd-popover-in 150ms ease;
+
+  --animate-fd-popover-out: fd-popover-out 150ms ease;
+
+  --animate-fd-collapsible-down: fd-collapsible-down 150ms ease-out;
+
+  --animate-fd-collapsible-up: fd-collapsible-up 150ms ease-out;
+
+  --animate-fd-accordion-down: fd-accordion-down 200ms ease-out;
+
+  --animate-fd-accordion-up: fd-accordion-up 200ms ease-out;
+
+  --animate-fd-nav-menu-in: fd-nav-menu-in 200ms ease;
+
+  --animate-fd-nav-menu-out: fd-nav-menu-out 200ms ease;
+
+  --animate-fd-enterFromLeft: fd-enterFromLeft 250ms ease;
+
+  --animate-fd-enterFromRight: fd-enterFromRight 250ms ease;
+
+  --animate-fd-exitToLeft: fd-exitToLeft 250ms ease;
+
+  --animate-fd-exitToRight: fd-exitToRight 250ms ease;
+
+  @keyframes fd-collapsible-down {
+    from {
+      height: 0;
+      opacity: 0;
+    }
+    to {
+      height: var(--radix-collapsible-content-height);
+    }
+  }
+
+  @keyframes fd-collapsible-up {
+    from {
+      height: var(--radix-collapsible-content-height);
+    }
+    to {
+      height: 0;
+      opacity: 0;
+    }
+  }
+
+  @keyframes fd-accordion-down {
+    from {
+      height: 0;
+      opacity: 0.5;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+
+  @keyframes fd-accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+      opacity: 0.5;
+    }
+  }
+
+  @keyframes fd-dialog-in {
+    from {
+      transform: scale(0.95);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes fd-dialog-out {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(0.95);
+      opacity: 0;
+    }
+  }
+
+  @keyframes fd-popover-in {
+    from {
+      opacity: 0;
+      transform: scale(0.98) translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  @keyframes fd-popover-out {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+  }
+
+  @keyframes fd-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fd-fade-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes fd-enterFromRight {
+    from {
+      opacity: 0;
+      transform: translateX(200px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fd-enterFromLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-200px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fd-exitToRight {
+    from {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateX(200px);
+    }
+  }
+
+  @keyframes fd-exitToLeft {
+    from {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateX(-200px);
+    }
+  }
+
+  @keyframes fd-nav-menu-in {
+    from {
+      opacity: 0;
+      height: 0px;
+    }
+    to {
+      opacity: 1;
+      height: var(--radix-navigation-menu-viewport-height);
+    }
+  }
+
+  @keyframes fd-nav-menu-out {
+    from {
+      opacity: 1;
+      height: var(--radix-navigation-menu-viewport-height);
+    }
+    to {
+      opacity: 0;
+      height: 0px;
+    }
+  }
   }
 
   .docs-title.active {
