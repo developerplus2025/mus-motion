@@ -13,6 +13,7 @@ import Providers from "@/components/ProgressBarProvider";
 import Footer from "@/components/footer";
 import { ToasterSonner } from "../components/ui/sonner";
 import CookieAlert from "@/components/cookie-alert";
+import { RootProvider } from 'fumadocs-ui/provider';
 import FrameVideo from "./home/components/frame-video";
 const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
@@ -53,7 +54,7 @@ export default function RootLayout({
               className="top-[60px]"
               position="top-center"
             />
-            {children}
+            <RootProvider>{children}</RootProvider>
             <Footer />
           </ThemeProvider>
         </body>

@@ -1,7 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+/* @import 'fumadocs-ui/css/neutral.css';
+@import 'fumadocs-ui/css/preset.css'; */
+ 
+/* path of `fumadocs-ui` relative to the CSS file */
+/* @source '../node_modules/fumadocs-ui/dist*.js'; */
 @layer base {
   :root {
     --preview-image-dark-display: none;

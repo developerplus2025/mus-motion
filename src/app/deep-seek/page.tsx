@@ -20,11 +20,11 @@ async function fetchDeepSeekResponse() {
   }
 }
 
-export default function ChatComponent() {
-  const handleClick = async () => {
-    const response = await fetchDeepSeekResponse();
-    console.log(response);
-  };
+// export default function ChatComponent() {
+//   const handleClick = async () => {
+//     const response = await fetchDeepSeekResponse();
+//     console.log(response);
+//   };
 
-  return <button onClick={handleClick}>Gửi</button>;
-}
+//   return <button onClick={handleClick}>Gửi</button>;
+// }
