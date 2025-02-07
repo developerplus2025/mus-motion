@@ -2,7 +2,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import '@source "../node_modules/fumadocs-ui/dist/style.css"';
+/* @import '@source "../node_modules/fumadocs-ui/dist/style.css"'; */
 
 @layer base {
   :root {
