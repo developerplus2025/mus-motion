@@ -4,12 +4,6 @@
 @import 'fumadocs-ui/css/neutral.css';
 @import 'fumadocs-ui/css/preset.css';
 @import 'fumadocs-twoslash/twoslash.css';
-@source ".";
-@source "../components";
-@source "../content";
-@source '../node_modules/fumadocs-ui/dist/**/*.js';
-@source '../node_modules/fumadocs-openapi/dist/**/*.js';
-@plugin 'tailwindcss-animate';
 @layer base {
   :root {
     --preview-image-dark-display: none;
@@ -140,171 +134,7 @@
 
   --animate-fd-exitToRight: fd-exitToRight 250ms ease;
 
-  @keyframes fd-collapsible-down {
-    from {
-      height: 0;
-      opacity: 0;
-    }
-    to {
-      height: var(--radix-collapsible-content-height);
-    }
-  }
-
-  @keyframes fd-collapsible-up {
-    from {
-      height: var(--radix-collapsible-content-height);
-    }
-    to {
-      height: 0;
-      opacity: 0;
-    }
-  }
-
-  @keyframes fd-accordion-down {
-    from {
-      height: 0;
-      opacity: 0.5;
-    }
-    to {
-      height: var(--radix-accordion-content-height);
-    }
-  }
-
-  @keyframes fd-accordion-up {
-    from {
-      height: var(--radix-accordion-content-height);
-    }
-    to {
-      height: 0;
-      opacity: 0.5;
-    }
-  }
-
-  @keyframes fd-dialog-in {
-    from {
-      transform: scale(0.95);
-      opacity: 0;
-    }
-    to {
-      transform: scale(1);
-    }
-  }
-
-  @keyframes fd-dialog-out {
-    from {
-      transform: scale(1);
-    }
-    to {
-      transform: scale(0.95);
-      opacity: 0;
-    }
-  }
-
-  @keyframes fd-popover-in {
-    from {
-      opacity: 0;
-      transform: scale(0.98) translateY(-4px);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1) translateY(0);
-    }
-  }
-
-  @keyframes fd-popover-out {
-    from {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    to {
-      opacity: 0;
-      transform: translateY(-4px);
-    }
-  }
-
-  @keyframes fd-fade-in {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  @keyframes fd-fade-out {
-    from {
-      opacity: 1;
-    }
-    to {
-      opacity: 0;
-    }
-  }
-
-  @keyframes fd-enterFromRight {
-    from {
-      opacity: 0;
-      transform: translateX(200px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  @keyframes fd-enterFromLeft {
-    from {
-      opacity: 0;
-      transform: translateX(-200px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  @keyframes fd-exitToRight {
-    from {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    to {
-      opacity: 0;
-      transform: translateX(200px);
-    }
-  }
-
-  @keyframes fd-exitToLeft {
-    from {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    to {
-      opacity: 0;
-      transform: translateX(-200px);
-    }
-  }
-
-  @keyframes fd-nav-menu-in {
-    from {
-      opacity: 0;
-      height: 0px;
-    }
-    to {
-      opacity: 1;
-      height: var(--radix-navigation-menu-viewport-height);
-    }
-  }
-
-  @keyframes fd-nav-menu-out {
-    from {
-      opacity: 1;
-      height: var(--radix-navigation-menu-viewport-height);
-    }
-    to {
-      opacity: 0;
-      height: 0px;
-    }
-  }
+ 
   }
   .dark {
     --color-fd-background: hsl(0, 0%, 2%);
@@ -447,171 +277,7 @@
 
   --animate-fd-exitToRight: fd-exitToRight 250ms ease;
 
-  @keyframes fd-collapsible-down {
-    from {
-      height: 0;
-      opacity: 0;
-    }
-    to {
-      height: var(--radix-collapsible-content-height);
-    }
-  }
 
-  @keyframes fd-collapsible-up {
-    from {
-      height: var(--radix-collapsible-content-height);
-    }
-    to {
-      height: 0;
-      opacity: 0;
-    }
-  }
-
-  @keyframes fd-accordion-down {
-    from {
-      height: 0;
-      opacity: 0.5;
-    }
-    to {
-      height: var(--radix-accordion-content-height);
-    }
-  }
-
-  @keyframes fd-accordion-up {
-    from {
-      height: var(--radix-accordion-content-height);
-    }
-    to {
-      height: 0;
-      opacity: 0.5;
-    }
-  }
-
-  @keyframes fd-dialog-in {
-    from {
-      transform: scale(0.95);
-      opacity: 0;
-    }
-    to {
-      transform: scale(1);
-    }
-  }
-
-  @keyframes fd-dialog-out {
-    from {
-      transform: scale(1);
-    }
-    to {
-      transform: scale(0.95);
-      opacity: 0;
-    }
-  }
-
-  @keyframes fd-popover-in {
-    from {
-      opacity: 0;
-      transform: scale(0.98) translateY(-4px);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1) translateY(0);
-    }
-  }
-
-  @keyframes fd-popover-out {
-    from {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    to {
-      opacity: 0;
-      transform: translateY(-4px);
-    }
-  }
-
-  @keyframes fd-fade-in {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  @keyframes fd-fade-out {
-    from {
-      opacity: 1;
-    }
-    to {
-      opacity: 0;
-    }
-  }
-
-  @keyframes fd-enterFromRight {
-    from {
-      opacity: 0;
-      transform: translateX(200px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  @keyframes fd-enterFromLeft {
-    from {
-      opacity: 0;
-      transform: translateX(-200px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  @keyframes fd-exitToRight {
-    from {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    to {
-      opacity: 0;
-      transform: translateX(200px);
-    }
-  }
-
-  @keyframes fd-exitToLeft {
-    from {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    to {
-      opacity: 0;
-      transform: translateX(-200px);
-    }
-  }
-
-  @keyframes fd-nav-menu-in {
-    from {
-      opacity: 0;
-      height: 0px;
-    }
-    to {
-      opacity: 1;
-      height: var(--radix-navigation-menu-viewport-height);
-    }
-  }
-
-  @keyframes fd-nav-menu-out {
-    from {
-      opacity: 1;
-      height: var(--radix-navigation-menu-viewport-height);
-    }
-    to {
-      opacity: 0;
-      height: 0px;
-    }
-  }
   }
 
   .docs-title.active {
@@ -952,4 +618,334 @@ number-flow-react::part(suffix) {
 	font-weight: normal;
 	font-size: 1rem;
 	color: var(--muted);
+}
+@keyframes fd-collapsible-down {
+  from {
+    height: 0;
+    opacity: 0;
+  }
+  to {
+    height: var(--radix-collapsible-content-height);
+  }
+}
+
+@keyframes fd-collapsible-up {
+  from {
+    height: var(--radix-collapsible-content-height);
+  }
+  to {
+    height: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes fd-accordion-down {
+  from {
+    height: 0;
+    opacity: 0.5;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes fd-accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+    opacity: 0.5;
+  }
+}
+
+@keyframes fd-dialog-in {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes fd-dialog-out {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+}
+
+@keyframes fd-popover-in {
+  from {
+    opacity: 0;
+    transform: scale(0.98) translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes fd-popover-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes fd-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fd-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fd-enterFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(200px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fd-enterFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-200px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fd-exitToRight {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(200px);
+  }
+}
+
+@keyframes fd-exitToLeft {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-200px);
+  }
+}
+
+@keyframes fd-nav-menu-in {
+  from {
+    opacity: 0;
+    height: 0px;
+  }
+  to {
+    opacity: 1;
+    height: var(--radix-navigation-menu-viewport-height);
+  }
+}
+
+@keyframes fd-nav-menu-out {
+  from {
+    opacity: 1;
+    height: var(--radix-navigation-menu-viewport-height);
+  }
+  to {
+    opacity: 0;
+    height: 0px;
+  }
+}
+@keyframes fd-collapsible-down {
+  from {
+    height: 0;
+    opacity: 0;
+  }
+  to {
+    height: var(--radix-collapsible-content-height);
+  }
+}
+
+@keyframes fd-collapsible-up {
+  from {
+    height: var(--radix-collapsible-content-height);
+  }
+  to {
+    height: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes fd-accordion-down {
+  from {
+    height: 0;
+    opacity: 0.5;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes fd-accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+    opacity: 0.5;
+  }
+}
+
+@keyframes fd-dialog-in {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes fd-dialog-out {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+}
+
+@keyframes fd-popover-in {
+  from {
+    opacity: 0;
+    transform: scale(0.98) translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes fd-popover-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes fd-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fd-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fd-enterFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(200px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fd-enterFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-200px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fd-exitToRight {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(200px);
+  }
+}
+
+@keyframes fd-exitToLeft {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-200px);
+  }
+}
+
+@keyframes fd-nav-menu-in {
+  from {
+    opacity: 0;
+    height: 0px;
+  }
+  to {
+    opacity: 1;
+    height: var(--radix-navigation-menu-viewport-height);
+  }
+}
+
+@keyframes fd-nav-menu-out {
+  from {
+    opacity: 1;
+    height: var(--radix-navigation-menu-viewport-height);
+  }
+  to {
+    opacity: 0;
+    height: 0px;
+  }
 }
