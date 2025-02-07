@@ -1,4 +1,7 @@
 /*! tailwindcss v4.0.3 | MIT License | https://tailwindcss.com */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 @layer theme, base, components, utilities;
 @layer theme {
   :root, :host {
