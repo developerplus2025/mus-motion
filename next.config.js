@@ -1,13 +1,7 @@
-const { withNextVideo } = require("next-video/process");
-import { createMDX } from "fumadocs-mdx/next";
+const { withNextVideo } = require('next-video/process')
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
+module.exports = {
   compiler: {
     styledComponents: true,
   },
 };
-
-// Gộp với next-video & MDX
-export default withNextVideo(createMDX()(nextConfig));
