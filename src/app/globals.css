@@ -1,11 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* @import 'fumadocs-ui/css/neutral.css';
-@import 'fumadocs-ui/css/preset.css'; */
- 
-/* path of `fumadocs-ui` relative to the CSS file */
-/* @source '../node_modules/fumadocs-ui/dist*.js'; */
+@import 'fumadocs-ui/css/neutral.css';
+@import 'fumadocs-ui/css/preset.css';
+@import 'fumadocs-twoslash/twoslash.css';
+@source ".";
+@source "../components";
+@source "../content";
+@source '../node_modules/fumadocs-ui/dist/**/*.js';
+@source '../node_modules/fumadocs-openapi/dist/**/*.js';
+@plugin 'tailwindcss-animate';
 @layer base {
   :root {
     --preview-image-dark-display: none;
