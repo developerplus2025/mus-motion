@@ -254,6 +254,12 @@
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+    --fd-sidebar-width: 0px;
+    --fd-toc-width: 0px;
+    --fd-layout-width: 100vw;
+    --fd-banner-height: 0px;
+    --fd-nav-height: 0px;
+    --fd-tocnav-height: 0px;
     --animate-fd-fade-in: fd-fade-in 300ms ease;
 
   --animate-fd-fade-out: fd-fade-out 300ms ease;
