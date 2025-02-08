@@ -569,5 +569,5 @@ number-flow-react::part(suffix) {
 	color: var(--muted);
 }
 .-translate-x-1\/2,.-translate-x-px {
-    transform: translateX(-50%)
+    transform: translateX(-50%) !           important;
 }
