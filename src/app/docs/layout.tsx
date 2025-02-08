@@ -1,12 +1,15 @@
-import type { Metadata } from "next";
-export const metadata: Metadata = {
-  title: "Documention | Stroma",
-  description: "MusicHub App",
-};
-export default function DocumentionLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return <section>{children}</section>;
+import { DocsLayout } from 'fumadocs-ui/layouts/docs';
+import type { ReactNode } from 'react';
+import { baseOptions } from '@/app/layout.config';
+import { source } from '@/lib/source';
+import "./style.css";
+import "./neutral.css";
+import "./shiki.css";
+import "./animations.css"
+export default function Layout({ children }: { children: ReactNode }) {
+  return (
+    <DocsLayout tree={source.pageTree} {...baseOptions}>
+      {children}
+    </DocsLayout>
+  );
 }

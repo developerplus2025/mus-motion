@@ -6,7 +6,7 @@ import { attachFile, createOpenAPI } from 'fumadocs-openapi/server';
 import { createElement } from 'react';
 import { docs, } from '../../.source';
 export const source = loader({
-  baseUrl: '/docs-x',
+  baseUrl: '/docs',
   icon(icon) {
     if (icon && icon in icons)
       return createElement(icons[icon as keyof typeof icons]);
