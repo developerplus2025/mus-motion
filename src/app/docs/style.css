@@ -3,8 +3,8 @@
 @tailwind components;
 @tailwind utilities;
 @layer theme, base, components, utilities;
-@layer theme {
-  :root, :host {
+
+  :root {
     --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
@@ -414,7 +414,7 @@
     --animate-fd-exitToRight: fd-exitToRight 250ms ease;
     --spacing-fd-container: 1400px;
   }
-}
+
 @layer base {
   *, ::after, ::before, ::backdrop, ::file-selector-button {
     box-sizing: border-box;
@@ -556,7 +556,7 @@
     display: none !important;
   }
 }
-@layer utilities {
+
   .collapse {
     visibility: collapse;
   }
@@ -2391,7 +2391,7 @@
       border-style: none;
     }
   }
-}
+
 .dark {
   --color-fd-background: hsl(0, 0%, 7.04%);
   --color-fd-foreground: hsl(0, 0%, 92%);
@@ -2461,7 +2461,7 @@
   background-color: color-mix( in oklab, var(--color-fd-primary) 10%, transparent );
   border-radius: 2px;
 }
-@layer base {
+
   *, ::after, ::before, ::backdrop, ::file-selector-button {
     border-color: var(--color-fd-border, currentColor);
   }
@@ -2472,7 +2472,7 @@
   [data-rmiz-modal-overlay='visible'] {
     background-color: var(--color-fd-background);
   }
-}
+
 @layer base {
   body {
     display: flex;
@@ -2483,7 +2483,7 @@
     cursor: pointer;
   }
 }
-@layer base {
+
   :root {
     --fd-sidebar-width: 0px;
     --fd-toc-width: 0px;
@@ -2496,7 +2496,7 @@
     --fd-diff-add-color: rgba(14,180,100,0.12);
     --fd-diff-add-symbol-color: rgb(10,200,100);
   }
-}
+
 @keyframes spin {
   to {
     transform: rotate(360deg);
