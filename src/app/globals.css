@@ -568,3 +568,6 @@ number-flow-react::part(suffix) {
 	font-size: 1rem;
 	color: var(--muted);
 }
+.-translate-x-1\/2,.-translate-x-px {
+    transform: translateX(-50%)
+}
