@@ -13,6 +13,7 @@ const config: Config = {
     "./chat/vn-vi/**/*.{ts,tsx}",
     "./home/**/*.{ts,tsx}",
     "./node_modules/@nextui-org/theme/dist/components/[object Object].js",
+    "./node_modules/fumadocs-ui/dist/**/*.js",
   ],
   prefix: "",
   theme: {
