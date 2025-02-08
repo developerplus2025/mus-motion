@@ -1,12 +1,12 @@
 @import './shiki.css';
 @import './animations.css';
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @plugin '../dist/theme/docs-ui.js';
 @plugin '../dist/theme/typography/index.js';
-
-@theme {
-  --spacing-fd-container: 1400px;
-}
 
 @layer base {
   *,
@@ -26,12 +26,8 @@
     background-color: var(--color-fd-background);
   }
 }
-
-@utility container {
+.container {
   margin-inline: auto;
   padding-inline: 1rem;
-
-  @apply 2xl:max-w-[1400px];
+  max-width: 1400px; /* Không dùng @apply trong @utility */
 }
-
-@variant dark (&:where(.dark, .dark *));

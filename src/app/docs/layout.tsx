@@ -4,6 +4,7 @@ import { baseOptions } from '@/app/layout.config';
 import { source } from '@/lib/source';
 import "./style.css";
 import "./neutral.css";
+import "./preset.css"
 import "./shiki.css";
 import "./animations.css"
 export default function Layout({ children }: { children: ReactNode }) {
