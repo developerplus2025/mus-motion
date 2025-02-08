@@ -112,36 +112,7 @@
     --color-fd-accent-foreground: hsl(0, 0%, 9%);
     --color-fd-ring: hsl(0, 0%, 63.9%);
 
-  --animate-fd-fade-out: fd-fade-out 300ms ease;
-
-  --animate-fd-dialog-in: fd-dialog-in 200ms cubic-bezier(0.32, 0.72, 0, 1);
-
-  --animate-fd-dialog-out: fd-dialog-out 300ms cubic-bezier(0.32, 0.72, 0, 1);
-
-  --animate-fd-popover-in: fd-popover-in 150ms ease;
-
-  --animate-fd-popover-out: fd-popover-out 150ms ease;
-
-  --animate-fd-collapsible-down: fd-collapsible-down 150ms ease-out;
-
-  --animate-fd-collapsible-up: fd-collapsible-up 150ms ease-out;
-
-  --animate-fd-accordion-down: fd-accordion-down 200ms ease-out;
-
-  --animate-fd-accordion-up: fd-accordion-up 200ms ease-out;
-
-  --animate-fd-nav-menu-in: fd-nav-menu-in 200ms ease;
-
-  --animate-fd-nav-menu-out: fd-nav-menu-out 200ms ease;
-
-  --animate-fd-enterFromLeft: fd-enterFromLeft 250ms ease;
-
-  --animate-fd-enterFromRight: fd-enterFromRight 250ms ease;
-
-  --animate-fd-exitToLeft: fd-exitToLeft 250ms ease;
-
-  --animate-fd-exitToRight: fd-exitToRight 250ms ease;
-
+  
  
   }
   .dark {
@@ -254,37 +225,7 @@
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
    
-    --animate-fd-fade-in: fd-fade-in 300ms ease;
-
-  --animate-fd-fade-out: fd-fade-out 300ms ease;
-
-  --animate-fd-dialog-in: fd-dialog-in 200ms cubic-bezier(0.32, 0.72, 0, 1);
-
-  --animate-fd-dialog-out: fd-dialog-out 300ms cubic-bezier(0.32, 0.72, 0, 1);
-
-  --animate-fd-popover-in: fd-popover-in 150ms ease;
-
-  --animate-fd-popover-out: fd-popover-out 150ms ease;
-
-  --animate-fd-collapsible-down: fd-collapsible-down 150ms ease-out;
-
-  --animate-fd-collapsible-up: fd-collapsible-up 150ms ease-out;
-
-  --animate-fd-accordion-down: fd-accordion-down 200ms ease-out;
-
-  --animate-fd-accordion-up: fd-accordion-up 200ms ease-out;
-
-  --animate-fd-nav-menu-in: fd-nav-menu-in 200ms ease;
-
-  --animate-fd-nav-menu-out: fd-nav-menu-out 200ms ease;
-
-  --animate-fd-enterFromLeft: fd-enterFromLeft 250ms ease;
-
-  --animate-fd-enterFromRight: fd-enterFromRight 250ms ease;
-
-  --animate-fd-exitToLeft: fd-exitToLeft 250ms ease;
-
-  --animate-fd-exitToRight: fd-exitToRight 250ms ease;
+    
 
 
   }
