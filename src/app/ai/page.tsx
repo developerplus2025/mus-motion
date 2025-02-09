@@ -19,7 +19,7 @@ import { SidebarApp } from "@/components/sidebar-app";
 const openai = new OpenAI({
   dangerouslyAllowBrowser: true,
   baseURL: "https://api.deepseek.com",
-  apiKey: "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",
+  apiKey: "sk-3e619bee68db4eb3bec1563601760504",
   
  })
 
