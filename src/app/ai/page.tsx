@@ -16,28 +16,25 @@ import {
 } from "@/components/ui/sidebar";
 import { Chat } from "@/components/chat";
 import { SidebarApp } from "@/components/sidebar-app";
-// const openai = new OpenAI({
-//   dangerouslyAllowBrowser: true,
-//   baseURL: "https://openrouter.ai/api/v1",
-//   apiKey: "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",
-//   defaultHeaders: {
-//     "HTTP-Referer": "<YOUR_SITE_URL>", // Optional. Site URL for rankings on openrouter.ai.
-//     "X-Title": "<YOUR_SITE_NAME>", // Optional. Site title for rankings on openrouter.ai.
-//   }
-// })
+const openai = new OpenAI({
+  dangerouslyAllowBrowser: true,
+  baseURL: "https://api.deepseek.com",
+  apiKey: "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",
+  
+ })
 
 export default async function AiPage() {
-  // const completion = await openai.chat.completions.create({
-  //   model: "openai/gpt-3.5-turbo",
-  //   messages: [
-  //     {
-  //       "role": "user",
-  //       "content": "Hello"
-  //     }
-  //   ]
-  // })
+   const completion = await openai.chat.completions.create({
+     model: "deepseek-chat",
+     messages: [
+     {
+        "role": "system",
+        "content": "You are a helpful assistant."
+      }
+     ]
+   })
 
-  // console.log(completion.choices[0].message)
+   console.log(completion.choices[0].message)
   return(
     <SidebarProvider>
     <SidebarApp />
