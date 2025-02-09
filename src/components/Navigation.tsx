@@ -219,7 +219,7 @@ export const Navigation = (): JSX.Element => {
         isSignIn ||
         isGuides ||
         isDocs ||
-        isHelp
+        isHelp || pathname.startsWith("/docs")
           ? "webfilm-class"
           : ""
       } sticky top-0 z-[20]`}
