@@ -571,3 +571,12 @@ number-flow-react::part(suffix) {
 .-translate-x-1\/2,.-translate-x-px {
     transform: translateX(0%) !           important;
 }
+#nd-docs-layout{
+  background-color: #000000;
+}
+#nd-sidebar{
+  background-color: #000000;
+}
+.bg-fd-card{
+  background-color: #000000;
+}
