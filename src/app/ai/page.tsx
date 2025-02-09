@@ -16,25 +16,25 @@ import {
 } from "@/components/ui/sidebar";
 import { Chat } from "@/components/chat";
 import { SidebarApp } from "@/components/sidebar-app";
-const openai = new OpenAI({
-  dangerouslyAllowBrowser: true,
-  baseURL: "https://api.deepseek.com",
-  apiKey: "sk-3e619bee68db4eb3bec1563601760504",
+// const openai = new OpenAI({
+//   dangerouslyAllowBrowser: true,
+//   baseURL: "https://api.deepseek.com",
+//   apiKey: "sk-3e619bee68db4eb3bec1563601760504",
   
- })
+//  })
 
 export default async function AiPage() {
-   const completion = await openai.chat.completions.create({
-     model: "deepseek-chat",
-     messages: [
-     {
-        "role": "system",
-        "content": "You are a helpful assistant."
-      }
-     ]
-   })
+  //  const completion = await openai.chat.completions.create({
+  //    model: "deepseek-chat",
+  //    messages: [
+  //    {
+  //       "role": "system",
+  //       "content": "You are a helpful assistant."
+  //     }
+  //    ]
+  //  })
 
-   console.log(completion.choices[0].message)
+  //  console.log(completion.choices[0].message)
   return(
     <SidebarProvider>
     <SidebarApp />
