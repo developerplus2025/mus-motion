@@ -21,7 +21,7 @@ export default function Footer() {
   };
   return (
     <div
-      className={`${isWebApp || isAi || isChatV2 || isRadio || isSignIn || isDocs ? "webfilm-class" : ""} border-t py-4`}
+      className={`${isWebApp || isAi || isChatV2 || isRadio || isSignIn || isDocs || path.startsWith("/docs") ? "webfilm-class" : ""} border-t py-4`}
     >
       <div className="">
         <div className="mb-10 grid grid-cols-1 gap-8 px-4 md:grid-cols-5">
