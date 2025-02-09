@@ -24,6 +24,9 @@ export default async function Page(props: {
       <DocsBody>
         <MDX components={{ ...defaultMdxComponents }} />
       </DocsBody>
+      
+ 
+{/* <InlineTOC items={page.data.toc} /> */}
     </DocsPage>
   );
 }
