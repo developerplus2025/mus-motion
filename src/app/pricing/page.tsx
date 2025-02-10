@@ -38,15 +38,19 @@ function PricingPage() {
 
   return (
     <main className="pb-[6rem]">
-      <AnimatedBar />
+      {/* <motion.div className="">
+
+      </motion.div> */}
+      <motion.div initial={{top:"100%"}} animate={{top:0}} transition={{duration:0.5,}} className="inset-0 fixed h-screen w-screen "></motion.div>
+      {/* <AnimatedBar /> */}
       <div className="relative flex h-[350px] flex-col items-center justify-center gap-[1rem] text-center">
         <Button variant="outline" className="h-[30px]">
           Pricing and Buy
         </Button>
-        <h1 className="w-[45rem] text-center text-[2.6rem] font-bold leading-[43px]">
+        <h1 className="w-[57rem] text-center text-[3.5rem] font-bold leading-[53px]">
           Choose the Ideal Plan to Elevate Your Music Creation Journey
         </h1>
-        <p className="text-md w-[26rem] text-center text-muted-foreground">
+        <p className="text-md w-[30rem] text-[1.3rem] text-center text-muted-foreground">
           Unlock Your Full Creative Potential with Our Comprehensive, Advanced,
           and Cutting-Edge Music Software Suite Designed for Every Artist
         </p>
