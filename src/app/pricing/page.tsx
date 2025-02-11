@@ -39,9 +39,9 @@ function PricingPage() {
   return (
     <main className="pb-[6rem]">
   
-      <motion.div initial={{top:"100%"}} animate={{top:"0",translateY:"-100%"}} transition={{duration:3,delay:1}} className="top-[100%] flex items-center justify-center h-[100vh]  z-[50] bg-[black] fixed  w-screen ">
+      {/* <motion.div initial={{top:"100%"}} animate={{top:"0",translateY:"-100%"}} transition={{duration:3,delay:1}} className="top-[100%] flex items-center justify-center h-[100vh]  z-[50] bg-[black] fixed  w-screen ">
       <div className="text-xl font-bold">Pricing Page</div>
-      </motion.div>
+      </motion.div> */}
       {/* <AnimatedBar /> */}
       <div className="relative flex h-[350px] flex-col items-center justify-center gap-[1rem] text-center">
         <Button variant="outline" className="h-[30px]">
