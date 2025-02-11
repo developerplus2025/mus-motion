@@ -38,10 +38,10 @@ function PricingPage() {
 
   return (
     <main className="pb-[6rem]">
-      <motion.div initial={{height:"100vh"}} animate={{height:"0vh"}} transition={{duration:1,}} className="flex fixed z-[40] bg-black items-center justify-center ">
-<div className="">Pricing Page</div>
+  
+      <motion.div initial={{height:"0vh"}} animate={{height:["100vh","0vh"]}} transition={{duration:1.5,delay:1}} className="top-[100%] h-[100vh]  z-[50] bg-[black] fixed  w-screen ">
+      <div className="text-xl font-bold">Pricing Page</div>
       </motion.div>
-      <motion.div initial={{height:"100vh"}} animate={{height:"0vh"}} transition={{duration:1.5,delay:1}} className="top-0 h-[100vh]  z-[50] bg-white fixed  w-screen "></motion.div>
       {/* <AnimatedBar /> */}
       <div className="relative flex h-[350px] flex-col items-center justify-center gap-[1rem] text-center">
         <Button variant="outline" className="h-[30px]">
