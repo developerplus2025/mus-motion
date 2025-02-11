@@ -1,5 +1,10 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+// import type { Metadata } from "next";
+"use client";
+
+import { AnimatePresence, motion } from "framer-motion";
+import { usePathname } from "next/navigation";
+
+// import { Inter } from "next/font/google";
 import "./globals.css";
 // import 'fumadsocs-ui/dist/style.css';
 import { GeistSans } from "geist/font/sans";
@@ -16,17 +21,20 @@ import { ToasterSonner } from "../components/ui/sonner";
 import CookieAlert from "@/components/cookie-alert";
 import { RootProvider } from 'fumadocs-ui/provider';
 import FrameVideo from "./home/components/frame-video";
-const inter = Inter({ subsets: ["latin"] });
-export const metadata: Metadata = {
-  title: "Stroma: A Useful Platform For Musicians",
-  description: "Stroma - Home",
-};
+// const inter = Inter({ subsets: ["latin"] });
+// export const metadata: Metadata = {
+//   title: "Stroma: A Useful Platform For Musicians",
+//   description: "Stroma - Home",
+// };
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const pathname = usePathname();
+
   return (
+    
     <>
       <html
         suppressHydrationWarning
@@ -34,8 +42,16 @@ export default function RootLayout({
         className={`${GeistSans.className} custom_command_scroll dark`}
         style={{ colorScheme: "dark" }}
       >
-        <head />
+       <head>
+        <title>Stroma: A Useful Platform For Musicians</title>
+       </head>
         <body className="relative overflow-x-hidden antialiased">
+        <AnimatePresence mode="wait">
+        <motion.div  key={pathname}
+        initial={{ opacity: 0,  }}
+        animate={{ opacity: 1,  }}
+        exit={{ opacity: 0,  }}
+        transition={{ duration: 0.5 }} >
           <CookieAlert />
           <ThemeProvider enableSystem attribute="class" defaultTheme="system">
             <Navigation />
@@ -58,6 +74,8 @@ export default function RootLayout({
             <RootProvider>{children}</RootProvider>
             <Footer />
           </ThemeProvider>
+          </motion.div>
+          </AnimatePresence>
         </body>
       </html>
     </>
