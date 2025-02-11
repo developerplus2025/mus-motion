@@ -41,7 +41,7 @@ function PricingPage() {
       {/* <motion.div className="">
 
       </motion.div> */}
-      <motion.div initial={{top:"0%"}} animate={{top:"-100vh"}} transition={{duration:1,}} className="inset-0 top-0  z-[50] bg-white fixed  w-screen "></motion.div>
+      <motion.div initial={{height:"100vh"}} animate={{height:"0vh"}} transition={{duration:1,}} className="top-0 h-[100vh]  z-[50] bg-white fixed  w-screen "></motion.div>
       {/* <AnimatedBar /> */}
       <div className="relative flex h-[350px] flex-col items-center justify-center gap-[1rem] text-center">
         <Button variant="outline" className="h-[30px]">
