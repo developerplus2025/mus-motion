@@ -23,6 +23,24 @@ const items = [
     body: "One of the best things about this app is its speed. Songs load almost instantly, and there's no lag at all. Even when I have a large playlist, the app handles it effortlessly, making it a top choice for music streaming.",
     img: "https://avatar.vercel.sh/charlie",
   },
+  {
+    name: "Alice",
+    username: "Senior Software Engineer, Frontend",
+    body: "I have tried many music apps before, but this one truly amazed me. The interface is smooth, easy to navigate, and the overall experience is fantastic. I can quickly find my favorite songs and create playlists effortlessly, making my music experience seamless and enjoyable.",
+    img: "https://avatar.vercel.sh/alice",
+  },
+  {
+    name: "Bob",
+    username: "Charlton Roberts, Product Engineering",
+    body: "The audio quality in this app is outstanding. Every note is crystal clear, from the deep bass to the sharp highs. If you're a true music lover, you will appreciate the sound precision and richness this app offers.",
+    img: "https://avatar.vercel.sh/bob",
+  },
+  {
+    name: "Charlie",
+    username: "Daniel Lopes, Frontend Developer",
+    body: "One of the best things about this app is its speed. Songs load almost instantly, and there's no lag at all. Even when I have a large playlist, the app handles it effortlessly, making it a top choice for music streaming.",
+    img: "https://avatar.vercel.sh/charlie",
+  },
   // {
   //   name: "David",
   //   username: "@david",
