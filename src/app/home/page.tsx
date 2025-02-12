@@ -418,7 +418,7 @@ export default function Home() {
                 }}
       
       aria-label="Loading..."
-      color="warning"
+      color="success"
       showValueLabel={true}
       size="lg"
       value={value}
