@@ -412,6 +412,11 @@ export default function Home() {
       <PeopleSay />
       <div className="mx-auto my-[2rem] w-[700px] border-t"></div>
       <CircularProgress
+                classNames={{
+                  svg: "w-36 h-36 drop-shadow-md",
+                  value: "text-3xl font-semibold text-white",
+                }}
+      
       aria-label="Loading..."
       color="warning"
       showValueLabel={true}
