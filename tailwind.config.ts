@@ -4,6 +4,7 @@ import tailwindcssAnimate from "tailwindcss-animate";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  
   darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
@@ -14,6 +15,7 @@ const config: Config = {
     "./chat/vn-vi/**/*.{ts,tsx}",
     "./home/**/*.{ts,tsx}",
     "./node_modules/fumadocs-ui/dist/**/*.js",
+    "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   prefix: "",
   theme: {
@@ -256,6 +258,7 @@ const config: Config = {
       },
     },
   },
+  
   plugins: [tailwindcssAnimate,nextui(),heroui()],
 };
 
