@@ -581,20 +581,22 @@ number-flow-react::part(suffix) {
   background-color: #000000;
 }
 .slide-in{
+  z-index: 50;
   position:absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: #0f0f0f;
+  background-color: #000000;
   transform-origin: bottom;
 }
 .slide-out{
+  z-index: 50;
   position:absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: #0f0f0f;
+  background-color: #000000;
   transform-origin: top;
 }
