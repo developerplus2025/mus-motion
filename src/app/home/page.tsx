@@ -154,6 +154,7 @@ import {  PeopleSay } from "./components/people-say";
 import  WatchDemo  from "./components/watch-demo";
 import VideoModal from "./components/modal-video";
 import Modal from "./components/Modal";
+import {CircularProgress} from "@heroui/react";
 export default function Home() {
   const { theme, systemTheme, setTheme } = useTheme();
  const [open ,setOpen] = useState(false)
@@ -234,6 +235,15 @@ export default function Home() {
       src: "labdigital",
     },
   ];
+  const [value, setValue] = React.useState(0);
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setValue((v) => (v >= 100 ? 0 : v + 10));
+    }, 500);
+
+    return () => clearInterval(interval);
+  }, []);
   return (
     <main className="GeistSans relative flex min-h-screen w-full flex-col items-center justify-between gap-[1rem] overflow-x-hidden pb-[1rem] pt-[3.8rem] dark:bg-black dark:[color-scheme:dark]">
       {/* <TailwindcssButton /> */}
@@ -401,7 +411,14 @@ export default function Home() {
 
       <PeopleSay />
       <div className="mx-auto my-[2rem] w-[700px] border-t"></div>
-
+      <CircularProgress
+      aria-label="Loading..."
+      color="warning"
+      showValueLabel={true}
+      size="lg"
+      value={value}
+    />
+     <div className="mx-auto my-[2rem] w-[700px] border-t"></div>
       {/* <div className="mt-[2rem] flex w-full items-center justify-center gap-[4rem] px-[2rem]">
         <ChartFirstYear />
         <ChartLastYear />

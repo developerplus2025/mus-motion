@@ -1,3 +1,4 @@
+import {heroui} from '@heroui/theme';
 import { nextui } from "@nextui-org/theme";
 import tailwindcssAnimate from "tailwindcss-animate";
 import type { Config } from "tailwindcss";
@@ -12,7 +13,6 @@ const config: Config = {
     "./public/**/*.{ts,tsx,svg}",
     "./chat/vn-vi/**/*.{ts,tsx}",
     "./home/**/*.{ts,tsx}",
-    "./node_modules/@nextui-org/theme/dist/components/[object Object].js",
     "./node_modules/fumadocs-ui/dist/**/*.js",
   ],
   prefix: "",
@@ -256,7 +256,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [tailwindcssAnimate, nextui()],
+  plugins: [tailwindcssAnimate,nextui(),heroui()],
 };
 
 export default config;
