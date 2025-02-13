@@ -864,17 +864,17 @@ export default function Individual() {
             className="flex flex-col rounded-lg border-[1px] dark:bg-[#000000]"
           >
             <CardHeader
-              className={`${tier.title === "Free" ? "to-[#121212]" : tier.title === "Basic" ? "to-[#121212]" : tier.title === "Pro" ? "to-[#121212]" : "to-[#121212]"} space-y-2 rounded-t-lg bg-[#00000099] p-[1.5rem]`}
+              className={`${tier.title === "Starter Plan" ? "to-[#121212]" : tier.title === "Basic Plan" ? "to-[#121212]" : tier.title === "Plus Plan" ? "to-[#121212]" : "to-[#121212]"} space-y-2 rounded-t-lg bg-[#00000099] p-[1.5rem]`}
             >
               <CardTitle className="text-[1.04rem] font-medium text-[#a1a1a1]">
                 <div className="flex justify-between items-center">
                    <p
-                  className={`${tier.title === "Pro" || tier.title === "Basic" ? "hidden" : ""}`}
+                  className={`${tier.title === "Plus Plan" || tier.title === "Basic Plan" ? "hidden" : ""}`}
                 >
                   {tier.title}
                 </p>
                 <svg
-                className={`${tier.title === "Pro" || tier.title === "Basic" ? "hidden" : ""}`}
+                className={`${tier.title === "Plus Plan" || tier.title === "Basic Plan" ? "hidden" : ""}`}
   data-testid="geist-icon"
   height={16}
   strokeLinejoin="round"
@@ -892,7 +892,7 @@ export default function Individual() {
 
                 </div>
                
-                {tier.title === "Pro" && (
+                {tier.title === "Plus Plan" && (
                   <div className="flex items-center justify-between">
                     <p>Pro</p>
                     <Badge className="h-fit px-3 py-1" variant={"outline"}>
@@ -900,7 +900,7 @@ export default function Individual() {
                     </Badge>
                   </div>
                 )}
-                {tier.title === "Basic" && (
+                {tier.title === "Basic Plan" && (
                   <div className="flex justify-between">
                     <p>Basic</p>
                     <Badge className="h-fit px-3 py-1" variant={"outline"}>
@@ -928,7 +928,7 @@ export default function Individual() {
 
               <CardDescription>{tier.description}</CardDescription>
               <div className="pt-[1rem] ">
-              {tier.title === "Ultimate" && (
+              {tier.title === "Pro Plan" && (
                 <div className="flex items-center justify-center gap-4">
                   {" "}
                   <AlertDialog>
@@ -1076,7 +1076,7 @@ export default function Individual() {
                   </AlertDialog>
                 </div>
               )}
-              {tier.title !== "Pro" && tier.title !== "Ultimate" && (
+              {tier.title !== "Plus Plan" && tier.title !== "Pro Plan" && (
                 <Button className="w-full" variant={"outline"}>
                   Get Started
                   <svg
@@ -1097,7 +1097,7 @@ export default function Individual() {
                   </svg>
                 </Button>
               )}
-              {tier.title === "Pro" && (
+              {tier.title === "Plus Plan" && (
                 <Button className="w-full" variant={"outline"}>
                   Upgrade Now
                   <svg
