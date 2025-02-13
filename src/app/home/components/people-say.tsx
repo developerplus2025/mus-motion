@@ -165,7 +165,7 @@ export function PeopleSay() {
 <div className=" flex justify-between gap-1 text-sm leading-tight sm:text-base">
  <div className="flex gap-2 items-center ">
   <div>
-    <Image alt={item.img} src={`/${item.img}.avif`} width={"50"} height={"50"} className="h-[30px] w-[30px] "></Image>
+    <Image alt={item.img} src={`/${item.img}.avif`} width={"50"} height={"50"} className="h-[30px] w-[40px] "></Image>
   </div>
  <div className="w-full flex flex-col gap-1 ">
     
