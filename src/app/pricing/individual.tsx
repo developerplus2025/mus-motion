@@ -98,7 +98,7 @@ import { CheckCircledIcon } from "@radix-ui/react-icons";
 const pricingData = {
   individual: [
     {
-      title: "Stater",
+      title: "Stater Plan",
       price: 0,
       description: "For entry-level users and trial",
       features: [
@@ -263,7 +263,7 @@ const pricingData = {
       ],
     },
     {
-      title: "Basic",
+      title: "Basic Plan",
       price: 12,
       description: "For hobbyists and beginners",
       features: [
@@ -428,7 +428,7 @@ const pricingData = {
       ],
     },
     {
-      title: "Pro",
+      title: "Plus Plan",
       price: 26,
       description: "For serious musicians and producers",
       features: [
@@ -593,7 +593,7 @@ const pricingData = {
       ],
     },
     {
-      title: "Ultimate",
+      title: "Pro Plan",
       price: 42,
       description: "For professional studios and artists",
       features: [
