@@ -1,42 +1,43 @@
+import Image from "next/image";
 import * as Masonry from "./masonry";
 import * as React from "react";
 
 const items = [
   {
-    name: "Alice",
+    name: "Eric Grigorian",
     username: "Senior Software Engineer, Frontend",
     body: "I have tried many music apps before, but this one truly amazed me. The interface is smooth, easy to navigate, and the overall experience is fantastic. I can quickly find my favorite songs and create playlists effortlessly, making my music experience seamless and enjoyable.",
-    img: "https://avatar.vercel.sh/alice",
+    img: "eric-grigorian",
   },
   {
-    name: "Bob",
+    name: "Charlton Roberts",
     username: "Charlton Roberts, Product Engineering",
     body: "The audio quality in this app is outstanding. Every note is crystal clear, from the deep bass to the sharp highs. If you're a true music lover, you will appreciate the sound precision and richness this app offers.",
-    img: "https://avatar.vercel.sh/bob",
+    img: "charlton-roberts",
   },
   {
-    name: "Charlie",
+    name: "Jonathan Melville",
     username: "Daniel Lopes, Frontend Developer",
     body: "One of the best things about this app is its speed. Songs load almost instantly, and there's no lag at all. Even when I have a large playlist, the app handles it effortlessly, making it a top choice for music streaming.",
-    img: "https://avatar.vercel.sh/charlie",
+    img: "jony",
   },
   {
-    name: "Alice",
+    name: "Alan Cowen",
     username: "Senior Software Engineer, Frontend",
     body: "I have tried many music apps before, but this one truly amazed me. The interface is smooth, easy to navigate, and the overall experience is fantastic. I can quickly find my favorite songs and create playlists effortlessly, making my music experience seamless and enjoyable.",
-    img: "https://avatar.vercel.sh/alice",
+    img: "alan-cowen",
   },
   {
-    name: "Bob",
+    name: "Thomas Zahner",
     username: "Charlton Roberts, Product Engineering",
     body: "The audio quality in this app is outstanding. Every note is crystal clear, from the deep bass to the sharp highs. If you're a true music lover, you will appreciate the sound precision and richness this app offers.",
-    img: "https://avatar.vercel.sh/bob",
+    img: "thomas-zahner",
   },
   {
-    name: "Charlie",
+    name: "Jason Cottrell",
     username: "Daniel Lopes, Frontend Developer",
     body: "One of the best things about this app is its speed. Songs load almost instantly, and there's no lag at all. Even when I have a large playlist, the app handles it effortlessly, making it a top choice for music streaming.",
-    img: "https://avatar.vercel.sh/charlie",
+    img: "jasoncottrell-sm",
   },
   // {
   //   name: "David",
@@ -161,10 +162,18 @@ export function PeopleSay() {
               <div className="absolute -right-[10px] -top-[10px] h-[10px] w-[10px] border-b border-l"></div>
               <div className="absolute -bottom-[10px] -left-[10px] h-[10px] w-[10px] border-r border-t"></div>
               <div className="absolute -bottom-[10px] -right-[10px] h-[10px] w-[10px] border-l border-t"></div>
-<div className=" flex items-start flex-col gap-1 text-sm leading-tight sm:text-base">
-  <div className="w-full flex justify-between">
+<div className=" flex justify-between gap-1 text-sm leading-tight sm:text-base">
+ <div className="flex gap-2 items-center ">
+  <div>
+    <Image alt={item.img} src={`/${item.img}.avif`} width={"50"} height={"50"} className="h-[30px] w-[30px] "></Image>
+  </div>
+ <div className="w-full flex flex-col gap-1 ">
     
     <p className="text-md ">{item.name}</p>
+    <p className="text-sm text-[#a1a1a1]">{item.username}</p>
+
+    </div>
+ </div>
     <svg
   data-testid="geist-icon"
   height={16}
@@ -180,9 +189,7 @@ export function PeopleSay() {
     fill="currentColor"
   />
 </svg>
-
-    </div>
-  <p className="text-sm text-[#a1a1a1]">{item.username}</p>
+ 
   </div>
   <span className="text-white text-md">&quot;{item.body}&quot;</span>
         </div>
