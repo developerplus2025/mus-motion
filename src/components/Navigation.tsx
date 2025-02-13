@@ -234,7 +234,7 @@ export const Navigation = (): JSX.Element => {
                 href="/"
                 className="text-[1.1rem] font-bold transition-colors duration-300 ease-out dark:text-white"
               >
-                Stroma VF
+                Flora VF
               </Link>
               <Link
                 href="/"
