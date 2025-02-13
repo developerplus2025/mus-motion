@@ -894,7 +894,7 @@ export default function Individual() {
                
                 {tier.title === "Plus Plan" && (
                   <div className="flex items-center justify-between">
-                    <p>Pro</p>
+                    <p>Plus Plan</p>
                     <Badge className="h-fit px-3 py-1" variant={"outline"}>
                       Popular
                     </Badge>
@@ -902,7 +902,7 @@ export default function Individual() {
                 )}
                 {tier.title === "Basic Plan" && (
                   <div className="flex justify-between">
-                    <p>Basic</p>
+                    <p>Basic Plan</p>
                     <Badge className="h-fit px-3 py-1" variant={"outline"}>
                       Best Value
                     </Badge>
@@ -1121,14 +1121,14 @@ export default function Individual() {
               </div>
             </CardHeader>
             <CardContent className="flex-grow pt-[8px]">
-              <ul className="space-y-2 first:border-t first:pt-[1rem]">
+              <ul className="space-y-2  border last:border-[0px] first:pt-[1rem]">
                 {tier.features.map((feature) => (
-                  <li key={feature.name} className="flex pb-2 border-b items-center gap-2">
-                    <div className="rounded-md p-[4px]">
+                  <li key={feature.name} className="flex px-2 pb-2 border-b items-center gap-2">
+                    <div className="rounded-md  p-[4px]">
                       {feature.icon}
                       {/* <CheckIcon className="h-[15px] w-[15px] flex-shrink-0 text-[#ffffff]" /> */}
                     </div>
-                    <p className="text-sm text-[#a1a1a1]">{feature.name}</p>
+                    <p className="text-sm text-[white]">{feature.name}</p>
                   </li>
                 ))}
               </ul>
