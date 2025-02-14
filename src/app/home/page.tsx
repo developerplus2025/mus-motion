@@ -245,7 +245,7 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
   return (
-    <main className="GeistSans relative flex min-h-screen w-full flex-col items-center justify-between gap-[1rem] overflow-x-hidden pb-[1rem] pt-[3.8rem] dark:bg-black dark:[color-scheme:dark]">
+    <main className="GeistSans relative flex min-h-screen w-full flex-col items-center justify-between gap-[1rem] overflow-x-hidden pb-[1rem] pt-[6rem] dark:bg-black dark:[color-scheme:dark]">
       {/* <TailwindcssButton /> */}
 
 
@@ -382,28 +382,8 @@ export default function Home() {
             <div className="text-sm">Countries</div>
           </div>
         </div> */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5, ease: "easeOut" }}
-        className="relative mt-[4rem] box-border h-fit w-full bg-contain px-[15rem]"
-      >
-        <InfiniteSlider gap={24} className="h-fit bg-contain" reverse>
-          {listLogo.map((logo) => (
-            <Image
-              key={logo.id}
-              src={`/${logo.src}.svg`}
-              height={"80"}
-              width={"100"}
-              alt={`${logo.src}`}
-              className="h-[50px] dark:invert-[1]"
-            ></Image>
-          ))}
-        </InfiniteSlider>
-        <div className="overlay"></div>
-        <div className="overlay right"></div>
-      </motion.div>
-      <div className="mx-auto mt-[2rem] w-[700px] border-t"></div>
+      
+      <div className="mx-auto mt-[6rem] w-[700px] border-t"></div>
       <div className="w-full">
         <PhotoFeatures />
       </div>
