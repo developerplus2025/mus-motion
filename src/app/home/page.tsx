@@ -155,6 +155,7 @@ import  WatchDemo  from "./components/watch-demo";
 import VideoModal from "./components/modal-video";
 import Modal from "./components/Modal";
 import {CircularProgress} from "@heroui/react";
+import SocialProof from "./components/social-proof";
 export default function Home() {
   const { theme, systemTheme, setTheme } = useTheme();
  const [open ,setOpen] = useState(false)
@@ -403,6 +404,9 @@ export default function Home() {
       size="lg"
       value={value}
     />
+     <div className="mx-auto my-[2rem] w-[700px] border-t"></div>
+     
+     <SocialProof/>
      <div className="mx-auto my-[2rem] w-[700px] border-t"></div>
       {/* <div className="mt-[2rem] flex w-full items-center justify-center gap-[4rem] px-[2rem]">
         <ChartFirstYear />
