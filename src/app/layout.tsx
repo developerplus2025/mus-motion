@@ -50,7 +50,7 @@ export default function RootLayout({
 
 </motion.div> */}
      <CookieAlert />
-     <ThemeProvider enableSystem attribute="class" defaultTheme="system">
+     <ThemeProvider enableSystem attribute="class" defaultTheme="dark">
        <Navigation />
        <DocsNavigation />
        <Toaster />
