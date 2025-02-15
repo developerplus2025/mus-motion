@@ -54,7 +54,7 @@ export default function SocialProof() {
             <div className="flex flex-col justify-center items-center">
 <div className="grid justify-items-center grid-cols-3">
 {
-    items.slice(0, 4).map((item) => (
+    items.slice(0, 3).map((item) => (
         <div key={item.id}>
             <Image
                 alt={item.src}
@@ -70,7 +70,7 @@ export default function SocialProof() {
             </div>
             <div className="grid justify-items-center grid-cols-3">
             {
-    items.slice(4).map((item) => (
+    items.slice(3).map((item) => (
         <div key={item.id}>
             <Image
                 alt={item.src}
