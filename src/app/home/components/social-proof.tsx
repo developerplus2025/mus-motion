@@ -52,7 +52,7 @@ export default function SocialProof() {
                 <span className="md:text-md max-w-[500px] text-center text-zinc-500 dark:text-zinc-400">This software is trusted by professionals in the music industry, from independent artists to top recording studios. Discover why so many creators rely on it to streamline their workflow and produce high-quality music. Join a community that’s making music smarter today!</span>
             </div>
             <div className="flex flex-col justify-center items-center">
-<div className="grid justify-items-center grid-cols-3">
+<div className="grid justify-items-center gap-4 grid-cols-3">
 {
     items.slice(0, 3).map((item) => (
         <div key={item.id}>
@@ -68,7 +68,7 @@ export default function SocialProof() {
 }
 
             </div>
-            <div className="grid justify-items-center grid-cols-3">
+            <div className="grid gap-4 justify-items-center grid-cols-4">
             {
     items.slice(3).map((item) => (
         <div key={item.id}>

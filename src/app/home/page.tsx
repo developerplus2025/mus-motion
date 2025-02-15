@@ -399,7 +399,7 @@ export default function Home() {
                 }}
       
       aria-label="Loading..."
-      color="success"
+      color="primary"
       showValueLabel={true}
       size="lg"
       value={value}
