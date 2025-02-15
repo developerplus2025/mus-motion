@@ -404,6 +404,7 @@ export default function Home() {
       showValueLabel={true}
       size="lg"
       value={value}
+      strokeWidth={2}
     />
      <div className="mx-auto my-[2rem] w-[700px] border-t"></div>
      
