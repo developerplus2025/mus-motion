@@ -1,8 +1,8 @@
-// import type { Metadata } from "next";
-"use client";
+import type { Metadata } from "next";
+// "use client";
 
-import { usePathname } from "next/navigation";
-import { AnimatePresence, motion } from "framer-motion";
+// import { usePathname } from "next/navigation";
+// import { AnimatePresence, motion } from "framer-motion";
 import { Inter } from "next/font/google";
 import "./globals.css";
 // import 'fumadsocs-ui/dist/style.css';
@@ -20,17 +20,17 @@ import { ToasterSonner } from "../components/ui/sonner";
 import CookieAlert from "@/components/cookie-alert";
 import { RootProvider } from 'fumadocs-ui/provider';
 import FrameVideo from "./home/components/frame-video";
-// const inter = Inter({ subsets: ["latin"] });
-// export const metadata: Metadata = {
-//   title: "Stroma: A Useful Platform For Musicians",
-//   description: "Stroma - Home",
-// };
+const inter = Inter({ subsets: ["latin"] });
+export const metadata: Metadata = {
+  title: "Stroma: A Useful Platform For Musicians",
+  description: "Stroma - Home",
+};
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const pathname = usePathname();
+  // const pathname = usePathname();
   return (
     <>
       <html
@@ -41,14 +41,14 @@ export default function RootLayout({
       >
         <head />
         <body className="relative overflow-x-hidden antialiased">
-        <AnimatePresence mode="wait">
-          <motion.div key={pathname}>
-          <motion.div className="slide-in" initial={{scaleY:0}} animate={{scaleY:0}} exit={{scaleY:1}} transition={{duration:0.5,ease:[0.22,1,0.36,1]}}>
+        {/* <AnimatePresence mode="wait">
+          <motion.div key={pathname}> */}
+          {/* <motion.div className="slide-in" initial={{scaleY:0}} animate={{scaleY:0}} exit={{scaleY:1}} transition={{duration:0.5,ease:[0.22,1,0.36,1]}}>
 
 </motion.div>
 <motion.div className="slide-out" initial={{scaleY:1}} animate={{scaleY:0}} exit={{scaleY:0}} transition={{duration:0.5,ease:[0.22,1,0.36,1]}}>
 
-</motion.div>
+</motion.div> */}
      <CookieAlert />
      <ThemeProvider enableSystem attribute="class" defaultTheme="system">
        <Navigation />
@@ -71,9 +71,9 @@ export default function RootLayout({
        <RootProvider>{children}</RootProvider>
        <Footer />
      </ThemeProvider>
-          </motion.div>
+          {/* </motion.div>
      
-          </AnimatePresence>
+          </AnimatePresence> */}
         </body>
       </html>
     </>
