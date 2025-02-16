@@ -1,8 +1,7 @@
-import Lottie from "lottie-react";
-import animationData from "./infinity.json"; // JSON tải về từ useanimations.com
+import React from "react";
+import UseAnimations from "react-useanimations";
+import infinity from 'react-useanimations/lib/infinity';
 
-const LoopAnimation = () => {
-  return <Lottie className="w-[auto] h-[auto]" animationData={animationData} loop autoplay />;
-};
-
-export default LoopAnimation;
+export const LoopAnimation = () => (
+  <UseAnimations animation={infinity} size={56} />
+);

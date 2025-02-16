@@ -1,6 +1,6 @@
 import Image from "next/image"
 import { RadaChart1 } from "./rada-chart-1"
-import LoopAnimation from "./loop-animation"
+import { LoopAnimation } from "./loop-animation"
 
 const items = [
     {
