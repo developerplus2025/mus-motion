@@ -30,7 +30,7 @@ const items = [
 ]
 export default function Metric() {
     return (
-        <div className="flex flex-col gap-[2rem]">
+        <div className="flex flex-col items-center gap-[2rem]">
             <LoopAnimation/>
             <div className="flex flex-col gap-4 items-center justify-center">
                 <h1 className="text-[3.5rem] leading-[4.5rem] w-[750px] font-bold text-center tracking-tighter text-white sm:text-5xl xl:text-[3.5rem]">Flora by the Numbers</h1>
