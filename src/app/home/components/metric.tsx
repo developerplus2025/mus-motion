@@ -31,10 +31,10 @@ export default function Metric() {
     return (
         <div className="flex flex-col gap-[2rem]">
             <div className="flex flex-col gap-4 items-center justify-center">
-                <h1 className="text-[3.5rem] leading-[4.5rem] w-[750px] font-bold text-center tracking-tighter text-white sm:text-5xl xl:text-[3.5rem]">Trusted by Musicians and Producers Worldwide</h1>
-                <span className="md:text-md max-w-[500px] text-center text-zinc-500 dark:text-zinc-400">This software is trusted by professionals in the music industry, from independent artists to top recording studios. Discover why so many creators rely on it to streamline their workflow and produce high-quality music. Join a community that’s making music smarter today!</span>
+                <h1 className="text-[3.5rem] leading-[4.5rem] w-[750px] font-bold text-center tracking-tighter text-white sm:text-5xl xl:text-[3.5rem]">Flora by the Numbers</h1>
+                <span className="md:text-md max-w-[500px] text-center text-zinc-500 dark:text-zinc-400">See why musicians and producers trust our music software! From the number of satisfied users to tracks created, these metrics highlight the impact our software is making in the music industry. Join a growing community of creators producing faster and smarter with our software.</span>
             </div>
-            <div className="flex justify-between items-center w-[500px]">
+            <div className="flex justify-between items-center ">
                 <RadaChart1/>
                 <RadaChart1/>
             </div>
