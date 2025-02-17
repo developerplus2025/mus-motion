@@ -1121,7 +1121,7 @@ export default function Individual() {
               </div>
             </CardHeader>
             <CardContent className="flex-grow pt-[8px]">
-              <ul className="space-y-2  border  rounded-lg first:pt-[1rem]">
+              <ul className="space-y-2  border-t  rounded-lg first:pt-[1rem]">
                 {tier.features.map((feature) => (
                   <li key={feature.name} className="flex px-2 pb-2  items-center gap-2">
                     <div className="rounded-md  p-[4px]">
