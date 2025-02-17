@@ -34,9 +34,9 @@ export default function Metric() {
             <LoopAnimation/>
             <div className="flex flex-col gap-4 items-center justify-center">
                 <h1 className="text-[3.5rem] leading-[4.5rem] w-[750px] font-bold text-center tracking-tighter text-white sm:text-5xl xl:text-[3.5rem]">Flora by the Numbers</h1>
-                <span className="md:text-md max-w-[500px] text-center text-zinc-500 dark:text-zinc-400">See why musicians and producers trust our music software! From the number of satisfied users to tracks created, these metrics highlight the impact our software is making in the music industry. Join a growing community of creators producing faster and smarter with our software.</span>
+                <span className="md:text-md max-w-[550px] text-center text-zinc-500 dark:text-zinc-400">See why musicians and producers trust our music software! From the number of satisfied users to tracks created, these metrics highlight the impact our software is making in the music industry. Join a growing community of creators producing faster and smarter with our software.</span>
             </div>
-            <div className="flex justify-between items-center ">
+            <div className="flex justify-between gap-[4rem] items-center ">
                 <RadaChart1/>
                 <RadaChart1/>
             </div>
