@@ -393,25 +393,13 @@ export default function Home() {
 
       <PeopleSay />
       <div className="mx-auto my-[2rem] w-[700px] border-t"></div>
-      <CircularProgress
-                classNames={{
-                  svg: "w-36 h-36 drop-shadow-md",
-                  value: "text-3xl font-semibold text-white",
-                }}
       
-      aria-label="Loading..."
-      color="primary"
-      showValueLabel={true}
-      size="lg"
-      value={value}
-      strokeWidth={2}
-    />
-     <div className="mx-auto my-[2rem] w-[700px] border-t"></div>
      
      <SocialProof/>
      <div className="mx-auto my-[2rem] w-[700px] border-t"></div>
      <Metric/>
      <div className="mx-auto my-[2rem] w-[700px] border-t"></div>
+     <AccordionFAQ/>
       {/* <div className="mt-[2rem] flex w-full items-center justify-center gap-[4rem] px-[2rem]">
         <ChartFirstYear />
         <ChartLastYear />
