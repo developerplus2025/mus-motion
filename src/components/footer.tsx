@@ -30,7 +30,7 @@ export default function Footer() {
             <div className="mb-3 flex items-center gap-2">
               {/* <Music2 className="h-5 w-5 text-white" /> */}
               <h3 className="text-lg font-semibold tracking-tight">
-                Stroma Software Company
+                Flora Software Company
               </h3>
             </div>
           </div>
@@ -128,7 +128,7 @@ export default function Footer() {
         {/* Bottom Section */}
         <div className="mt-6 flex flex-col items-center justify-between gap-4 border-t pt-6 md:flex-row">
           <p className="w-full text-center text-sm text-[#a1a1a1]">
-            © {new Date().getFullYear()} Stroma Software Company, Inc.
+            © {new Date().getFullYear()} Flora Software Company, Inc.
           </p>
           <div className="hidden space-x-5">
             <a

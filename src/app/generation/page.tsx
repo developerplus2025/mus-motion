@@ -157,7 +157,7 @@ export default function SupportPage() {
   return (
     <div>
       <div className="mt-[3rem] text-center text-xl font-bold">
-        <p>The latest StromaVF news </p>
+        <p>The latest FloraVF news </p>
       </div>
       <div className="my-[4rem] grid grid-cols-1 justify-items-center gap-[3rem] px-[2rem]">
         {list_version.map((list) => (
@@ -167,7 +167,7 @@ export default function SupportPage() {
           >
             <div className="flex flex-col gap-4">
               <div className="flex justify-between">
-                <p className="text-xl font-bold">Stroma v{list.version}</p>
+                <p className="text-xl font-bold">Flora v{list.version}</p>
                 <div className="flex items-center gap-2">
                   {" "}
                   <p className="text-sm text-[#a1a1a1]">{list.day}</p>

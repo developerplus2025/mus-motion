@@ -15,7 +15,7 @@ export default function DownloadsPage() {
   return (
     <main className="mt-[3rem] w-full">
       <div className="flex w-full flex-col items-center justify-center gap-[1rem]">
-        <p className="text-center text-4xl font-bold">Download Stroma </p>
+        <p className="text-center text-4xl font-bold">Download Flora </p>
         <p className="w-[45rem] text-center text-xl text-[#a1a1a1]">
           Experience the best music streaming service on your favorite device.
           Download our app now and enjoy unlimited access to millions of songs.

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 export const metadata: Metadata = {
-  title: "Video | Stroma",
-  description: "Stroma - Video",
+  title: "Video | Flora",
+  description: "Flora - Video",
 };
 export default function ResourcesLayout({
   children,

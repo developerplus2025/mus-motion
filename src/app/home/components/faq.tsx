@@ -122,7 +122,7 @@ export default function AccordionFAQ() {
       </div>
       <div className="flex flex-col gap-[2rem] h-full justify-center items-center">
       <h1 className="text-[3.5rem] leading-[4.5rem] w-[750px] font-bold text-center tracking-tighter text-white sm:text-5xl xl:text-[3.5rem]">Got Questions? We&apos;ve Got Answers!</h1>
-      <span className="md:text-md max-w-[500px] text-center text-zinc-500 dark:text-zinc-400">Curious about our flora software? Check out the frequently asked questions below to find answers about features, pricing, customization, and more. Whether you're wondering how it works or what&apos;s included, we&apos;ve got all the details you need right here.</span></div>
+      <span className="md:text-md max-w-[500px] text-center text-zinc-500 dark:text-zinc-400">Curious about our flora software? Check out the frequently asked questions below to find answers about features, pricing, customization, and more. Whether you&apos;re wondering how it works or what&apos;s included, we&apos;ve got all the details you need right here.</span></div>
      
       {/* <div className="grid grid-cols-3 place-items-center gap-[4rem] rounded-lg">
         {branch.map((branch) => (

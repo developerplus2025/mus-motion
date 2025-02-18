@@ -18,7 +18,7 @@ export default function FeedBack() {
           <form className="space-y-3">
             <Textarea
               id="feedback"
-              placeholder="How can we improve Stroma VF?"
+              placeholder="How can we improve Flora VF?"
               aria-label="Send feedback"
             />
             <div className="flex flex-col sm:flex-row sm:justify-end">

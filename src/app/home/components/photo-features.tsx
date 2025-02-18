@@ -203,7 +203,7 @@ export default function PhotoFeatures() {
           {/* <div className="w-full md:w-1/2">
             <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
               <Image
-                src="/Opera Snapshot_2024-12-25_203610_stromatech.vercel.app.png"
+                src="/Opera Snapshot_2024-12-25_203610_Floratech.vercel.app.png"
                 alt="Feature illustration"
                 className=""
                 fill

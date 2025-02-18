@@ -22,8 +22,8 @@ import { RootProvider } from 'fumadocs-ui/provider';
 import FrameVideo from "./home/components/frame-video";
 const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
-  title: "Stroma: A Useful Platform For Musicians",
-  description: "Stroma - Home",
+  title: "Flora: A Useful Platform For Musicians",
+  description: "Flora - Home",
 };
 export default function RootLayout({
   children,

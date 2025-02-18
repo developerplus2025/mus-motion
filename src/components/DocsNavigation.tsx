@@ -222,8 +222,7 @@ export const DocsNavigation = (): JSX.Element => {
                 href="/"
                 className="text-[1.1rem] font-bold transition-colors duration-300 ease-out dark:text-white"
               >
-                Stroma
-              </Link>
+                Flora           </Link>
               <Link
                 href="/"
                 className="rounded-full border px-4 py-1 text-xs font-bold transition-colors duration-300 ease-out dark:text-white"

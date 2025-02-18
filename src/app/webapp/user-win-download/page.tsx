@@ -9,10 +9,10 @@ export default function Dpage() {
     const timer = setTimeout(() => {
       // URL của file cần tải
       const fileUrl =
-        "https://github.com/devplus2024/music-app/releases/download/2.3.5/StromaSetup.2.5.3.exe";
+        "https://github.com/devplus2024/music-app/releases/download/2.3.5/FloraSetup.2.5.3.exe";
       const link = document.createElement("a");
       link.href = fileUrl;
-      link.setAttribute("download", "StromaSetup.2.5.3.exe"); // Tên file sẽ tải xuống
+      link.setAttribute("download", "FloraSetup.2.5.3.exe"); // Tên file sẽ tải xuống
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);

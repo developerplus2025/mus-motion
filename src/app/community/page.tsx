@@ -159,8 +159,7 @@ export default function CommunityPage() {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="mb-4 text-center text-3xl font-bold">
-        Community Of Stroma
-      </h1>
+        Community Of Flora   </h1>
 
       <Tabs defaultValue="discussions" className="">
         <TabsList className="mb-[5rem] grid h-0 w-full justify-items-center rounded-full p-0">

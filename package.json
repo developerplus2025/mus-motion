@@ -1,12 +1,12 @@
 {
-  "name": "stroma-vf",
+  "name": "flora-vf",
   "version": "10.9.5",
   "private": true,
   "main": "main.js",
   "build": {
     "asar": false,
     "compression": "store",
-    "appId": "com.Stroma.inc",
+    "appId": "com.Flora.inc",
     "directories": {
       "output": "dist"
     },

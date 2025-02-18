@@ -124,7 +124,7 @@ import { NavigationEffect } from "@/components/NavigationEffect";
 import { ToasterSonner } from "@/components/ui/sonner";
 import { TabList, tablist } from "./data/tablist";
 import MusicTab from "./components/musictab";
-export default function StromaWebApp() {
+export default function FloraWebApp() {
   const { theme, systemTheme, setTheme } = useTheme();
   const [position, setPosition] = React.useState("benoit");
   return (
@@ -135,23 +135,22 @@ export default function StromaWebApp() {
             <div className="title_bar flex h-[37px] gap-[2rem] rounded-t-lg border-b dark:border-b-[#202020] dark:bg-black">
               <Menubar className="title_bar_no rounded-t-lg border-none dark:bg-black">
                 <MenubarMenu>
-                  <MenubarTrigger>Stroma</MenubarTrigger>
+                  <MenubarTrigger>Flora</MenubarTrigger>
                   <MenubarContent>
-                    <MenubarItem>About Stroma</MenubarItem>
+                    <MenubarItem>About Flora</MenubarItem>
                     <MenubarSeparator />
                     <MenubarItem>
                       Preferences<MenubarShortcut>⌘,</MenubarShortcut>
                     </MenubarItem>
                     <MenubarSeparator />
                     <MenubarItem>
-                      Hide Stroma<MenubarShortcut>⇧⌘H</MenubarShortcut>
+                      Hide Flora<MenubarShortcut>⇧⌘H</MenubarShortcut>
                     </MenubarItem>
                     <MenubarItem>
                       Hide Other<MenubarShortcut>⌘H</MenubarShortcut>
                     </MenubarItem>
                     <MenubarItem>
-                      Quit Stroma
-                      <MenubarShortcut>⌘Q</MenubarShortcut>
+                      Quit Flora                   <MenubarShortcut>⌘Q</MenubarShortcut>
                     </MenubarItem>
                   </MenubarContent>
                 </MenubarMenu>
