@@ -88,7 +88,7 @@ const items = [
 
 export default function AccordionFAQ() {
   return (
-    <div className=" w-full items-center justify-center px-[3rem]">
+    <div className=" w-full flex-row-reverse items-center flex justify-between px-[3rem]">
       <div className=" space-y-4">
         <Accordion
           type="single"
@@ -120,19 +120,23 @@ export default function AccordionFAQ() {
           ))}
         </Accordion>
       </div>
-      <div className="grid grid-cols-3 place-items-center gap-[4rem] rounded-lg">
+      <div className="flex flex-col gap-[2rem] h-full justify-center items-center">
+      <h1 className="text-[3.5rem] leading-[4.5rem] w-[750px] font-bold text-center tracking-tighter text-white sm:text-5xl xl:text-[3.5rem]">Got Questions? We’ve Got Answers!</h1>
+      <span className="md:text-md max-w-[500px] text-center text-zinc-500 dark:text-zinc-400">Curious about our flora software? Check out the frequently asked questions below to find answers about features, pricing, customization, and more. Whether you're wondering how it works or what’s included, we’ve got all the details you need right here.</span></div>
+     
+      {/* <div className="grid grid-cols-3 place-items-center gap-[4rem] rounded-lg">
         {branch.map((branch) => (
           <div
             className="flex h-[150px] w-[300px] flex-col items-start justify-start gap-1 rounded-lg border px-4 py-4"
             key={branch.id}
           >
-            {/* <Image
+            <Image
               src={`/${branch.src}.svg`}
               alt={branch.src}
               className="h-[50px] w-[50px]"
               height={"30"}
               width={"30"}
-            ></Image> */}
+            ></Image>
             <h1 className="text-md capitalize">{branch.src}</h1>
             <h1 className="text-sm capitalize text-[#a1a1a1]">
               The library for web and native user interfaces. Next.js is built
@@ -141,7 +145,7 @@ export default function AccordionFAQ() {
             </h1>
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 }
