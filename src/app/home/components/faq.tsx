@@ -101,7 +101,7 @@ export default function AccordionFAQ() {
             <AccordionItem
               value={item.id}
               key={item.id}
-              className={`"${item.id == "8" ? "border-b-[0px]"  : "boder"} ${item.id == "1" ? "border-b-[0px]"  : ""} bg-background px-4 py-1 "`}
+              className={`"${item.id == "8" ? "border-b-[0px]"  : "border"} ${item.id == "1" ? "border-b-[0px]"  : ""} bg-background px-4 py-1 "`}
             >
               <AccordionPrimitive.Header className="flex">
                 <AccordionPrimitive.Trigger className="flex flex-1 items-center gap-3 py-2 text-left text-[15px] font-semibold leading-6 transition-all [&>svg>path:last-child]:origin-center [&>svg>path:last-child]:transition-all [&>svg>path:last-child]:duration-200 [&>svg]:-order-1 [&[data-state=open]>svg>path:last-child]:rotate-90 [&[data-state=open]>svg>path:last-child]:opacity-0 [&[data-state=open]>svg]:rotate-180">
