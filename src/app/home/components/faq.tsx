@@ -89,37 +89,34 @@ const items = [
 export default function AccordionFAQ() {
   return (
     <div className="w-full flex justify-center px-[3rem] ">
-      <div className=" w-full flex-row-reverse items-center flex gap-[5rem] border rounded-lg">
+      <div className=" w-full flex-col-reverse items-center flex gap-[2rem] rounded-lg">
       <div className=" space-y-4">
-        <Accordion
-          type="single"
-          collapsible
-          className="w-[650px] border-[0px] first:rounded-t-[0px] last:rounded-b-[0px]    -space-y-px"
-          defaultValue="3"
-        >
-          {items.map((item) => (
-            <AccordionItem
-              value={item.id}
-              key={item.id}
-              className={`"${item.id == "8" ? "border-b-[0px]"  : "border"} ${item.id == "1" ? "border-t-[0px]"  : " "} bg-background px-4 py-1 "`}
-            >
-              <AccordionPrimitive.Header className="flex">
-                <AccordionPrimitive.Trigger className="flex flex-1 items-center gap-3 py-2 text-left text-[15px] font-semibold leading-6 transition-all [&>svg>path:last-child]:origin-center [&>svg>path:last-child]:transition-all [&>svg>path:last-child]:duration-200 [&>svg]:-order-1 [&[data-state=open]>svg>path:last-child]:rotate-90 [&[data-state=open]>svg>path:last-child]:opacity-0 [&[data-state=open]>svg]:rotate-180">
-                  {item.title}
-                  <Plus
-                    size={16}
-                    strokeWidth={2}
-                    className="shrink-0 opacity-60 transition-transform duration-200"
-                    aria-hidden="true"
-                  />
-                </AccordionPrimitive.Trigger>
-              </AccordionPrimitive.Header>
-              <AccordionContent className="pb-2 text-muted-foreground">
-                {item.content}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
+
+      <Accordion type="single" collapsible className="w-[650px] space-y-2" defaultValue="3">
+        {items.map((item) => (
+          <AccordionItem
+            value={item.id}
+            key={item.id}
+            className="rounded-lg border bg-background px-4 py-1"
+          >
+            <AccordionPrimitive.Header className="flex">
+              <AccordionPrimitive.Trigger className="flex flex-1 items-center gap-3 py-2 text-left text-[15px] font-semibold leading-6 transition-all [&>svg>path:last-child]:origin-center [&>svg>path:last-child]:transition-all [&>svg>path:last-child]:duration-200 [&>svg]:-order-1 [&[data-state=open]>svg>path:last-child]:rotate-90 [&[data-state=open]>svg>path:last-child]:opacity-0 [&[data-state=open]>svg]:rotate-180">
+                {item.title}
+                <Plus
+                  size={16}
+                  strokeWidth={2}
+                  className="shrink-0 opacity-60 transition-transform duration-200"
+                  aria-hidden="true"
+                />
+              </AccordionPrimitive.Trigger>
+            </AccordionPrimitive.Header>
+            <AccordionContent className="pb-2 ps-7 text-muted-foreground">
+              {item.content}
+            </AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
+
       </div>
       <div className="flex w-[500px] flex-col gap-[2rem] h-full justify-center items-center">
       <h1 className="text-[3.5rem] leading-[4.5rem]  font-bold text-center tracking-tighter text-white sm:text-5xl xl:text-[3.5rem]">Got Questions? We&apos;ve Got Answers!</h1>
