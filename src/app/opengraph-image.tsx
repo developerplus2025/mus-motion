@@ -30,7 +30,7 @@ export default async function Image() {
   } else if (currentUrl === "https://localhost:3000/") {
     imagePreview = "Đăng Bình";
   } else {
-    imagePreview = "Mình là Jack bỏ con đây mọi người, donate giúp mình 😁😁";
+    imagePreview = "Tôi tên Phạm Viết Tuấn và Tôi rất yêu chị Yến";
   }
 
   const geistLight = fetch(
