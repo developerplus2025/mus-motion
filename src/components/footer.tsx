@@ -17,7 +17,14 @@ export default function Footer() {
   const isDocs = path === "/docs";
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Thanks for subscribing!");
+    const promise = () => new Promise((resolve) => setTimeout(() => resolve({ name: 'Sonner' }), 2000));
+    toast.promise(promise, {
+      loading: 'Loading...',
+      success: (data) => {
+        return `Thanks for subscribing!`;
+      },
+      error: 'Error',
+    });
   };
   return (
     <div
