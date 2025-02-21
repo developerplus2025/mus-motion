@@ -847,7 +847,7 @@ export default function Individual() {
     if (selected) setSelectedPackage(selected);
   };
   return (
-    <div className="max-[1467px]:px-[11rem] min-[1350px]:px-[6rem]">
+    <motion.div animate={{opacity:1}} initial={{opacity:0}} exit={{opacity:0}} transition={{duration:0.25}} className="max-[1467px]:px-[11rem] min-[1350px]:px-[6rem]">
       <div className="mb-[3rem] mt-4 flex items-center justify-center space-x-2">
         <span className="text-sm">Monthly</span>
         <Switch
@@ -1155,7 +1155,7 @@ export default function Individual() {
           </Card>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 }
 // bg-gradient-to-tr from-black/50 to-[#121212]
