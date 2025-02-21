@@ -119,7 +119,7 @@ export default function Footer() {
               <Input
                 type="email"
                 placeholder="you@domain.com"
-                className="h-8  bg-[#0c0c0c] text-xs text-white placeholder:text-[#a1a1a1]"
+                className="h-8  bg-[#27272a80] text-xs text-white placeholder:text-[#a1a1a1]"
                 required
               />
               <Button
