@@ -385,22 +385,22 @@ export default function Home() {
           </div>
         </div> */}
       
-      <div className="mx-auto mt-[6rem] w-[700px] border-t"></div>
+      <div className="mx-auto mt-[6rem] w-[700px]  h-px bg-gradient-to-r from-transparent via-zinc-700 dark:via-zinc-300 to-transparent"></div>
       <div className="w-full">
         <PhotoFeatures />
       </div>
-      <div className="mx-auto my-[2rem] w-[700px] border-t"></div>
+      <div className="mx-auto my-[2rem] w-[700px]  h-px bg-gradient-to-r from-transparent via-zinc-700 dark:via-zinc-300 to-transparent"></div>
 
       <PeopleSay />
-      <div className="mx-auto my-[2rem] w-[700px] border-t"></div>
+      <div className="mx-auto my-[2rem] w-[700px]  h-px bg-gradient-to-r from-transparent via-zinc-700 dark:via-zinc-300 to-transparent"></div>
       
      
      <SocialProof/>
-     <div className="mx-auto my-[2rem] w-[700px] border-t"></div>
+     <div className="mx-auto my-[2rem] w-[700px]  h-px bg-gradient-to-r from-transparent via-zinc-700 dark:via-zinc-300 to-transparent"></div>
      <Metric/>
-     <div className="mx-auto my-[2rem] w-[700px] border-t"></div>
+     <div className="mx-auto my-[2rem] w-[700px]  h-px bg-gradient-to-r from-transparent via-zinc-700 dark:via-zinc-300 to-transparent"></div>
      <AccordionFAQ/>
-     <div className="mx-auto my-[2rem] w-[700px] border-t"></div>
+     <div className="mx-auto my-[2rem] w-[700px]  h-px bg-gradient-to-r from-transparent via-zinc-700 dark:via-zinc-300 to-transparent"></div>
       {/* <div className="mt-[2rem] flex w-full items-center justify-center gap-[4rem] px-[2rem]">
         <ChartFirstYear />
         <ChartLastYear />
