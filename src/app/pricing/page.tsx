@@ -83,8 +83,8 @@ function PricingPage() {
         </div>
       </div>
 
-      <motion.div className="mt-[1rem]">{contents[activeTab]}</motion.div>
-      <div className="mx-[2rem] mt-16 flex flex-col items-center">
+      <motion.div className="mt-[1rem]" animate={{opacity:1}} initial={{opacity:0}} exit={{opacity:0}} transition={{duration:0.25}}>{contents[activeTab]}</motion.div>
+      <div className="mx-[2rem] mt-16 hidden flex-col items-center">
         <h2 className="mb-8 text-center text-3xl font-bold">
           Frequently Asked Questions
         </h2>
