@@ -21,24 +21,24 @@ const items = [
     body: "One of the best things about this app is its speed. Songs load almost instantly, and there's no lag at all. Even when I have a large playlist, the app handles it effortlessly, making it a top choice for music streaming.",
     img: "jony",
   },
-  {
-    name: "Alan Cowen",
-    username: "Senior Software Engineer, Frontend",
-    body: "I have tried many music apps before, but this one truly amazed me. The interface is smooth, easy to navigate, and the overall experience is fantastic. I can quickly find my favorite songs and create playlists effortlessly, making my music experience seamless and enjoyable.",
-    img: "alan-cowen",
-  },
-  {
-    name: "Thomas Zahner",
-    username: "Charlton Roberts, Product Engineering",
-    body: "The audio quality in this app is outstanding. Every note is crystal clear, from the deep bass to the sharp highs. If you're a true music lover, you will appreciate the sound precision and richness this app offers.",
-    img: "thomas-zahner",
-  },
-  {
-    name: "Jason Cottrell",
-    username: "Daniel Lopes, Frontend Developer",
-    body: "One of the best things about this app is its speed. Songs load almost instantly, and there's no lag at all. Even when I have a large playlist, the app handles it effortlessly, making it a top choice for music streaming.",
-    img: "jasoncottrell-sm",
-  },
+  // {
+  //   name: "Alan Cowen",
+  //   username: "Senior Software Engineer, Frontend",
+  //   body: "I have tried many music apps before, but this one truly amazed me. The interface is smooth, easy to navigate, and the overall experience is fantastic. I can quickly find my favorite songs and create playlists effortlessly, making my music experience seamless and enjoyable.",
+  //   img: "alan-cowen",
+  // },
+  // {
+  //   name: "Thomas Zahner",
+  //   username: "Charlton Roberts, Product Engineering",
+  //   body: "The audio quality in this app is outstanding. Every note is crystal clear, from the deep bass to the sharp highs. If you're a true music lover, you will appreciate the sound precision and richness this app offers.",
+  //   img: "thomas-zahner",
+  // },
+  // {
+  //   name: "Jason Cottrell",
+  //   username: "Daniel Lopes, Frontend Developer",
+  //   body: "One of the best things about this app is its speed. Songs load almost instantly, and there's no lag at all. Even when I have a large playlist, the app handles it effortlessly, making it a top choice for music streaming.",
+  //   img: "jasoncottrell-sm",
+  // },
   // {
   //   name: "David",
   //   username: "@david",
@@ -151,13 +151,13 @@ const items = [
  
 export function PeopleSay() {
   return (
-    <div className="flex flex-col gap-[2rem]">
+    <div className="flex flex-col gap-[4rem]">
       <div className="text-4xl font-bold text-center tracking-tighter text-white sm:text-5xl xl:text-[2.75rem]/none">
         <p>What People Say ?</p>
       </div>
       <div   className="grid grid-cols-3 justify-items-center gap-[2rem] ">
       {items.map((item) => (
-        <div key={item.name} className="flex flex-cols gap relative w-[400px] flex flex-col gap-1  border bg-[#0c0c0c] p-4 text-card-foreground shadow-sm">
+        <div key={item.name} className="flex flex-cols gap relative w-[400px]  flex-col gap-1  border bg-[#0c0c0c] p-4 text-card-foreground shadow-sm">
            <div className="absolute -left-[10px] -top-[10px] h-[10px] w-[10px] border-b border-r"></div>
               <div className="absolute -right-[10px] -top-[10px] h-[10px] w-[10px] border-b border-l"></div>
               <div className="absolute -bottom-[10px] -left-[10px] h-[10px] w-[10px] border-r border-t"></div>
