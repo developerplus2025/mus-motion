@@ -247,7 +247,7 @@ export default function PhotoFeatures() {
               <div className="absolute -bottom-[10px] -left-[10px] h-[10px] w-[10px] border-r border-t"></div>
               <div className="absolute -bottom-[10px] -right-[10px] h-[10px] w-[10px] border-l border-t"></div>
               {items.map((item) => (
- <div key={item.id} className="flex items-center gap-4 border-r border-primary/10 h-[70px] px-3 py-2 transition-colors hover:border-primary/30">
+ <div key={item.id} className={`${item.id == 8 || item.id == 7 ? "border-b-[0px]" : "border-b" } flex items-center gap-4 border-r border-primary/10 h-[70px] px-3 py-2 transition-colors hover:border-primary/30`}>
  <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-lg">
   {item.icon}
  </div>
