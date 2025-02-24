@@ -252,7 +252,7 @@ export default function PhotoFeatures() {
   {item.icon}
  </div>
  <div className="space-y-1">
-   <h3 className="text-xl font-semibold">
+   <h3 className="text-[1.01rem] font-semibold">
      {item.title}
    </h3>
    <p className="text-md text-muted-foreground">
