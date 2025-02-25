@@ -247,7 +247,9 @@ export const Navigation = (): JSX.Element => {
             <NavigationMenu>
               <NavigationMenuList className="font-medium">
                 <NavigationMenuItem className="">
-                  <NavigationMenuTrigger>Feature</NavigationMenuTrigger>
+                  <NavigationMenuTrigger className="pr-3 text-[#9b9b9b]">
+                    Feature
+                  </NavigationMenuTrigger>
                   <NavigationMenuContent className="flex w-[30rem] gap-[2.5rem] px-[1rem] py-[1rem] data-[motion=from-end]:animate-enterFromRight data-[motion=from-start]:animate-enterFromLeft data-[motion=to-end]:animate-exitToRight data-[motion=to-start]:animate-exitToLeft">
                     <div className="flex flex-col gap-[2rem]">
                       <div className="group flex cursor-pointer items-center gap-[0.5rem]">
@@ -334,7 +336,9 @@ export const Navigation = (): JSX.Element => {
                   </NavigationMenuContent>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger>Library</NavigationMenuTrigger>
+                  <NavigationMenuTrigger className="text-[#9b9b9b]">
+                    Library
+                  </NavigationMenuTrigger>
                   <NavigationMenuContent className="flex w-[37rem] justify-between gap-[2.5rem] px-[1rem] py-[1rem]">
                     <div className="grid w-[37rem] grid-cols-2 place-content-between gap-[2rem]">
                       <div className="flex flex-col gap-[1.5rem]">
@@ -606,6 +610,7 @@ export const Navigation = (): JSX.Element => {
                     </ul>
                   </NavigationMenuContent>
                 </NavigationMenuItem> */}
+                <NavigationMenuIndicator />
               </NavigationMenuList>
             </NavigationMenu>
           </div>
