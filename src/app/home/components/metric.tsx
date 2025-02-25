@@ -69,10 +69,7 @@ export default function Metric() {
               transition={{ delay: 0.2 + index * 0.1 }}
               className="text-center"
             >
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="rounded-xl border p-6 backdrop-blur-lg transition-colors"
-              >
+              <motion.div className="rounded-xl border p-6 backdrop-blur-lg transition-colors">
                 <div className="mb-2 flex justify-center text-white/70">
                   {stat.icon}
                 </div>
