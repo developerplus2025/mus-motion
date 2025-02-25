@@ -71,7 +71,7 @@ export default function Metric() {
             >
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className="rounded-xl border border-white/10 bg-zinc-900/50 p-6 backdrop-blur-lg transition-colors hover:border-white/20"
+                className="rounded-xl border p-6 backdrop-blur-lg transition-colors"
               >
                 <div className="mb-2 flex justify-center text-white/70">
                   {stat.icon}
