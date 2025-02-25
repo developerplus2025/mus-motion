@@ -246,6 +246,183 @@ export const Navigation = (): JSX.Element => {
             </div>
             <NavigationMenu>
               <NavigationMenuList className="font-medium">
+                <NavigationMenuItem className="">
+                  <NavigationMenuTrigger>Feature</NavigationMenuTrigger>
+                  <NavigationMenuContent className="flex w-[30rem] gap-[2.5rem] px-[1rem] py-[1rem] data-[motion=from-end]:animate-enterFromRight data-[motion=from-start]:animate-enterFromLeft data-[motion=to-end]:animate-exitToRight data-[motion=to-start]:animate-exitToLeft">
+                    <div className="flex flex-col gap-[2rem]">
+                      <div className="group flex cursor-pointer items-center gap-[0.5rem]">
+                        <div>
+                          <Lightbulb className="h-[2rem] w-[2rem] rounded-sm border p-1 text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:bg-white group-hover:text-black" />
+                        </div>
+                        <div className="flex flex-col items-start justify-start">
+                          <NavigationMenuLink className="text-nowrap text-sm font-bold">
+                            Smart Recommendations
+                          </NavigationMenuLink>
+                          <p className="text-nowrap text-xs text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:text-white">
+                            Discover music curated just for you.
+                          </p>
+                        </div>
+                      </div>
+                      <div className="group flex cursor-pointer items-center gap-[0.5rem]">
+                        <div>
+                          <WifiOff className="h-[2rem] w-[2rem] rounded-sm border p-1 text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:bg-white group-hover:text-black" />
+                        </div>
+                        <div className="flex flex-col items-start justify-start">
+                          <NavigationMenuLink className="text-nowrap text-sm font-bold">
+                            Offline Mode
+                          </NavigationMenuLink>
+                          <p className="text-nowrap text-xs text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:text-white">
+                            Download songs and listen offline.
+                          </p>
+                        </div>
+                      </div>
+                      <div className="group flex cursor-pointer items-center gap-[0.5rem]">
+                        <div>
+                          <Podcast className="h-[2rem] w-[2rem] rounded-sm border p-1 text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:bg-white group-hover:text-black" />
+                        </div>
+                        <div className="flex flex-col items-start justify-start">
+                          <NavigationMenuLink className="text-nowrap text-sm font-bold">
+                            Podcasts
+                          </NavigationMenuLink>
+                          <p className="text-nowrap text-xs text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:text-white">
+                            Access a wide range of podcasts.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex flex-col items-start justify-between">
+                      <div className="group flex cursor-pointer items-center gap-[0.5rem]">
+                        <div>
+                          <NotebookText className="h-[2rem] w-[2rem] rounded-sm border p-1 text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:bg-white group-hover:text-black" />
+                        </div>
+                        <div className="flex flex-col items-start justify-start">
+                          <NavigationMenuLink className="text-nowrap text-sm font-bold">
+                            Lyrics Display
+                          </NavigationMenuLink>
+                          <p className="text-nowrap text-xs text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:text-white">
+                            Sing along with on-screen lyrics.
+                          </p>
+                        </div>
+                      </div>
+                      <div className="group flex cursor-pointer items-center gap-[0.5rem]">
+                        <div>
+                          <Medal className="h-[2rem] w-[2rem] rounded-sm border p-1 text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:bg-white group-hover:text-black" />
+                        </div>
+                        <div className="flex flex-col items-start justify-start">
+                          <NavigationMenuLink className="text-nowrap text-sm font-bold">
+                            High-Quality Audio
+                          </NavigationMenuLink>
+                          <p className="text-nowrap text-xs text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:text-white">
+                            Enjoy lossless audio streaming.
+                          </p>
+                        </div>
+                      </div>
+                      <div className="group flex cursor-pointer items-center gap-[0.5rem]">
+                        <div>
+                          <Share2 className="h-[2rem] w-[2rem] rounded-sm border p-1 text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:bg-white group-hover:text-black" />
+                        </div>
+                        <div className="flex flex-col items-start justify-start">
+                          <NavigationMenuLink className="text-nowrap text-sm font-bold">
+                            Social Sharing
+                          </NavigationMenuLink>
+                          <p className="text-nowrap text-xs text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:text-white">
+                            Share your favorite tracks on social media.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger>Library</NavigationMenuTrigger>
+                  <NavigationMenuContent className="flex w-[37rem] justify-between gap-[2.5rem] px-[1rem] py-[1rem]">
+                    <div className="grid w-[37rem] grid-cols-2 place-content-between gap-[2rem]">
+                      <div className="flex flex-col gap-[1.5rem]">
+                        <div>
+                          <h1 className="text-[1rem] text-[#a1a1a1]">
+                            Playlist
+                          </h1>
+                        </div>
+                        <div className="flex flex-col gap-[1.8rem]">
+                          <div className="group flex cursor-pointer items-center gap-[0.5rem]">
+                            <div>
+                              <ListPlus className="h-[2rem] w-[2rem] rounded-sm border p-1 text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:bg-white group-hover:text-black" />
+                            </div>
+                            <div className="flex flex-col items-start justify-start">
+                              <NavigationMenuLink className="text-nowrap text-sm font-bold">
+                                Create New
+                              </NavigationMenuLink>
+                              <p className="text-nowrap text-xs text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:text-white">
+                                Start personalized playlists here.
+                              </p>
+                            </div>
+                          </div>
+                          <div className="group flex cursor-pointer items-center gap-[0.5rem]">
+                            <div>
+                              <Heart className="h-[2rem] w-[2rem] rounded-sm border p-1 text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:bg-white group-hover:text-black" />
+                            </div>
+                            <div className="flex flex-col items-start justify-start">
+                              <NavigationMenuLink className="text-nowrap text-sm font-bold">
+                                Favorites
+                              </NavigationMenuLink>
+                              <p className="text-nowrap text-xs text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:text-white">
+                                Manage curated favorite playlists.
+                              </p>
+                            </div>
+                          </div>
+                          <div className="group flex cursor-pointer items-center gap-[0.5rem]">
+                            <div>
+                              <Play className="h-[2rem] w-[2rem] rounded-sm border p-1 text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:bg-white group-hover:text-black" />
+                            </div>
+                            <div className="flex flex-col items-start justify-start">
+                              <NavigationMenuLink className="text-nowrap text-sm font-bold">
+                                Currently Playing
+                              </NavigationMenuLink>
+                              <p className="text-nowrap text-xs text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:text-white">
+                                View active playlists now.
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex flex-col gap-[1.5rem]">
+                        <div>
+                          <h1 className="text-[1rem] text-[#a1a1a1]">
+                            Listening History
+                          </h1>
+                        </div>
+                        <div className="flex flex-col gap-[1.8rem]">
+                          <div className="group flex cursor-pointer items-center gap-[0.5rem]">
+                            <div>
+                              <Clock className="h-[2rem] w-[2rem] rounded-sm border p-1 text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:bg-white group-hover:text-black" />
+                            </div>
+                            <div className="flex flex-col items-start justify-start">
+                              <NavigationMenuLink className="text-nowrap text-sm font-bold">
+                                Recent
+                              </NavigationMenuLink>
+                              <p className="text-nowrap text-xs text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:text-white">
+                                Review recently played songs and albums.
+                              </p>
+                            </div>
+                          </div>
+                          <div className="group flex cursor-pointer items-center gap-[0.5rem]">
+                            <div>
+                              <Save className="h-[2rem] w-[2rem] rounded-sm border p-1 text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:bg-white group-hover:text-black" />
+                            </div>
+                            <div className="flex flex-col items-start justify-start">
+                              <NavigationMenuLink className="text-nowrap text-sm font-bold">
+                                Saved
+                              </NavigationMenuLink>
+                              <p className="text-nowrap text-xs text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:text-white">
+                                Access saved songs and albums.
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
                 <NavigationMenuItem>
                   <Link href="/creative" legacyBehavior passHref>
                     <NavigationMenuLink
@@ -352,7 +529,7 @@ export const Navigation = (): JSX.Element => {
                     </NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
-                <NavigationMenuItem>
+                <NavigationMenuItem className="hidden">
                   <Link href="/blog" legacyBehavior passHref>
                     <NavigationMenuLink
                       className={`relative flex h-7 items-center rounded-full px-3 text-sm duration-300 ease-out ${
@@ -386,7 +563,7 @@ export const Navigation = (): JSX.Element => {
                     </NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem> */}
-                <NavigationMenuItem>
+                <NavigationMenuItem className="hidden">
                   <Link href="/generation" legacyBehavior passHref>
                     <NavigationMenuLink
                       className={`relative flex h-7 items-center rounded-full px-3 text-sm duration-300 ease-out ${
