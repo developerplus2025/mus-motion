@@ -1,6 +1,10 @@
+import {heroui} from '@heroui/theme';
+import { nextui } from "@nextui-org/theme";
+import tailwindcssAnimate from "tailwindcss-animate";
 import type { Config } from "tailwindcss";
 
-const config = {
+const config: Config = {
+  
   darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
@@ -10,6 +14,8 @@ const config = {
     "./public/**/*.{ts,tsx,svg}",
     "./chat/vn-vi/**/*.{ts,tsx}",
     "./home/**/*.{ts,tsx}",
+    "./node_modules/fumadocs-ui/dist/**/*.js",
+    "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   prefix: "",
   theme: {
@@ -59,6 +65,16 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        sidebar: {
+          DEFAULT: "hsl(var(--sidebar-background))",
+          foreground: "hsl(var(--sidebar-foreground))",
+          primary: "hsl(var(--sidebar-primary))",
+          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
+          accent: "hsl(var(--sidebar-accent))",
+          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
+          border: "hsl(var(--sidebar-border))",
+          ring: "hsl(var(--sidebar-ring))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -66,48 +82,166 @@ const config = {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
+        flip: {
+          to: {
+            transform: "rotate(360deg)",
+          },
+        },
+        rotate: {
+          to: {
+            transform: "rotate(90deg)",
+          },
+        },
+        meteor: {
+          "0%": {
+            transform: "rotate(215deg) translateX(0px)",
+            opacity: "1",
+          },
+          "70%": {
+            opacity: "1",
+          },
+          "100%": {
+            transform: "rotate(215deg) translateX(-500px)",
+          },
+        },
+        "border-beam": {
+          "100%": {
+            "offset-distance": "100%",
+          },
+        },
+        "shine-pulse": {
+          "0%": {
+            "background-position": "0% 0%",
+          },
+          "50%": {
+            "background-position": "100% 100%",
+          },
+          to: {
+            "background-position": "0% 0%",
+          },
+        },
         "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
+          from: {
+            height: "0",
+          },
+          to: {
+            height: "var(--radix-accordion-content-height)",
+          },
         },
         "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
+          from: {
+            height: "var(--radix-accordion-content-height)",
+          },
+          to: {
+            height: "0",
+          },
         },
         enterFromRight: {
-          from: { opacity: "0", transform: "translateX(200px)" },
-          to: { opacity: "1", transform: "translateX(0)" },
+          from: {
+            opacity: "0",
+            transform: "translateX(200px)",
+          },
+          to: {
+            opacity: "1",
+            transform: "translateX(0)",
+          },
         },
         enterFromLeft: {
-          from: { opacity: "0", transform: "translateX(-200px)" },
-          to: { opacity: "1", transform: "translateX(0)" },
+          from: {
+            opacity: "0",
+            transform: "translateX(-200px)",
+          },
+          to: {
+            opacity: "1",
+            transform: "translateX(0)",
+          },
         },
         exitToRight: {
-          from: { opacity: "1", transform: "translateX(0)" },
-          to: { opacity: "0", transform: "translateX(200px)" },
+          from: {
+            opacity: "1",
+            transform: "translateX(0)",
+          },
+          to: {
+            opacity: "0",
+            transform: "translateX(200px)",
+          },
         },
         exitToLeft: {
-          from: { opacity: "1", transform: "translateX(0)" },
-          to: { opacity: "0", transform: "translateX(-200px)" },
+          from: {
+            opacity: "1",
+            transform: "translateX(0)",
+          },
+          to: {
+            opacity: "0",
+            transform: "translateX(-200px)",
+          },
         },
         scaleIn: {
-          from: { opacity: "0", transform: "rotateX(-10deg) scale(0.9)" },
-          to: { opacity: "1", transform: "rotateX(0deg) scale(1)" },
+          from: {
+            opacity: "0",
+            transform: "rotateX(-10deg) scale(0.9)",
+          },
+          to: {
+            opacity: "1",
+            transform: "rotateX(0deg) scale(1)",
+          },
         },
         scaleOut: {
-          from: { opacity: "1", transform: "rotateX(0deg) scale(1)" },
-          to: { opacity: "0", transform: "rotateX(-10deg) scale(0.95)" },
+          from: {
+            opacity: "1",
+            transform: "rotateX(0deg) scale(1)",
+          },
+          to: {
+            opacity: "0",
+            transform: "rotateX(-10deg) scale(0.95)",
+          },
         },
         fadeIn: {
-          from: { opacity: "0" },
-          to: { opacity: "1" },
+          from: {
+            opacity: "0",
+          },
+          to: {
+            opacity: "1",
+          },
         },
         fadeOut: {
-          from: { opacity: "1" },
-          to: { opacity: "0" },
+          from: {
+            opacity: "1",
+          },
+          to: {
+            opacity: "0",
+          },
+        },
+        grid: {
+          "0%": {
+            transform: "translateY(-50%)",
+          },
+          "100%": {
+            transform: "translateY(0)",
+          },
+        },
+        marquee: {
+          from: {
+            transform: "translateX(0)",
+          },
+          to: {
+            transform: "translateX(calc(-100% - var(--gap)))",
+          },
+        },
+        "marquee-vertical": {
+          from: {
+            transform: "translateY(0)",
+          },
+          to: {
+            transform: "translateY(calc(-100% - var(--gap)))",
+          },
         },
       },
       animation: {
+        flip: "flip 6s infinite steps(2, end)",
+        rotate: "rotate 3s linear infinite both",
+        meteor: "meteor 5s linear infinite",
+        "border-beam": "border-beam calc(var(--duration)*1s) infinite linear",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         scaleIn: "scaleIn 200ms ease",
@@ -118,10 +252,14 @@ const config = {
         enterFromRight: "enterFromRight 250ms ease",
         exitToLeft: "exitToLeft 250ms ease",
         exitToRight: "exitToRight 250ms ease",
+        grid: "grid 15s linear infinite",
+        marquee: "marquee var(--duration) infinite linear",
+        "marquee-vertical": "marquee-vertical var(--duration) linear infinite",
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
-} satisfies Config;
+  
+  plugins: [tailwindcssAnimate,nextui(),heroui()],
+};
 
 export default config;

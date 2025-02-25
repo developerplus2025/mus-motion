@@ -1,41 +1,33 @@
 const { app, BrowserWindow } = require("electron");
-const path = require("path");
-const url = require("url");
-
-let mainWindow;
 
 function createWindow() {
-  mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
-    webPreferences: {
-      nodeIntegration: true, // Cho phép sử dụng Node.js APIs trong ứng dụng của bạn
-    },
+  const win = new BrowserWindow({
+    width: 1040,
+    height: 690,
+    frame: false,
+    titleBarStyle: "hidden",
+    titleBarOverlay: {
+      color: "#000",
+      symbolColor: "#fff",
+      height: 37,
+    }, // Loại bỏ khung mặc định của hệ điều hành
   });
 
-  mainWindow.loadURL(
-    url.format({
-      pathname: path.join(__dirname, "out", ".next/server/app/index.html"), // Điều chỉnh đường dẫn đến index.html của dự án Next.js sau khi build
-      protocol: "file:",
-      slashes: true,
-    })
-  );
-
-  mainWindow.on("closed", function () {
-    mainWindow = null;
-  });
+  win.loadURL("http://Flora.vercel.app/docs");
 }
 
-app.on("ready", createWindow);
+app.whenReady().then(() => {
+  createWindow();
 
-app.on("window-all-closed", function () {
-  if (process.platform !== "darwin") {
-    app.quit();
-  }
+  app.on("activate", () => {
+    if (BrowserWindow.getAllWindows().length === 0) {
+      createWindow();
+    }
+  });
 });
 
-app.on("activate", function () {
-  if (mainWindow === null) {
-    createWindow();
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") {
+    app.quit();
   }
 });
