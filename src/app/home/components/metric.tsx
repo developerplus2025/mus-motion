@@ -47,7 +47,7 @@ export default function Metric() {
   return (
     <div className="flex flex-col items-center gap-[2rem]">
       {/* <LoopAnimation /> */}
-      <div>
+      <div className="rounded-lg border p-3">
         <svg
           data-testid="geist-icon"
           height={28}
