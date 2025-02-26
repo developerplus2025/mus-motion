@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
 const items = [
@@ -703,6 +704,20 @@ export default function SocialProof() {
             <div key={item.id}>{item.svg}</div>
           ))}
         </div>
+      </div>
+      <div className="mt-[3rem] flex flex-col items-center justify-center gap-4 sm:flex-row">
+        {/* <Button size="lg" className="w-full text-black sm:w-auto">
+                Start Free Trial
+              </Button> */}
+        <div className="relative">
+          <Button className="text-primary-foreground">Start Creative</Button>
+          {/* <span className="absolute -right-2 -top-4 rounded-full border bg-black px-2 py-1 text-xs font-bold text-white">
+                  14 Days Free
+                </span> */}
+        </div>
+        <Button variant="outline" className="w-full sm:w-auto">
+          Read Documention
+        </Button>
       </div>
     </div>
   );
