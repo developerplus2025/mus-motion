@@ -46,7 +46,24 @@ const stats = [
 export default function Metric() {
   return (
     <div className="flex flex-col items-center gap-[2rem]">
-      <LoopAnimation />
+      {/* <LoopAnimation /> */}
+      <div>
+        <svg
+          data-testid="geist-icon"
+          height={28}
+          strokeLinejoin="round"
+          viewBox="0 0 16 16"
+          width={28}
+          style={{ color: "currentcolor" }}
+        >
+          <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M8.75 1V1.75V14.25V15H7.25V14.25V1.75V1H8.75ZM3.5 9V9.75V14.25V15H2V14.25V9.75V9H3.5ZM14 6.75V6H12.5V6.75V14.25V15H14V14.25V6.75Z"
+            fill="currentColor"
+          />
+        </svg>
+      </div>
       <div className="flex flex-col items-center justify-center gap-4">
         <h1 className="w-[750px] text-center text-[3.5rem] font-bold leading-[4.5rem] tracking-tighter text-white sm:text-5xl xl:text-[3.5rem]">
           Flora by the Numbers
