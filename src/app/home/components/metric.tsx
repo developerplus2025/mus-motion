@@ -70,9 +70,9 @@ export default function Metric() {
               className="text-center"
             >
               <motion.div className="rounded-xl border p-6 backdrop-blur-lg transition-colors">
-                <div className="mb-2 flex justify-center text-white/70">
+                {/* <div className="mb-2 flex justify-center text-white/70">
                   {stat.icon}
-                </div>
+                </div> */}
                 <motion.div
                   className="mb-1 text-3xl font-bold"
                   initial={{ opacity: 0 }}
