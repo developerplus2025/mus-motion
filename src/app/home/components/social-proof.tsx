@@ -667,14 +667,14 @@ const items = [
 ];
 export default function SocialProof() {
   return (
-    <div className="flex flex-col gap-[2rem]">
+    <div className="flex flex-col items-center gap-[2rem]">
       <div className="rounded-lg border p-3">
         <svg
           data-testid="geist-icon"
-          height={16}
+          height={28}
           strokeLinejoin="round"
           viewBox="0 0 16 16"
-          width={16}
+          width={28}
           style={{ color: "currentcolor" }}
         >
           <path
