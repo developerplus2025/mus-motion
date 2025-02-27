@@ -1,9 +1,11 @@
+"use client";
 import Image from "next/image";
 import { RadaChart1 } from "./rada-chart-1";
 import { LoopAnimation } from "./loop-animation";
-import { motion } from "framer-motion";
+import { animate, motion, useMotionValue, useTransform } from "motion/react";
 import { Users, Music, Clock, Download } from "lucide-react";
 import { AudioWaveform, Disc3, Music2, Play } from "lucide-react";
+import { useEffect } from "react";
 const items = [
   {
     id: 1,
@@ -53,6 +55,13 @@ const stats = [
   },
 ];
 export default function Metric() {
+  const count = useMotionValue(0);
+  const rounded = useTransform(() => Math.round(count.get()));
+
+  useEffect(() => {
+    const controls = animate(count, 100, { duration: 5 });
+    return () => controls.stop();
+  }, []);
   return (
     <div className="flex flex-col items-center gap-[2rem]">
       {/* <LoopAnimation /> */}
@@ -86,7 +95,7 @@ export default function Metric() {
         </span>
       </div>
       <div className="flex items-center justify-between gap-[4rem]">
-        <div className="mx-auto grid max-w-4xl grid-cols-2 gap-8 md:grid-cols-4">
+        <div className="mx-auto grid grid-cols-2 gap-8 md:grid-cols-4">
           {stats.map((stat, index) => (
             <motion.div
               key={stat.title}
