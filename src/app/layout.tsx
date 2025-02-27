@@ -22,7 +22,7 @@ import { RootProvider } from 'fumadocs-ui/provider';
 import FrameVideo from "./home/components/frame-video";
 const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
-  title: "Flora: A Useful Platform For Musicians",
+  title: "Flora: Buy Pi Network",
   description: "Flora - Home",
 };
 export default function RootLayout({
