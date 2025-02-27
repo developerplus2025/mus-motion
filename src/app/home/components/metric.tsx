@@ -2,6 +2,7 @@ import Image from "next/image";
 import { RadaChart1 } from "./rada-chart-1";
 import { LoopAnimation } from "./loop-animation";
 import { motion } from "framer-motion";
+import { Users, Music, Clock, Download } from "lucide-react";
 import { AudioWaveform, Disc3, Music2, Play } from "lucide-react";
 const items = [
   {
@@ -26,21 +27,29 @@ const items = [
   },
 ];
 const stats = [
-  { icon: <Play className="h-6 w-6" />, label: "Beats Sold", value: "500+" },
   {
-    icon: <Disc3 className="h-6 w-6" />,
-    label: "Unique Tracks",
-    value: "1000+",
+    title: "Active Users",
+    value: "10,483",
+    icon: Users,
+    description: "Daily active users",
   },
   {
-    icon: <Music2 className="h-6 w-6" />,
-    label: "Happy Artists",
-    value: "200+",
+    title: "Tracks Created",
+    value: "856,942",
+    icon: Music,
+    description: "Total tracks created",
   },
   {
-    icon: <AudioWaveform className="h-6 w-6" />,
-    label: "Genres",
-    value: "10+",
+    title: "Total Playtime",
+    value: "2.4M hours",
+    icon: Clock,
+    description: "Cumulative playtime",
+  },
+  {
+    title: "Downloads",
+    value: "1.2M",
+    icon: Download,
+    description: "Total software downloads",
   },
 ];
 export default function Metric() {
@@ -80,7 +89,7 @@ export default function Metric() {
         <div className="mx-auto grid max-w-4xl grid-cols-2 gap-8 md:grid-cols-4">
           {stats.map((stat, index) => (
             <motion.div
-              key={stat.label}
+              key={stat.title}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 + index * 0.1 }}
@@ -90,6 +99,7 @@ export default function Metric() {
                 {/* <div className="mb-2 flex justify-center text-white/70">
                   {stat.icon}
                 </div> */}
+                <div className="text-sm text-zinc-400">{stat.title}</div>
                 <motion.div
                   className="mb-1 text-3xl font-bold"
                   initial={{ opacity: 0 }}
@@ -98,7 +108,7 @@ export default function Metric() {
                 >
                   {stat.value}
                 </motion.div>
-                <div className="text-sm text-zinc-400">{stat.label}</div>
+                <div className="text-sm text-zinc-400">{stat.description}</div>
               </motion.div>
             </motion.div>
           ))}
