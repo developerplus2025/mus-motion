@@ -6,6 +6,7 @@ import { animate, motion, useMotionValue, useTransform } from "motion/react";
 import { Users, Music, Clock, Download } from "lucide-react";
 import { AudioWaveform, Disc3, Music2, Play } from "lucide-react";
 import { useEffect } from "react";
+import { NumberTicker } from "@/components/magicui/number-ticker";
 const items = [
   {
     id: 1,
@@ -115,7 +116,7 @@ export default function Metric() {
                   whileInView={{ opacity: 1 }}
                   viewport={{ once: true }}
                 >
-                  {stat.value}
+                  <NumberTicker value={Number(stat.value)} />
                 </motion.div>
                 <div className="text-sm text-zinc-400">{stat.description}</div>
               </motion.div>

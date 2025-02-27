@@ -600,3 +600,12 @@ number-flow-react::part(suffix) {
   background-color: #000000;
   transform-origin: top;
 }
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
