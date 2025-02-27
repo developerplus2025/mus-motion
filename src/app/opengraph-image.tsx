@@ -30,7 +30,7 @@ export default async function Image() {
   } else if (currentUrl === "https://localhost:3000/") {
     imagePreview = "Đăng Bình";
   } else {
-    imagePreview = "Tôi tên Phạm Viết Tuấn và Tôi rất yêu chị Yến";
+    imagePreview = "1 pi ≈ 2,7631 USDT";
   }
 
   const geistLight = fetch(
