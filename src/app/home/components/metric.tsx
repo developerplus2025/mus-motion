@@ -5,7 +5,7 @@ import { LoopAnimation } from "./loop-animation";
 import { animate, motion, useMotionValue, useTransform } from "motion/react";
 import { Users, Music, Clock, Download } from "lucide-react";
 import { AudioWaveform, Disc3, Music2, Play } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { NumberTicker } from "@/components/magicui/number-ticker";
 const items = [
   {
@@ -58,7 +58,36 @@ const stats = [
 export default function Metric() {
   const count = useMotionValue(0);
   const rounded = useTransform(() => Math.round(count.get()));
+  const [value, setValue] = useState(0);
 
+  const [value1, setValue1] = useState(0);
+  const [value2, setValue2] = useState(0);
+  const [value3, setValue3] = useState(0);
+
+  useEffect(() => {
+    setValue(2082);
+  }, []);
+  useEffect(() => {
+    const controls = animate(count, 100, { duration: 5 });
+    return () => controls.stop();
+  }, []);
+  useEffect(() => {
+    setValue1(2082);
+  }, []);
+  useEffect(() => {
+    const controls = animate(count, 100, { duration: 5 });
+    return () => controls.stop();
+  }, []);
+  useEffect(() => {
+    setValue2(2082);
+  }, []);
+  useEffect(() => {
+    const controls = animate(count, 100, { duration: 5 });
+    return () => controls.stop();
+  }, []);
+  useEffect(() => {
+    setValue3(2082);
+  }, []);
   useEffect(() => {
     const controls = animate(count, 100, { duration: 5 });
     return () => controls.stop();
