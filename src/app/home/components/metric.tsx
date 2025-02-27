@@ -116,7 +116,7 @@ export default function Metric() {
                   whileInView={{ opacity: 1 }}
                   viewport={{ once: true }}
                 >
-                  <NumberTicker value={Number(stat.value)} />
+                  {stat.value}
                 </motion.div>
                 <div className="text-sm text-zinc-400">{stat.description}</div>
               </motion.div>
