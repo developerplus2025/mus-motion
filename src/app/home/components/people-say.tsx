@@ -2,7 +2,8 @@ import Image from "next/image";
 import * as Masonry from "./masonry";
 import * as React from "react";
 import Activity from "./activity";
-
+import { useStore } from "@nanostores/react";
+import { $bookmarks, $likes, $reposts, $views } from "./stores";
 const items = [
   {
     name: "Eric Grigorian",
@@ -151,6 +152,10 @@ const items = [
 ];
 
 export function PeopleSay() {
+  const reposts = useStore($reposts);
+  const bookmarks = useStore($bookmarks);
+  const likes = useStore($likes);
+  const views = useStore($views);
   return (
     <div className="flex flex-col gap-[4rem]">
       <div className="text-center text-4xl font-bold tracking-tighter text-white sm:text-5xl xl:text-[2.75rem]/none">
@@ -203,22 +208,17 @@ export function PeopleSay() {
         ))}
       </div>
       <Activity
-        likes={0}
-        reposts={0}
-        views={0}
-        bookmarks={0}
-        liked={false}
-        reposted={false}
-        bookmarked={false}
-        onLike={function (): void {
-          throw new Error("Function not implemented.");
-        }}
-        onBookmark={function (): void {
-          throw new Error("Function not implemented.");
-        }}
-        onRepost={function (): void {
-          throw new Error("Function not implemented.");
-        }}
+        className="~px-0/16"
+        likes={likes.count}
+        onLike={$likes.toggle}
+        liked={likes.hasIncremented}
+        reposts={reposts.count}
+        onRepost={$reposts.toggle}
+        reposted={reposts.hasIncremented}
+        bookmarks={bookmarks.count}
+        onBookmark={$bookmarks.toggle}
+        bookmarked={bookmarks.hasIncremented}
+        views={views.count}
       />
     </div>
   );
