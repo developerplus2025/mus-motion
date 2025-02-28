@@ -129,7 +129,7 @@ export default function Activity({
           />
         </button>
       </div>
-      <Share absoluteStrokeWidth className="~size-4/5 shrink-0" />
+      {/* <Share absoluteStrokeWidth className="~size-4/5 shrink-0" /> */}
     </div>
   );
 }

@@ -165,7 +165,7 @@ export function PeopleSay() {
         {items.map((item) => (
           <div
             key={item.name}
-            className="flex-cols gap relative flex w-[400px] flex-col gap-1 rounded-lg border bg-[#0c0c0c] p-4 text-card-foreground shadow-sm"
+            className="flex-cols gap relative flex w-[400px] flex-col justify-between gap-1 rounded-lg border bg-[#0c0c0c] p-4 text-card-foreground shadow-sm"
           >
             {/* <div className="absolute -left-[10px] -top-[10px] h-[10px] w-[10px] border-b border-r"></div>
               <div className="absolute -right-[10px] -top-[10px] h-[10px] w-[10px] border-b border-l"></div>
