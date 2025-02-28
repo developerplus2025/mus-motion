@@ -1,6 +1,7 @@
 import Image from "next/image";
 import * as Masonry from "./masonry";
 import * as React from "react";
+import Activity from "./activity";
 
 const items = [
   {
@@ -165,7 +166,7 @@ export function PeopleSay() {
               <div className="absolute -right-[10px] -top-[10px] h-[10px] w-[10px] border-b border-l"></div>
               <div className="absolute -bottom-[10px] -left-[10px] h-[10px] w-[10px] border-r border-t"></div>
               <div className="absolute -bottom-[10px] -right-[10px] h-[10px] w-[10px] border-l border-t"></div> */}
-            <div className="gap-2b flex justify-between text-sm leading-tight sm:text-base">
+            <div className="flex justify-between gap-2 text-sm leading-tight sm:text-base">
               <div className="flex items-center gap-2">
                 <div>
                   <Image
@@ -201,6 +202,24 @@ export function PeopleSay() {
           </div>
         ))}
       </div>
+      <Activity
+        likes={0}
+        reposts={0}
+        views={0}
+        bookmarks={0}
+        liked={false}
+        reposted={false}
+        bookmarked={false}
+        onLike={function (): void {
+          throw new Error("Function not implemented.");
+        }}
+        onBookmark={function (): void {
+          throw new Error("Function not implemented.");
+        }}
+        onRepost={function (): void {
+          throw new Error("Function not implemented.");
+        }}
+      />
     </div>
   );
 }
