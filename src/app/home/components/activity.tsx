@@ -1,11 +1,13 @@
 import NumberFlow, { continuous, type Format } from "@number-flow/react";
 import clsx from "clsx/lite";
 import { Bookmark, BarChart, Heart, Repeat, Share } from "lucide-react";
+
 const format: Format = {
   notation: "compact",
   compactDisplay: "short",
   roundingMode: "trunc",
 };
+
 type Props = JSX.IntrinsicElements["div"] & {
   likes: number;
   reposts: number;
@@ -18,6 +20,7 @@ type Props = JSX.IntrinsicElements["div"] & {
   onBookmark: () => void;
   onRepost: () => void;
 };
+
 export default function Activity({
   className,
   likes,
@@ -41,7 +44,7 @@ export default function Activity({
       )}
     >
       <div className="flex flex-1 items-center gap-1.5">
-        <BarChart absoluteStrokeWidth className="~size-4/5" />
+        <BarChart absoluteStrokeWidth className="~size-4/5 h-[20px] w-[20px]" />
         <NumberFlow
           willChange
           plugins={[continuous]}
@@ -61,7 +64,7 @@ export default function Activity({
           <div className="relative before:absolute before:-inset-2.5 before:rounded-full before:transition-[background-color] before:group-hover:bg-emerald-500/10">
             <Repeat
               absoluteStrokeWidth
-              className="~size-4/5 group-active:spring-duration-[25] spring-bounce-50 spring-duration-300 transition-transform group-active:scale-[85%]"
+              className="~size-4/5 group-active:spring-duration-[25] spring-bounce-50 spring-duration-300 h-[20px] w-[20px] transition-transform group-active:scale-[85%]"
             />
           </div>
           <NumberFlow
@@ -85,7 +88,7 @@ export default function Activity({
             <Heart
               absoluteStrokeWidth
               className={clsx(
-                "~size-4/5 group-active:spring-duration-[25] spring-bounce-[65] spring-duration-300 transition-transform group-active:scale-[80%]",
+                "~size-4/5 group-active:spring-duration-[25] spring-bounce-[65] spring-duration-300 h-[20px] w-[20px] transition-transform group-active:scale-[80%]",
                 liked && "fill-current",
               )}
             />
@@ -111,7 +114,7 @@ export default function Activity({
             <Bookmark
               absoluteStrokeWidth
               className={clsx(
-                "~size-4/5 group-active:spring-duration-[25] spring-bounce-50 spring-duration-300 transition-transform group-active:scale-[85%]",
+                "~size-4/5 group-active:spring-duration-[25] spring-bounce-50 spring-duration-300 h-[20px] w-[20px] transition-transform group-active:scale-[85%]",
                 bookmarked && "fill-current",
               )}
             />
