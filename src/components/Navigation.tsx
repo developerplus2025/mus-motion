@@ -642,14 +642,14 @@ export const Navigation = (): JSX.Element => {
               transition={{ duration: 0.5, ease: "easeOut" }}
               className="flex items-center justify-center gap-2"
             >
-              {/* <div className="flex h-[30px] w-[37px] cursor-pointer items-center justify-center rounded-md border transition-all duration-200 ease-out hover:bg-muted dark:hover:bg-[#101010]">
+              <div className="flex h-[30px] w-[37px] cursor-pointer items-center justify-center rounded-md border transition-all duration-200 ease-out hover:bg-muted dark:hover:bg-[#101010]">
                 <GitHub />
               </div>
               <div className="flex h-[30px] w-[37px] cursor-pointer items-center justify-center rounded-md border transition-all duration-200 ease-out hover:bg-muted dark:hover:bg-[#101010]">
                 <X />
-              </div> */}
+              </div>
 
-              <DropdownMenu>
+              {/* <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
                     variant="outline"
@@ -749,7 +749,7 @@ export const Navigation = (): JSX.Element => {
                   </DropdownMenuGroup>
                 </DropdownMenuContent>
               </DropdownMenu>
-              <PopoverNotifications />
+              <PopoverNotifications /> */}
               <ThemeToggle />
               {/* <CommandMenu /> */}
               <FeedBack />
