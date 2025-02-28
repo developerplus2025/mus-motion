@@ -204,22 +204,22 @@ export function PeopleSay() {
               </svg>
             </div>
             <span className="text-md text-white">&quot;{item.body}&quot;</span>
+            <Activity
+              className="~px-0/16"
+              likes={likes.count}
+              onLike={$likes.toggle}
+              liked={likes.hasIncremented}
+              reposts={reposts.count}
+              onRepost={$reposts.toggle}
+              reposted={reposts.hasIncremented}
+              bookmarks={bookmarks.count}
+              onBookmark={$bookmarks.toggle}
+              bookmarked={bookmarks.hasIncremented}
+              views={views.count}
+            />
           </div>
         ))}
       </div>
-      <Activity
-        className="~px-0/16"
-        likes={likes.count}
-        onLike={$likes.toggle}
-        liked={likes.hasIncremented}
-        reposts={reposts.count}
-        onRepost={$reposts.toggle}
-        reposted={reposts.hasIncremented}
-        bookmarks={bookmarks.count}
-        onBookmark={$bookmarks.toggle}
-        bookmarked={bookmarks.hasIncremented}
-        views={views.count}
-      />
     </div>
   );
 }
