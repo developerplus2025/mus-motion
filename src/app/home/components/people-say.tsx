@@ -148,53 +148,59 @@ const items = [
   //   img: "https://avatar.vercel.sh/uma",
   // },
 ];
- 
+
 export function PeopleSay() {
   return (
     <div className="flex flex-col gap-[4rem]">
-      <div className="text-4xl font-bold text-center tracking-tighter text-white sm:text-5xl xl:text-[2.75rem]/none">
+      <div className="text-center text-4xl font-bold tracking-tighter text-white sm:text-5xl xl:text-[2.75rem]/none">
         <p>What People Say ?</p>
       </div>
-      <div   className="grid grid-cols-3 justify-items-center gap-[2rem] ">
-      {items.map((item) => (
-        <div key={item.name} className="flex flex-cols rounded-lg gap relative w-[400px]  flex-col gap-1  border bg-[#0c0c0c] p-4 text-card-foreground shadow-sm">
-           {/* <div className="absolute -left-[10px] -top-[10px] h-[10px] w-[10px] border-b border-r"></div>
+      <div className="grid grid-cols-3 justify-items-center gap-[2rem]">
+        {items.map((item) => (
+          <div
+            key={item.name}
+            className="flex-cols gap relative flex w-[400px] flex-col gap-1 rounded-lg border bg-[#0c0c0c] p-4 text-card-foreground shadow-sm"
+          >
+            {/* <div className="absolute -left-[10px] -top-[10px] h-[10px] w-[10px] border-b border-r"></div>
               <div className="absolute -right-[10px] -top-[10px] h-[10px] w-[10px] border-b border-l"></div>
               <div className="absolute -bottom-[10px] -left-[10px] h-[10px] w-[10px] border-r border-t"></div>
               <div className="absolute -bottom-[10px] -right-[10px] h-[10px] w-[10px] border-l border-t"></div> */}
-<div className=" flex justify-between gap-1 text-sm leading-tight sm:text-base">
- <div className="flex gap-2 items-center ">
-  <div>
-    <Image alt={item.img} src={`/${item.img}.avif`} width={"50"} height={"50"} className="h-[30px] w-[40px] "></Image>
-  </div>
- <div className="w-full flex flex-col gap-1 ">
-    
-    <p className="text-md ">{item.name}</p>
-    <p className="text-sm text-[#a1a1a1]">{item.username}</p>
-
-    </div>
- </div>
-    <svg
-  data-testid="geist-icon"
-  height={16}
-  strokeLinejoin="round"
-  viewBox="0 0 16 16"
-  width={16}
-  style={{ color: "currentcolor" }}
->
-  <path
-    fillRule="evenodd"
-    clipRule="evenodd"
-    d="M0.5 0.5H5.75L9.48421 5.71053L14 0.5H16L10.3895 6.97368L16.5 15.5H11.25L7.51579 10.2895L3 15.5H1L6.61053 9.02632L0.5 0.5ZM12.0204 14L3.42043 2H4.97957L13.5796 14H12.0204Z"
-    fill="currentColor"
-  />
-</svg>
- 
-  </div>
-  <span className="text-white text-md">&quot;{item.body}&quot;</span>
-        </div>
-      ))}
-    </div>
+            <div className="flex justify-between gap-2 text-sm leading-tight sm:text-base">
+              <div className="flex items-center gap-2">
+                <div>
+                  <Image
+                    alt={item.img}
+                    src={`/${item.img}.avif`}
+                    width={"50"}
+                    height={"50"}
+                    className="h-[30px] w-[40px]"
+                  ></Image>
+                </div>
+                <div className="flex w-full flex-col gap-2">
+                  <p className="text-md">{item.name}</p>
+                  <p className="text-sm text-[#a1a1a1]">@{item.username}</p>
+                </div>
+              </div>
+              <svg
+                data-testid="geist-icon"
+                height={16}
+                strokeLinejoin="round"
+                viewBox="0 0 16 16"
+                width={16}
+                style={{ color: "currentcolor" }}
+              >
+                <path
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                  d="M0.5 0.5H5.75L9.48421 5.71053L14 0.5H16L10.3895 6.97368L16.5 15.5H11.25L7.51579 10.2895L3 15.5H1L6.61053 9.02632L0.5 0.5ZM12.0204 14L3.42043 2H4.97957L13.5796 14H12.0204Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
+            <span className="text-md text-white">&quot;{item.body}&quot;</span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
