@@ -165,7 +165,7 @@ export function PeopleSay() {
               <div className="absolute -right-[10px] -top-[10px] h-[10px] w-[10px] border-b border-l"></div>
               <div className="absolute -bottom-[10px] -left-[10px] h-[10px] w-[10px] border-r border-t"></div>
               <div className="absolute -bottom-[10px] -right-[10px] h-[10px] w-[10px] border-l border-t"></div> */}
-            <div className="flex justify-between gap-2 text-sm leading-tight sm:text-base">
+            <div className="gap-2b flex justify-between text-sm leading-tight sm:text-base">
               <div className="flex items-center gap-2">
                 <div>
                   <Image
