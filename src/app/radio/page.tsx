@@ -1,411 +1,306 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+
+import { useState, useRef, useEffect } from "react";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import * as Slider from "@radix-ui/react-slider";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  PlayIcon,
-  PauseIcon,
-  SkipForwardIcon,
-  VolumeIcon,
-  Radio,
-  SkipBack,
-  PlayCircle,
-  SkipForward,
-  Pause,
-  Play,
-  FastForward,
-  Rewind,
-} from "lucide-react";
-import Image from "next/image";
+import { Slider } from "@/components/ui/slider";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { usePathname, useRouter } from "next/navigation";
-export default function Component() {
+import {
+  Play,
+  Pause,
+  SkipForward,
+  SkipBack,
+  Volume2,
+  Shuffle,
+  Repeat,
+  Repeat1Icon as RepeatOne,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
+
+type Track = {
+  id: number;
+  title: string;
+  artist: string;
+  duration: number;
+  src: string;
+};
+
+const playlist: Track[] = [
+  {
+    id: 1,
+    title: "Sunflower",
+    artist: "Post Malone & Swae Lee",
+    duration: 158,
+    src: "/audio/sunflower.mp3",
+  },
+  {
+    id: 2,
+    title: "Blinding Lights",
+    artist: "The Weeknd",
+    duration: 200,
+    src: "/audio/blinding-lights.mp3",
+  },
+  {
+    id: 3,
+    title: "Shape of You",
+    artist: "Ed Sheeran",
+    duration: 233,
+    src: "/audio/shape-of-you.mp3",
+  },
+];
+
+export default function EnhancedAudioPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [volume, setVolume] = useState(75);
-  const [currentStation, setCurrentStation] = useState("Synthwave Nights");
-  const [currentGenre, setCurrentGenre] = useState("Electronic");
-  const [currentTimeMusic, setCurrentTimeMusic] = useState<string>("3:40");
-  const [value, setValue] = useState<number[]>([0]);
-  const [soundValue, setSoundValue] = useState<number[]>([50]);
-  const [soundTempValue, setSoundTempValue] = useState<number[]>([50]);
-  const [tempValue, setTempValue] = useState<number[]>([0]);
-  const [currentTime, setCurrentTime] = useState<number>(0);
-  const stations = [
-    { name: "Synthwave Nights", genre: "Electronic", time: "3:40" },
-    { name: "Jazz Cafe", genre: "Jazz", time: "3:40" },
-    { name: "Classical Serenity", genre: "Classical", time: "3:40" },
-    { name: "Rock Legends", genre: "Rock", time: "3:40" },
-    { name: "Hip Hop Beats", genre: "Hip Hop", time: "3:40" },
-    { name: "Heart Over Mind", genre: "EDM", time: "3:40" },
-    { name: "Heart Over Mind", genre: "EDM", time: "3:40" },
-    { name: "Heart Over Mind", genre: "EDM", time: "3:40" },
-    { name: "Heart Over Mind", genre: "EDM", time: "3:40" },
-  ];
-
-  const recentTracks = [
-    { title: "Neon Cruise", artist: "RetroWave", time: "2:34" },
-    { title: "Midnight Drive", artist: "SynthMaster", time: "3:45" },
-    { title: "Digital Dreams", artist: "Cybernetic", time: "4:12" },
-    { title: "Retro Flashback", artist: "80s Revival", time: "3:21" },
-  ];
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [volume, setVolume] = useState(1);
+  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
+  const [isShuffled, setIsShuffled] = useState(false);
+  const [repeatMode, setRepeatMode] = useState<"off" | "all" | "one">("off");
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [totalSeconds, setTotalSeconds] = useState<number>(220);
-
-  // Hàm chuyển đổi từ "phút:giây" sang giây
-  const convertToSeconds = (time: string) => {
-    const [minutes, seconds] = time.split(":").map(Number);
-    return minutes * 60 + seconds;
-  };
-
-  const handleConvert = () => {
-    const seconds = convertToSeconds(currentTimeMusic);
-    setTotalSeconds(seconds);
-  };
-  const handlePlayPause = () => {
-    if (audioRef.current) {
-      if (audioRef.current.paused) {
-        audioRef.current.play();
-      } else {
-        audioRef.current.pause();
-      }
-    }
-  };
-  // const handleValueCommit = (newValue: number[]) => {
-  //   console.log("Giá trị cuối cùng:", newValue[0]);
-  // };
-  const handlemousedown = () => {
-    if (audioRef.current) {
-      audioRef.current.pause();
-    }
-  };
-  const handlemouseup = () => {
-    if (audioRef.current) {
-      audioRef.current.play();
-    }
-  };
-  const router = useRouter();
-  const initialTimeRef = useRef(currentTime);
-  const currentTimeRef = useRef(currentTime); // Lưu giá trị currentTime
-  const pathname = usePathname();
+  const [hoverTime, setHoverTime] = useState<number | null>(null);
 
   useEffect(() => {
-    if (audioRef.current) {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const setAudioData = () => {
+      setDuration(audio.duration);
+      setCurrentTime(audio.currentTime);
+    };
+
+    const setAudioTime = () => setCurrentTime(audio.currentTime);
+
+    audio.addEventListener("loadeddata", setAudioData);
+    audio.addEventListener("timeupdate", setAudioTime);
+    audio.addEventListener("ended", handleTrackEnd);
+
+    return () => {
+      audio.removeEventListener("loadeddata", setAudioData);
+      audio.removeEventListener("timeupdate", setAudioTime);
+      audio.removeEventListener("ended", handleTrackEnd);
+    };
+  }, []);
+
+  const togglePlayPause = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (isPlaying) {
+      audio.pause();
+    } else {
+      audio.play();
+    }
+    setIsPlaying(!isPlaying);
+  };
+
+  const handleTrackEnd = () => {
+    if (repeatMode === "one") {
+      audioRef.current!.currentTime = 0;
+      audioRef.current!.play();
+    } else if (
+      repeatMode === "all" ||
+      currentTrackIndex < playlist.length - 1
+    ) {
+      playNextTrack();
+    } else {
       setIsPlaying(false);
-      audioRef.current.pause();
-    }
-  }, [pathname]);
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.currentTime = (Number(value) / 100) * totalSeconds;
-    }
-  }, [value, totalSeconds]);
-  useEffect(() => {
-    setSoundTempValue(soundValue);
-    if (audioRef.current) {
-      audioRef.current.volume = Number(soundTempValue) / 100;
-    }
-  }, [soundTempValue, soundValue]);
-  const increaseVolume = () => {
-    if (audioRef.current && audioRef.current.volume <= 1) {
-      audioRef.current.volume = Math.min(1, Number(soundValue) / 100 + 0.1); // Tăng âm lượng 0.1 mỗi lần
-      console.log(`Current volume: ${Number(soundValue) / 100}`);
-      const sound = audioRef.current.volume * 100; // Lấy giá trị âm lượng hiện tại
-      setSoundValue([sound]);
     }
   };
 
-  const decreaseVolume = () => {
-    if (audioRef.current && audioRef.current.volume >= 0) {
-      audioRef.current.volume = Math.max(0, Number(soundValue) / 100 - 0.1); // Giảm âm lượng 0.1 mỗi lần
-      console.log(`Current volume: ${Number(soundValue) / 100}`);
-      const sound = audioRef.current.volume * 100; // Lấy giá trị âm lượng hiện tại
-      setSoundValue([sound]);
-    }
+  const onProgressChange = (value: number[]) => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    audio.currentTime = value[0];
+    setCurrentTime(value[0]);
   };
+
+  const onVolumeChange = (value: number[]) => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    audio.volume = value[0];
+    setVolume(value[0]);
+  };
+
   const formatTime = (time: number) => {
-    const minutes = Math.floor(time / 60); // Tính phút
-    const seconds = Math.floor(time % 60); // Tính giây còn lại
-    // Định dạng với 2 chữ số (ví dụ: 01:05)
-    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
   };
-  const handleTimeUpdate = () => {
-    if (audioRef.current) {
-      setCurrentTime(audioRef.current.currentTime);
+
+  const playNextTrack = () => {
+    let nextIndex;
+    if (isShuffled) {
+      nextIndex = Math.floor(Math.random() * playlist.length);
+    } else {
+      nextIndex = (currentTrackIndex + 1) % playlist.length;
     }
+    setCurrentTrackIndex(nextIndex);
+    setIsPlaying(true);
   };
+
+  const playPreviousTrack = () => {
+    let prevIndex;
+    if (isShuffled) {
+      prevIndex = Math.floor(Math.random() * playlist.length);
+    } else {
+      prevIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
+    }
+    setCurrentTrackIndex(prevIndex);
+    setIsPlaying(true);
+  };
+
+  const toggleShuffle = () => setIsShuffled(!isShuffled);
+
+  const toggleRepeat = () => {
+    const modes: ("off" | "all" | "one")[] = ["off", "all", "one"];
+    const currentIndex = modes.indexOf(repeatMode);
+    setRepeatMode(modes[(currentIndex + 1) % modes.length]);
+  };
+
+  const currentTrack = playlist[currentTrackIndex];
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    audio.src = currentTrack.src;
+    if (isPlaying) audio.play();
+  }, [currentTrack.src, isPlaying]);
 
   return (
-    <div className="mx-auto flex h-[calc(100vh-59px)] w-full flex-col">
-      <div className="flex h-[calc(100vh-129px)] w-full justify-between">
-        <ScrollArea className="w-[300px] flex-shrink-0">
-          <Card className="w-[300px] rounded-none border-y-0 border-l-0 border-r bg-[#000000]">
-            <CardHeader>
-              <CardTitle>Stations</CardTitle>
-            </CardHeader>
-            <CardContent className=" ">
-              <ul className="space-y-4">
-                {stations.map((station) => (
-                  <li
-                    key={station.name}
-                    className="flex items-center justify-between"
-                  >
-                    <div>
-                      <p className="font-medium">{station.name}</p>
-                      <p className="text-sm text-muted-foreground">
-                        {station.genre}
-                      </p>
-                    </div>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => {
-                        setCurrentStation(station.name);
-                        setCurrentGenre(station.genre);
-                        setCurrentTimeMusic(station.time);
-                      }}
-                    >
-                      <Radio className="mr-2 h-4 w-4" />
-                      Tune In
-                    </Button>
-                  </li>
-                ))}
-              </ul>
-            </CardContent>
-          </Card>
-        </ScrollArea>
-        <div className="flex flex-col items-center justify-center gap-[4rem]">
-          <div className="flex flex-col items-center justify-center gap-[2rem]">
+    <Card className="w-[400px] bg-gradient-to-br from-zinc-900 to-black text-white">
+      <CardContent className="p-6">
+        <div className="mb-4 aspect-square w-full overflow-hidden rounded-md bg-zinc-800 shadow-lg">
+          <img
+            src="/placeholder.svg?height=400&width=400"
+            alt="Album Cover"
+            className="h-full w-full object-cover"
+          />
+        </div>
+        <h2 className="mb-1 text-2xl font-bold">{currentTrack.title}</h2>
+        <p className="mb-4 text-sm text-zinc-400">{currentTrack.artist}</p>
+        <div className="mb-4 flex items-center justify-between">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="rounded-full text-white hover:bg-white/10"
+            onClick={toggleShuffle}
+          >
+            <Shuffle className={cn("h-4 w-4", isShuffled && "text-white")} />
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="rounded-full text-white hover:bg-white/10"
+            onClick={playPreviousTrack}
+          >
+            <SkipBack className="h-6 w-6" />
+          </Button>
+          <Button
+            variant="outline"
+            size="icon"
+            className="rounded-full bg-white text-black hover:bg-zinc-200 hover:text-black"
+            onClick={togglePlayPause}
+          >
+            {isPlaying ? (
+              <Pause className="h-6 w-6" />
+            ) : (
+              <Play className="h-6 w-6" />
+            )}
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="rounded-full text-white hover:bg-white/10"
+            onClick={playNextTrack}
+          >
+            <SkipForward className="h-6 w-6" />
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="rounded-full text-white hover:bg-white/10"
+            onClick={toggleRepeat}
+          >
+            {repeatMode === "one" ? (
+              <RepeatOne className="h-4 w-4 text-white" />
+            ) : (
+              <Repeat
+                className={cn("h-4 w-4", repeatMode === "all" && "text-white")}
+              />
+            )}
+          </Button>
+        </div>
+        <div
+          className="relative mb-2"
+          onMouseMove={(e) => {
+            const rect = e.currentTarget.getBoundingClientRect();
+            const percent = (e.clientX - rect.left) / rect.width;
+            setHoverTime(percent * duration);
+          }}
+          onMouseLeave={() => setHoverTime(null)}
+        >
+          <Slider
+            value={[currentTime]}
+            max={duration}
+            step={0.1}
+            onValueChange={onProgressChange}
+            className="z-10"
+          />
+          {hoverTime !== null && (
             <div
-              className="h-[14rem] w-[14rem] rounded-lg bg-[#0c0c0c]"
+              className="absolute top-[-25px] rounded bg-white px-2 py-1 text-xs text-black"
               style={{
-                background:
-                  'url("https://avatar-ex-swe.nixcdn.com/song/2024/08/15/n/m/F/k/1723689056060_500.jpg") left center / contain no-repeat',
+                left: `${(hoverTime / duration) * 100}%`,
+                transform: "translateX(-50%)",
               }}
             >
-              <audio
-                id="audio"
-                ref={audioRef}
-                src="/tawerrw6f4.mp3"
-                loop
-                autoPlay
-                onTimeUpdate={handleTimeUpdate}
-                className="hidden"
-              ></audio>
+              {formatTime(hoverTime)}
             </div>
-            <div className="flex flex-col items-center justify-center">
-              <h1 className="text-xl font-medium">{currentStation}</h1>
-              <p className="text-md text-[#a1a1a1]">{currentGenre}</p>
-            </div>
-          </div>
-          <div className="flex gap-[1rem] rounded-lg border bg-gradient-to-tr from-black/50 to-[#121212] px-2 py-1">
-            <Button
-              variant={"outline"}
-              size={"icon"}
-              className="h-[1.8rem] w-[1.8rem] border-none bg-transparent"
-            >
-              <Rewind className="h-4 w-4" />
-            </Button>
-            <Button
-              variant={"outline"}
-              size={"icon"}
-              className="h-[1.8rem] w-[1.8rem] border-none bg-transparent"
-            >
-              <SkipBack className="h-4 w-4" />
-            </Button>
-
-            <Button
-              variant="outline"
-              size="icon"
-              className={`${isPlaying ? "hidden" : "flex"} h-[1.8rem] w-[1.8rem] border-none bg-transparent`}
+          )}
+        </div>
+        <div className="mb-4 flex justify-between text-sm text-zinc-400">
+          <span>{formatTime(currentTime)}</span>
+          <span>{formatTime(duration)}</span>
+        </div>
+        <div className="mb-4 flex items-center gap-2">
+          <Volume2 className="h-4 w-4 text-zinc-400" />
+          <Slider
+            value={[volume]}
+            max={1}
+            step={0.01}
+            onValueChange={onVolumeChange}
+            className="w-[100px]"
+          />
+        </div>
+        <ScrollArea className="h-[100px] rounded-md border border-zinc-800 p-2">
+          {playlist.map((track, index) => (
+            <div
+              key={track.id}
+              className={cn(
+                "flex cursor-pointer items-center justify-between rounded p-2 hover:bg-zinc-800",
+                index === currentTrackIndex && "bg-zinc-700",
+              )}
               onClick={() => {
+                setCurrentTrackIndex(index);
                 setIsPlaying(true);
-                handlePlayPause();
               }}
             >
-              <Play className="h-4 w-4" />
-            </Button>
-            <Button
-              variant="outline"
-              size="icon"
-              className={`${!isPlaying ? "hidden" : "flex"} h-[1.8rem] w-[1.8rem] border-none bg-transparent`}
-              onClick={() => {
-                setIsPlaying(false);
-                handlePlayPause();
-              }}
-            >
-              <Pause className="h-4 w-4" />
-            </Button>
-
-            <Button
-              variant="outline"
-              size={"icon"}
-              className="h-[1.8rem] w-[1.8rem] border-none bg-transparent"
-            >
-              <SkipForward className="h-4 w-4" />
-            </Button>
-            <Button
-              variant="outline"
-              size={"icon"}
-              className="h-[1.8rem] w-[1.8rem] border-none bg-transparent"
-            >
-              <FastForward className="h-4 w-4" />
-            </Button>
-          </div>
-        </div>
-        <ScrollArea className="w-[300px] flex-shrink-0">
-          <Card className="w-[300px] rounded-none border-y-0 border-l border-r bg-[#000000]">
-            <CardHeader>
-              <CardTitle>Stations</CardTitle>
-            </CardHeader>
-            <CardContent className=" ">
-              <ul className="space-y-4">
-                {stations.map((station) => (
-                  <li
-                    key={station.name}
-                    className="flex items-center justify-between"
-                  >
-                    <div>
-                      <p className="font-medium">{station.name}</p>
-                      <p className="text-sm text-muted-foreground">
-                        {station.genre}
-                      </p>
-                    </div>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => {
-                        setCurrentStation(station.name);
-                        setCurrentGenre(station.genre);
-                        handleConvert();
-                      }}
-                    >
-                      <Radio className="mr-2 h-4 w-4" />
-                      Tune In
-                    </Button>
-                  </li>
-                ))}
-              </ul>
-            </CardContent>
-          </Card>
+              <div>
+                <p className="font-medium">{track.title}</p>
+                <p className="text-sm text-zinc-400">{track.artist}</p>
+              </div>
+              <span className="text-sm text-zinc-400">
+                {formatTime(track.duration)}
+              </span>
+            </div>
+          ))}
         </ScrollArea>
-      </div>
-      <div>
-        <div className="flex h-[70px] w-full items-center justify-between border-t dark:border-t-[#202020]">
-          <div className="flex w-[299px] items-center gap-3 pl-[1rem]">
-            <div
-              className="h-[2rem] w-[2rem] rounded-md bg-[#0c0c0c]"
-              style={{
-                background:
-                  'url("https://avatar-ex-swe.nixcdn.com/song/2024/08/15/n/m/F/k/1723689056060_500.jpg") left center / contain no-repeat',
-              }}
-            ></div>
-            <div className="flex flex-col gap-1">
-              <h1 className="text-sm font-medium">{currentStation}</h1>
-              <p className="text-xs text-[#a1a1a1]">{currentGenre}</p>
-            </div>
-          </div>
-          <div className="flex w-[20rem] flex-col items-center justify-center gap-[1rem]">
-            <div className="flex gap-4">
-              <p className="text-xs tabular-nums">{formatTime(currentTime)}</p>
-              <Slider.Root
-                onValueChange={(newTempValue) => setTempValue(newTempValue)}
-                onValueCommit={(newValue) => setValue(tempValue)}
-                defaultValue={[0]}
-                value={[(currentTime / totalSeconds) * 100]}
-                max={100}
-                step={1}
-                className="relative flex w-[20rem] touch-none select-none items-center"
-              >
-                <Slider.Track
-                  onMouseDown={handlemousedown}
-                  onMouseUp={handlemouseup}
-                  className="relative h-1.5 w-full grow overflow-hidden rounded-full bg-primary/20"
-                >
-                  <Slider.Range className="absolute h-full bg-primary" />
-                </Slider.Track>
-                <Slider.Thumb className="block h-4 w-4 rounded-full border border-primary/50 bg-background shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50" />
-              </Slider.Root>
-              {/* <Slider
-                // onValueCommit={handleValueCommit}
-                onValueChange={(newValue) => setValue(newValue)} // Cập nhật liên tục
-                // onValueChange={(newValue) =>
-                //   handleValueChangeAndCommit(newValue, false)
-                // }
-                // onValueCommit={(newValue) =>
-                //   handleValueChangeAndCommit(newValue, true)
-                // }
-                onMouseDown={handlemousedown}
-                onMouseUp={handlemouseup}
-                className="w-[20rem]"
-                defaultValue={[0]}
-                value={[(currentTime / totalSeconds) * 100]}
-                max={100}
-                step={1}
-              /> */}
-              <p className="text-xs tabular-nums">{currentTimeMusic}</p>
-            </div>
-          </div>
-          <div className="flex w-[299px] items-center justify-center gap-[1.25rem] pr-[1rem]">
-            <svg
-              onClick={decreaseVolume}
-              data-testid="geist-icon"
-              height={16}
-              strokeLinejoin="round"
-              viewBox="0 0 16 16"
-              width={16}
-              style={{ color: "currentcolor" }}
-            >
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M0 5V11C0 11.5523 0.447715 12 1 12H3L10 16V0L3 4H1C0.447715 4 0 4.44772 0 5ZM13.9115 5.64655L13.5581 4.98506L12.2351 5.69195L12.5885 6.35345C12.8503 6.84344 12.9991 7.40324 12.9991 8C12.9991 8.59676 12.8503 9.15657 12.5885 9.64655L12.2351 10.3081L13.558 11.0149L13.9115 10.3534C14.2867 9.65129 14.4991 8.84933 14.4991 8C14.4991 7.15067 14.2867 6.34871 13.9115 5.64655Z"
-                fill="currentColor"
-              />
-            </svg>
-            <Slider.Root
-              onValueChange={(newSoundValue) => {
-                setSoundValue(newSoundValue);
-              }}
-              value={[Number(soundValue)]}
-              max={100}
-              step={1}
-              className="relative flex w-[6rem] touch-none select-none items-center"
-            >
-              <Slider.Track
-                onMouseDown={handlemousedown}
-                onMouseUp={handlemouseup}
-                className="relative h-1.5 w-full grow overflow-hidden rounded-full bg-primary/20"
-              >
-                <Slider.Range className="absolute h-full bg-primary" />
-              </Slider.Track>
-              <Slider.Thumb className="block h-4 w-4 rounded-full border border-primary/50 bg-background shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50" />
-            </Slider.Root>
-            <svg
-              onClick={increaseVolume}
-              data-testid="geist-icon"
-              height={16}
-              strokeLinejoin="round"
-              viewBox="0 0 16 16"
-              width={16}
-              style={{ color: "currentcolor" }}
-            >
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M0 5V11C0 11.5523 0.447715 12 1 12H3L10 16V0L3 4H1C0.447715 4 0 4.44772 0 5ZM14.2585 2.96051L14.6728 3.58567C15.5116 4.85121 16 6.3697 16 8C16 9.6303 15.5116 11.1488 14.6728 12.4143L14.2585 13.0395L13.0082 12.2108L13.4225 11.5857C14.1034 10.5582 14.5 9.32657 14.5 8C14.5 6.67343 14.1034 5.44176 13.4225 4.41433L13.0082 3.78916L14.2585 2.96051ZM12.059 4.98506L12.4125 5.64655C12.7876 6.34871 13 7.15067 13 8C13 8.84933 12.7876 9.65129 12.4125 10.3534L12.059 11.0149L10.736 10.3081L11.0895 9.64655C11.3513 9.15657 11.5 8.59676 11.5 8C11.5 7.40324 11.3513 6.84344 11.0895 6.35345L10.736 5.69195L12.059 4.98506Z"
-                fill="currentColor"
-              />
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
+        <audio ref={audioRef} src={currentTrack.src} onEnded={handleTrackEnd} />
+      </CardContent>
+    </Card>
   );
 }
