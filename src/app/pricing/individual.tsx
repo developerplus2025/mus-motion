@@ -100,6 +100,7 @@ const pricingData = {
     {
       title: "Stater Plan",
       price: 0,
+      tooltip: "Starter for Everyone",
       description: "For entry-level users and trial",
       features: [
         {
@@ -265,6 +266,7 @@ const pricingData = {
     {
       title: "Basic Plan",
       price: 12,
+      tooltip: "Starter for Everyone",
       description: "For hobbyists and beginners",
       features: [
         {
@@ -430,6 +432,7 @@ const pricingData = {
     {
       title: "Plus Plan",
       price: 26,
+      tooltip: "Starter for Everyone",
       description: "For serious musicians and producers",
       features: [
         {
@@ -595,6 +598,7 @@ const pricingData = {
     {
       title: "Pro Plan",
       price: 42,
+      tooltip: "Super Plan For Musican",
       description: "For professional studios and artists",
       features: [
         {
@@ -847,7 +851,13 @@ export default function Individual() {
     if (selected) setSelectedPackage(selected);
   };
   return (
-    <motion.div animate={{opacity:1}} initial={{opacity:0}} exit={{opacity:0}} transition={{duration:0.25}} className="max-[1467px]:px-[11rem] min-[1350px]:px-[6rem]">
+    <motion.div
+      animate={{ opacity: 1 }}
+      initial={{ opacity: 0 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25 }}
+      className="px-[6rem]"
+    >
       <div className="mb-[3rem] mt-4 flex items-center justify-center space-x-2">
         <span className="text-sm">Monthly</span>
         <Switch
@@ -867,31 +877,44 @@ export default function Individual() {
               className={`${tier.title === "Starter Plan" ? "to-[#121212]" : tier.title === "Basic Plan" ? "to-[#121212]" : tier.title === "Plus Plan" ? "to-[#121212]" : "to-[#121212]"} space-y-2 rounded-t-lg bg-[#00000099] p-[1.5rem]`}
             >
               <CardTitle className="text-[1.04rem] font-medium text-[#a1a1a1]">
-                <div className="flex justify-between items-center">
-                   <p
-                  className={`${tier.title === "Plus Plan" || tier.title === "Basic Plan" ? "hidden" : ""}`}
-                >
-                  {tier.title}
-                </p>
-                <svg
-                className={`${tier.title === "Plus Plan" || tier.title === "Basic Plan" ? "hidden" : ""}`}
-  data-testid="geist-icon"
-  height={16}
-  strokeLinejoin="round"
-  style={{ color: "currentcolor" }}
-  viewBox="0 0 16 16"
-  width={16}
->
-  <path
-    fillRule="evenodd"
-    clipRule="evenodd"
-    d="M8 14.5C11.5899 14.5 14.5 11.5899 14.5 8C14.5 4.41015 11.5899 1.5 8 1.5C4.41015 1.5 1.5 4.41015 1.5 8C1.5 11.5899 4.41015 14.5 8 14.5ZM8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16ZM6.25 7H7H7.74999C8.30227 7 8.74999 7.44772 8.74999 8V11.5V12.25H7.24999V11.5V8.5H7H6.25V7ZM8 6C8.55229 6 9 5.55228 9 5C9 4.44772 8.55229 4 8 4C7.44772 4 7 4.44772 7 5C7 5.55228 7.44772 6 8 6Z"
-    fill="currentColor"
-  />
-</svg>
-
+                <div className="flex items-center justify-between">
+                  <p
+                    className={`${tier.title === "Plus Plan" || tier.title === "Basic Plan" ? "hidden" : ""}`}
+                  >
+                    {tier.title}
+                  </p>
+                  {tier.title === "Plus Plan" || tier.title === "Basic Plan" ? (
+                    ""
+                  ) : (
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger>
+                          {" "}
+                          <svg
+                            className={`${tier.title === "Plus Plan" || tier.title === "Basic Plan" ? "hidden" : ""}`}
+                            data-testid="geist-icon"
+                            height={16}
+                            strokeLinejoin="round"
+                            style={{ color: "currentcolor" }}
+                            viewBox="0 0 16 16"
+                            width={16}
+                          >
+                            <path
+                              fillRule="evenodd"
+                              clipRule="evenodd"
+                              d="M8 14.5C11.5899 14.5 14.5 11.5899 14.5 8C14.5 4.41015 11.5899 1.5 8 1.5C4.41015 1.5 1.5 4.41015 1.5 8C1.5 11.5899 4.41015 14.5 8 14.5ZM8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16ZM6.25 7H7H7.74999C8.30227 7 8.74999 7.44772 8.74999 8V11.5V12.25H7.24999V11.5V8.5H7H6.25V7ZM8 6C8.55229 6 9 5.55228 9 5C9 4.44772 8.55229 4 8 4C7.44772 4 7 4.44772 7 5C7 5.55228 7.44772 6 8 6Z"
+                              fill="currentColor"
+                            />
+                          </svg>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>{tier.tooltip}</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  )}
                 </div>
-               
+
                 {tier.title === "Plus Plan" && (
                   <div className="flex items-center justify-between">
                     <p>Plus Plan</p>
@@ -927,220 +950,227 @@ export default function Individual() {
               />
 
               <CardDescription>{tier.description}</CardDescription>
-              <div className="pt-[1rem] ">
-              {tier.title === "Pro Plan" && (
-                <div className="flex items-center justify-center gap-4">
-                  {" "}
-                  <AlertDialog>
-                    <AlertDialogTrigger asChild>
-                      <Button
-                        variant="outline"
-                        className="w-full"
-                        onClick={() => handlePackageSelect("ultimate")}
-                      >
-                        Get Started
-                        <svg
-                          className="rounded-full bg-black dark:bg-white"
-                          data-testid="geist-icon"
-                          height={16}
-                          strokeLinejoin="round"
-                          viewBox="0 0 16 16"
-                          width={16}
+              <div className="pt-[1rem]">
+                {tier.title === "Pro Plan" && (
+                  <div className="flex items-center justify-center gap-4">
+                    {" "}
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <Button
+                          variant="outline"
+                          className="w-full"
+                          onClick={() => handlePackageSelect("ultimate")}
                         >
-                          <path
-                            className="fill-black"
-                            fillRule="evenodd"
-                            clipRule="evenodd"
-                            d="M6.74999 3.93933L7.28032 4.46966L10.1035 7.29288C10.4941 7.68341 10.4941 8.31657 10.1035 8.7071L7.28032 11.5303L6.74999 12.0607L5.68933 11L6.21966 10.4697L8.68933 7.99999L6.21966 5.53032L5.68933 4.99999L6.74999 3.93933Z"
-                            fill="currentColor"
-                          />
-                        </svg>
-                      </Button>
-                    </AlertDialogTrigger>
-                    <AlertDialogContent className="max-w-[62rem]">
-                      <AlertDialogHeader>
-                        <AlertDialogTitle>
-                          <Card className="bg-black">
-                            <CardHeader>
-                              <CardTitle>Select a Software Package</CardTitle>
-                              <CardDescription>
-                                Choose the package that best fits your needs
-                              </CardDescription>
-                            </CardHeader>
-                            <CardContent>
-                              <div className="mb-4 flex items-center justify-end space-x-2">
-                                <span className="text-sm">Monthly</span>
-                                <Switch
-                                  checked={isYearly}
-                                  onCheckedChange={setIsYearly}
-                                  id="billing-toggle"
-                                />
-                                <span className="text-sm">
-                                  Yearly (10% off)
-                                </span>
-                              </div>
-                              <RadioGroup
-                                className="grid-cols-3 gap-4"
-                                defaultValue={selectedPackage.id}
-                                onValueChange={handlePackageSelect}
-                              >
-                                {packages.map((pkg) => (
-                                  <Card
-                                    key={pkg.id}
-                                    className={`mb-4 bg-black ${selectedPackage.id === pkg.id ? "shadow outline-none ring-2 ring-ring ring-offset-2 ring-offset-background" : ""}`}
-                                  >
-                                    <CardHeader>
-                                      <div className="flex items-center justify-between">
-                                        <div className="flex items-center space-x-2">
-                                          <RadioGroupItem
-                                            value={pkg.id}
-                                            id={pkg.id}
-                                          />
-                                          <Label
-                                            htmlFor={pkg.id}
-                                            className="text-lg font-semibold"
-                                          >
-                                            {pkg.name}
-                                          </Label>
-                                        </div>
-                                        <Badge variant="secondary">
-                                          $
-                                          {isYearly
-                                            ? (pkg.price * 12 * 0.9).toFixed(2)
-                                            : pkg.price}
-                                          /{isYearly ? "year" : "month"}
-                                        </Badge>
-                                      </div>
-                                    </CardHeader>
-                                    <CardContent>
-                                      <p className="mb-2 text-sm text-muted-foreground">
-                                        {pkg.description}
-                                      </p>
-                                      <ul className="list-inside list-disc text-sm">
-                                        {pkg.features.map((feature, index) => (
-                                          <li key={index}>{feature}</li>
-                                        ))}
-                                      </ul>
-                                    </CardContent>
-                                  </Card>
-                                ))}
-                              </RadioGroup>
-                            </CardContent>
-                          </Card>
-                        </AlertDialogTitle>
-                        <AlertDialogDescription className="flex items-center gap-2">
-                          <Checkbox id="terms" required />
-                          <label
-                            htmlFor="terms"
-                            className="text-xs font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                          Get Started
+                          <svg
+                            className="rounded-full bg-black dark:bg-white"
+                            data-testid="geist-icon"
+                            height={16}
+                            strokeLinejoin="round"
+                            viewBox="0 0 16 16"
+                            width={16}
                           >
-                            By purchasing a package, you agree to our{" "}
-                            <a
-                              href="#"
-                              className="text-primary hover:underline"
+                            <path
+                              className="fill-black"
+                              fillRule="evenodd"
+                              clipRule="evenodd"
+                              d="M6.74999 3.93933L7.28032 4.46966L10.1035 7.29288C10.4941 7.68341 10.4941 8.31657 10.1035 8.7071L7.28032 11.5303L6.74999 12.0607L5.68933 11L6.21966 10.4697L8.68933 7.99999L6.21966 5.53032L5.68933 4.99999L6.74999 3.93933Z"
+                              fill="currentColor"
+                            />
+                          </svg>
+                        </Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent className="max-w-[62rem]">
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>
+                            <Card className="bg-black">
+                              <CardHeader>
+                                <CardTitle>Select a Software Package</CardTitle>
+                                <CardDescription>
+                                  Choose the package that best fits your needs
+                                </CardDescription>
+                              </CardHeader>
+                              <CardContent>
+                                <div className="mb-4 flex items-center justify-end space-x-2">
+                                  <span className="text-sm">Monthly</span>
+                                  <Switch
+                                    checked={isYearly}
+                                    onCheckedChange={setIsYearly}
+                                    id="billing-toggle"
+                                  />
+                                  <span className="text-sm">
+                                    Yearly (10% off)
+                                  </span>
+                                </div>
+                                <RadioGroup
+                                  className="grid-cols-3 gap-4"
+                                  defaultValue={selectedPackage.id}
+                                  onValueChange={handlePackageSelect}
+                                >
+                                  {packages.map((pkg) => (
+                                    <Card
+                                      key={pkg.id}
+                                      className={`mb-4 bg-black ${selectedPackage.id === pkg.id ? "shadow outline-none ring-2 ring-ring ring-offset-2 ring-offset-background" : ""}`}
+                                    >
+                                      <CardHeader>
+                                        <div className="flex items-center justify-between">
+                                          <div className="flex items-center space-x-2">
+                                            <RadioGroupItem
+                                              value={pkg.id}
+                                              id={pkg.id}
+                                            />
+                                            <Label
+                                              htmlFor={pkg.id}
+                                              className="text-lg font-semibold"
+                                            >
+                                              {pkg.name}
+                                            </Label>
+                                          </div>
+                                          <Badge variant="secondary">
+                                            $
+                                            {isYearly
+                                              ? (pkg.price * 12 * 0.9).toFixed(
+                                                  2,
+                                                )
+                                              : pkg.price}
+                                            /{isYearly ? "year" : "month"}
+                                          </Badge>
+                                        </div>
+                                      </CardHeader>
+                                      <CardContent>
+                                        <p className="mb-2 text-sm text-muted-foreground">
+                                          {pkg.description}
+                                        </p>
+                                        <ul className="list-inside list-disc text-sm">
+                                          {pkg.features.map(
+                                            (feature, index) => (
+                                              <li key={index}>{feature}</li>
+                                            ),
+                                          )}
+                                        </ul>
+                                      </CardContent>
+                                    </Card>
+                                  ))}
+                                </RadioGroup>
+                              </CardContent>
+                            </Card>
+                          </AlertDialogTitle>
+                          <AlertDialogDescription className="flex items-center gap-2">
+                            <Checkbox id="terms" required />
+                            <label
+                              htmlFor="terms"
+                              className="text-xs font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                             >
-                              terms and conditions
-                            </a>{" "}
-                            of Service. Please read them carefully before
-                            proceeding with your purchase.{" "}
-                          </label>
-                        </AlertDialogDescription>
-                      </AlertDialogHeader>
-                      <AlertDialogFooter>
-                        <AlertDialogCancel>Cancel</AlertDialogCancel>
-                        <AlertDialogAction className="ml-[1.4rem]">
-                          Continue
-                        </AlertDialogAction>
-                      </AlertDialogFooter>
-                    </AlertDialogContent>
-                  </AlertDialog>
-                  <AlertDialog>
-                    <AlertDialogTrigger asChild>
-                      <Button className="w-full">Contact Sale</Button>
-                    </AlertDialogTrigger>
-                    <AlertDialogContent>
-                      <AlertDialogHeader>
-                        <AlertDialogTitle className="flex items-center gap-[1rem]">
-                          <Input type="email" placeholder="Email" />
-                          <Button variant="outline">Subscribe</Button>
-                        </AlertDialogTitle>
-                        <AlertDialogDescription>
-                          Please Enter Your Email To We Send Sale Code
-                        </AlertDialogDescription>
-                      </AlertDialogHeader>
-                      <AlertDialogFooter>
-                        <AlertDialogCancel>Cancel</AlertDialogCancel>
-                        <AlertDialogAction>Continue</AlertDialogAction>
-                      </AlertDialogFooter>
-                    </AlertDialogContent>
-                  </AlertDialog>
-                </div>
-              )}
-              {tier.title !== "Plus Plan" && tier.title !== "Pro Plan" && (
-                <Button className="w-full" variant={"outline"}>
-                  Get Started
-                  <svg
-                    data-testid="geist-icon"
-                    height={16}
-                    strokeLinejoin="round"
-                    viewBox="0 0 16 16"
-                    className="rounded-full bg-black fill-black dark:bg-white"
-                    width={16}
-                  >
-                    <path
-                      className="fill-black"
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M6.74999 3.93933L7.28032 4.46966L10.1035 7.29288C10.4941 7.68341 10.4941 8.31657 10.1035 8.7071L7.28032 11.5303L6.74999 12.0607L5.68933 11L6.21966 10.4697L8.68933 7.99999L6.21966 5.53032L5.68933 4.99999L6.74999 3.93933Z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                </Button>
-              )}
-              {tier.title === "Plus Plan" && (
-                <Button className="w-full" variant={"outline"}>
-                  Upgrade Now
-                  <svg
-                    data-testid="geist-icon"
-                    className="rounded-full bg-black fill-black dark:bg-white"
-                    height={16}
-                    strokeLinejoin="round"
-                    viewBox="0 0 16 16"
-                    width={16}
-                  >
-                    <path
-                      className="fill-black"
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M6.74999 3.93933L7.28032 4.46966L10.1035 7.29288C10.4941 7.68341 10.4941 8.31657 10.1035 8.7071L7.28032 11.5303L6.74999 12.0607L5.68933 11L6.21966 10.4697L8.68933 7.99999L6.21966 5.53032L5.68933 4.99999L6.74999 3.93933Z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                </Button>
-              )}
+                              By purchasing a package, you agree to our{" "}
+                              <a
+                                href="#"
+                                className="text-primary hover:underline"
+                              >
+                                terms and conditions
+                              </a>{" "}
+                              of Service. Please read them carefully before
+                              proceeding with your purchase.{" "}
+                            </label>
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Cancel</AlertDialogCancel>
+                          <AlertDialogAction className="ml-[1.4rem]">
+                            Continue
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <Button className="w-full">Contact Sale</Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle className="flex items-center gap-[1rem]">
+                            <Input type="email" placeholder="Email" />
+                            <Button variant="outline">Subscribe</Button>
+                          </AlertDialogTitle>
+                          <AlertDialogDescription>
+                            Please Enter Your Email To We Send Sale Code
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Cancel</AlertDialogCancel>
+                          <AlertDialogAction>Continue</AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
+                  </div>
+                )}
+                {tier.title !== "Plus Plan" && tier.title !== "Pro Plan" && (
+                  <Button className="w-full" variant={"outline"}>
+                    Get Started
+                    <svg
+                      data-testid="geist-icon"
+                      height={16}
+                      strokeLinejoin="round"
+                      viewBox="0 0 16 16"
+                      className="rounded-full bg-black fill-black dark:bg-white"
+                      width={16}
+                    >
+                      <path
+                        className="fill-black"
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        d="M6.74999 3.93933L7.28032 4.46966L10.1035 7.29288C10.4941 7.68341 10.4941 8.31657 10.1035 8.7071L7.28032 11.5303L6.74999 12.0607L5.68933 11L6.21966 10.4697L8.68933 7.99999L6.21966 5.53032L5.68933 4.99999L6.74999 3.93933Z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </Button>
+                )}
+                {tier.title === "Plus Plan" && (
+                  <Button className="w-full" variant={"outline"}>
+                    Upgrade Now
+                    <svg
+                      data-testid="geist-icon"
+                      className="rounded-full bg-black fill-black dark:bg-white"
+                      height={16}
+                      strokeLinejoin="round"
+                      viewBox="0 0 16 16"
+                      width={16}
+                    >
+                      <path
+                        className="fill-black"
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        d="M6.74999 3.93933L7.28032 4.46966L10.1035 7.29288C10.4941 7.68341 10.4941 8.31657 10.1035 8.7071L7.28032 11.5303L6.74999 12.0607L5.68933 11L6.21966 10.4697L8.68933 7.99999L6.21966 5.53032L5.68933 4.99999L6.74999 3.93933Z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </Button>
+                )}
               </div>
             </CardHeader>
             <CardContent className="flex-grow pt-[8px]">
-              <ul className="space-y-2  border-t  rounded-lg first:pt-[1rem]">
+              <ul className="space-y-2 rounded-lg border-t first:pt-[1rem]">
                 {tier.features.map((feature) => (
-                  <li key={feature.name} className="flex px-2   items-center gap-2">
-                    <div className="rounded-md  p-[4px]">
+                  <li
+                    key={feature.name}
+                    className="flex items-center gap-2 px-2"
+                  >
+                    <div className="rounded-md p-[4px]">
                       {/* {feature.icon} */}
                       <svg
-  data-testid="geist-icon"
-  height={16}
-  strokeLinejoin="round"
-  viewBox="0 0 16 16"
-  width={16}
-  style={{ color: "currentcolor" }}
->
-  <path
-    fillRule="evenodd"
-    clipRule="evenodd"
-    d="M16 8C16 12.4183 12.4183 16 8 16C3.58172 16 0 12.4183 0 8C0 3.58172 3.58172 0 8 0C12.4183 0 16 3.58172 16 8ZM11.5303 6.53033L12.0607 6L11 4.93934L10.4697 5.46967L6.5 9.43934L5.53033 8.46967L5 7.93934L3.93934 9L4.46967 9.53033L5.96967 11.0303C6.26256 11.3232 6.73744 11.3232 7.03033 11.0303L11.5303 6.53033Z"
-    fill="currentColor"
-  />
-</svg>
+                        data-testid="geist-icon"
+                        height={16}
+                        strokeLinejoin="round"
+                        viewBox="0 0 16 16"
+                        width={16}
+                        style={{ color: "currentcolor" }}
+                      >
+                        <path
+                          fillRule="evenodd"
+                          clipRule="evenodd"
+                          d="M16 8C16 12.4183 12.4183 16 8 16C3.58172 16 0 12.4183 0 8C0 3.58172 3.58172 0 8 0C12.4183 0 16 3.58172 16 8ZM11.5303 6.53033L12.0607 6L11 4.93934L10.4697 5.46967L6.5 9.43934L5.53033 8.46967L5 7.93934L3.93934 9L4.46967 9.53033L5.96967 11.0303C6.26256 11.3232 6.73744 11.3232 7.03033 11.0303L11.5303 6.53033Z"
+                          fill="currentColor"
+                        />
+                      </svg>
 
                       {/* <CheckIcon className="h-[15px] w-[15px] flex-shrink-0 text-[#ffffff]" /> */}
                     </div>
@@ -1149,9 +1179,7 @@ export default function Individual() {
                 ))}
               </ul>
             </CardContent>
-            <CardFooter className="justify-center rounded-none px-6 py-[1rem]">
-             
-            </CardFooter>
+            <CardFooter className="justify-center rounded-none px-6 py-[1rem]"></CardFooter>
           </Card>
         ))}
       </div>
