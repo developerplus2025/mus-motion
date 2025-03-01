@@ -30,7 +30,7 @@ export default async function Image() {
   } else if (currentUrl === "https://localhost:3000/") {
     imagePreview = "Đăng Bình";
   } else {
-    imagePreview = "1 pi ≈ 2,7631 USDT";
+    imagePreview = "Anh Yêu Em Như Vòi Xịt Đít";
   }
 
   const geistLight = fetch(
