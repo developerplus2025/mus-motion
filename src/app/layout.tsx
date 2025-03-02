@@ -23,7 +23,7 @@ import FrameVideo from "./home/components/frame-video";
 const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Flora: Buy and Sell Pi Network",
-  description: "Flora - Home",
+  description: "Lê Thanh Trung",
 };
 export default function RootLayout({
   children,
