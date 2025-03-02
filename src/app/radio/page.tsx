@@ -31,21 +31,21 @@ const playlist: Track[] = [
     title: "Sunflower",
     artist: "Post Malone & Swae Lee",
     duration: 158,
-    src: "/audio/sunflower.mp3",
+    src: "/audio/DaiDienHauSinhTuKienLouisRemix-VuongNgocManh-14125736.mp3",
   },
   {
     id: 2,
     title: "Blinding Lights",
     artist: "The Weeknd",
     duration: 200,
-    src: "/audio/blinding-lights.mp3",
+    src: "/audio/tawerrw6f4.mp3",
   },
   {
     id: 3,
     title: "Shape of You",
     artist: "Ed Sheeran",
     duration: 233,
-    src: "/audio/shape-of-you.mp3",
+    src: "/audio/y2mate.com2.mp3",
   },
 ];
 
