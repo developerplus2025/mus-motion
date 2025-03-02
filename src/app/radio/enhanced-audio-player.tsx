@@ -28,20 +28,27 @@ type Track = {
 const playlist: Track[] = [
   {
     id: 1,
-    title: "DaiDienHauSinhTuKienLouisRemix-VuongNgocManh-14125736",
+    title: "Phap Ta Ba",
+    artist: "Ed Sheeran",
+    duration: 233,
+    src: "/audio/kw04scrx7h.mp3",
+  },
+  {
+    id: 2,
+    title: "Sunflower",
     artist: "Post Malone & Swae Lee",
     duration: 158,
     src: "/audio/DaiDienHauSinhTuKienLouisRemix-VuongNgocManh-14125736.mp3",
   },
   {
-    id: 2,
+    id: 3,
     title: "Blinding Lights",
     artist: "The Weeknd",
     duration: 200,
     src: "/audio/tawerrw6f4.mp3",
   },
   {
-    id: 3,
+    id: 4,
     title: "Shape of You",
     artist: "Ed Sheeran",
     duration: 233,
