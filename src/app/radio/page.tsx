@@ -171,13 +171,13 @@ export default function EnhancedAudioPlayer() {
   }, [currentTrack.src, isPlaying]);
 
   return (
-    <Card className="w-[400px] bg-gradient-to-br from-zinc-900 to-black text-white">
+    <Card className="w-[900px] bg-gradient-to-br from-zinc-900 to-black text-white">
       <CardContent className="p-6">
-        <div className="mb-4 aspect-square w-full overflow-hidden rounded-md bg-zinc-800 shadow-lg">
+        <div className="mb-4 aspect-square w-[100px] overflow-hidden rounded-md bg-zinc-800 shadow-lg">
           <img
             src="/placeholder.svg?height=400&width=400"
             alt="Album Cover"
-            className="h-full w-full object-cover"
+            className="h-[0px] w-full object-cover"
           />
         </div>
         <h2 className="mb-1 text-2xl font-bold">{currentTrack.title}</h2>
