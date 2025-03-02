@@ -82,22 +82,34 @@ export default function EnhancedAudioPlayer() {
     };
   }, []);
 
-  const togglePlayPause = () => {
+  const togglePlayPause = async () => {
     const audio = audioRef.current;
     if (!audio) return;
 
     if (isPlaying) {
       audio.pause();
     } else {
-      audio.play();
+      try {
+        await audio.play();
+      } catch (error) {
+        console.error("Error playing audio:", error);
+      }
     }
     setIsPlaying(!isPlaying);
   };
 
-  const handleTrackEnd = () => {
+  const handleTrackEnd = async () => {
     if (repeatMode === "one") {
-      audioRef.current!.currentTime = 0;
-      audioRef.current!.play();
+      const audio = audioRef.current;
+      if (audio) {
+        audio.currentTime = 0;
+        try {
+          await audio.play();
+        } catch (error) {
+          console.error("Error replaying audio:", error);
+          setIsPlaying(false);
+        }
+      }
     } else if (
       repeatMode === "all" ||
       currentTrackIndex < playlist.length - 1
@@ -131,23 +143,17 @@ export default function EnhancedAudioPlayer() {
   };
 
   const playNextTrack = () => {
-    let nextIndex;
-    if (isShuffled) {
-      nextIndex = Math.floor(Math.random() * playlist.length);
-    } else {
-      nextIndex = (currentTrackIndex + 1) % playlist.length;
-    }
+    const nextIndex = isShuffled
+      ? Math.floor(Math.random() * playlist.length)
+      : (currentTrackIndex + 1) % playlist.length;
     setCurrentTrackIndex(nextIndex);
     setIsPlaying(true);
   };
 
   const playPreviousTrack = () => {
-    let prevIndex;
-    if (isShuffled) {
-      prevIndex = Math.floor(Math.random() * playlist.length);
-    } else {
-      prevIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
-    }
+    const prevIndex = isShuffled
+      ? Math.floor(Math.random() * playlist.length)
+      : (currentTrackIndex - 1 + playlist.length) % playlist.length;
     setCurrentTrackIndex(prevIndex);
     setIsPlaying(true);
   };
@@ -166,8 +172,25 @@ export default function EnhancedAudioPlayer() {
     const audio = audioRef.current;
     if (!audio) return;
 
-    audio.src = currentTrack.src;
-    if (isPlaying) audio.play();
+    const playAudio = async () => {
+      audio.src = currentTrack.src;
+      audio.load(); // Explicitly load the new audio
+      if (isPlaying) {
+        try {
+          await audio.play();
+        } catch (error) {
+          console.error("Error playing audio:", error);
+          setIsPlaying(false);
+        }
+      }
+    };
+
+    playAudio();
+
+    return () => {
+      audio.pause();
+      audio.currentTime = 0;
+    };
   }, [currentTrack.src, isPlaying]);
 
   return (
