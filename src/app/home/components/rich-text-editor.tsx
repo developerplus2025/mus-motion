@@ -113,13 +113,13 @@ export default function RichTextEditor() {
 
   return (
     <div className="mx-auto max-w-4xl p-4">
-      <Card className="border shadow-sm dark:bg-gray-800">
-        <div className="flex flex-wrap items-center gap-1 border-b bg-muted/50 p-2 dark:border-gray-600 dark:bg-gray-700">
+      <Card className="rounded-t-lg border shadow-sm dark:bg-black">
+        <div className="flex flex-wrap items-center gap-1 border-b bg-muted/50 p-2 dark:border dark:bg-black">
           <Button
             variant="ghost"
             size="icon"
             onClick={() => toggleInlineStyle("BOLD")}
-            className={`${isInlineStyleActive("BOLD") ? "bg-muted dark:bg-gray-600" : ""} dark:text-gray-200 dark:hover:bg-gray-600`}
+            className={`${isInlineStyleActive("BOLD") ? "bg-muted dark:bg-[#272727]" : ""} dark:hover:bg-bg-[#272727] dark:text-gray-200`}
             title="Bold"
           >
             <Bold className="h-4 w-4" />
@@ -128,7 +128,7 @@ export default function RichTextEditor() {
             variant="ghost"
             size="icon"
             onClick={() => toggleInlineStyle("ITALIC")}
-            className={`${isInlineStyleActive("ITALIC") ? "bg-muted dark:bg-gray-600" : ""} dark:text-gray-200 dark:hover:bg-gray-600`}
+            className={`${isInlineStyleActive("ITALIC") ? "bg-muted dark:bg-[#272727]" : ""} dark:hover:bg-bg-[#272727] dark:text-gray-200`}
             title="Italic"
           >
             <Italic className="h-4 w-4" />
@@ -137,7 +137,7 @@ export default function RichTextEditor() {
             variant="ghost"
             size="icon"
             onClick={() => toggleInlineStyle("UNDERLINE")}
-            className={`${isInlineStyleActive("UNDERLINE") ? "bg-muted dark:bg-gray-600" : ""} dark:text-gray-200 dark:hover:bg-gray-600`}
+            className={`${isInlineStyleActive("UNDERLINE") ? "bg-muted dark:bg-[#272727]" : ""} dark:hover:bg-bg-[#272727] dark:text-gray-200`}
             title="Underline"
           >
             <Underline className="h-4 w-4" />
@@ -145,14 +145,14 @@ export default function RichTextEditor() {
 
           <Separator
             orientation="vertical"
-            className="mx-1 h-6 dark:bg-gray-600"
+            className="mx-1 h-6 dark:bg-black"
           />
 
           <Button
             variant="ghost"
             size="icon"
             onClick={() => toggleBlockType("header-one")}
-            className={`${isBlockActive("header-one") ? "bg-muted dark:bg-gray-600" : ""} dark:text-gray-200 dark:hover:bg-gray-600`}
+            className={`${isBlockActive("header-one") ? "bg-muted dark:bg-[#272727]" : ""} dark:text-gray-200 dark:hover:bg-[#272727]`}
             title="Heading 1"
           >
             <Heading1 className="h-4 w-4" />
@@ -161,7 +161,7 @@ export default function RichTextEditor() {
             variant="ghost"
             size="icon"
             onClick={() => toggleBlockType("header-two")}
-            className={`${isBlockActive("header-two") ? "bg-muted dark:bg-gray-600" : ""} dark:text-gray-200 dark:hover:bg-gray-600`}
+            className={`${isBlockActive("header-two") ? "bg-muted dark:bg-[#272727]" : ""} dark:text-gray-200 dark:hover:bg-[#272727]`}
             title="Heading 2"
           >
             <Heading2 className="h-4 w-4" />
@@ -169,14 +169,14 @@ export default function RichTextEditor() {
 
           <Separator
             orientation="vertical"
-            className="mx-1 h-6 dark:bg-gray-600"
+            className="mx-1 h-6 dark:bg-black"
           />
 
           <Button
             variant="ghost"
             size="icon"
             onClick={() => toggleBlockType("unordered-list-item")}
-            className={`${isBlockActive("unordered-list-item") ? "bg-muted dark:bg-gray-600" : ""} dark:text-gray-200 dark:hover:bg-gray-600`}
+            className={`${isBlockActive("unordered-list-item") ? "bg-muted dark:bg-[#272727]" : ""} dark:text-gray-200 dark:hover:bg-[#272727]`}
             title="Bullet List"
           >
             <List className="h-4 w-4" />
@@ -185,7 +185,7 @@ export default function RichTextEditor() {
             variant="ghost"
             size="icon"
             onClick={() => toggleBlockType("ordered-list-item")}
-            className={`${isBlockActive("ordered-list-item") ? "bg-muted dark:bg-gray-600" : ""} dark:text-gray-200 dark:hover:bg-gray-600`}
+            className={`${isBlockActive("ordered-list-item") ? "bg-muted dark:bg-[#272727]" : ""} dark:text-gray-200 dark:hover:bg-[#272727]`}
             title="Numbered List"
           >
             <ListOrdered className="h-4 w-4" />
@@ -193,14 +193,14 @@ export default function RichTextEditor() {
 
           <Separator
             orientation="vertical"
-            className="mx-1 h-6 dark:bg-gray-600"
+            className="mx-1 h-6 dark:bg-black"
           />
 
           <Button
             variant="ghost"
             size="icon"
             onClick={() => toggleBlockType("left")}
-            className={`${isBlockActive("left") ? "bg-muted dark:bg-gray-600" : ""} dark:text-gray-200 dark:hover:bg-gray-600`}
+            className={`${isBlockActive("left") ? "bg-muted dark:bg-[#272727]" : ""} dark:text-gray-200 dark:hover:bg-[#272727]`}
             title="Align Left"
           >
             <AlignLeft className="h-4 w-4" />
@@ -209,7 +209,7 @@ export default function RichTextEditor() {
             variant="ghost"
             size="icon"
             onClick={() => toggleBlockType("center")}
-            className={`${isBlockActive("center") ? "bg-muted dark:bg-gray-600" : ""} dark:text-gray-200 dark:hover:bg-gray-600`}
+            className={`${isBlockActive("center") ? "bg-muted dark:bg-[#272727]" : ""} dark:text-gray-200 dark:hover:bg-[#272727]`}
             title="Align Center"
           >
             <AlignCenter className="h-4 w-4" />
@@ -218,7 +218,7 @@ export default function RichTextEditor() {
             variant="ghost"
             size="icon"
             onClick={() => toggleBlockType("right")}
-            className={`${isBlockActive("right") ? "bg-muted dark:bg-gray-600" : ""} dark:text-gray-200 dark:hover:bg-gray-600`}
+            className={`${isBlockActive("right") ? "bg-muted dark:bg-[#272727]" : ""} dark:text-gray-200 dark:hover:bg-[#272727]`}
             title="Align Right"
           >
             <AlignRight className="h-4 w-4" />
@@ -226,7 +226,7 @@ export default function RichTextEditor() {
 
           <Separator
             orientation="vertical"
-            className="mx-1 h-6 dark:bg-gray-600"
+            className="mx-1 h-6 dark:bg-black"
           />
 
           <Button
@@ -253,7 +253,7 @@ export default function RichTextEditor() {
                 );
               }
             }}
-            className="dark:text-gray-200 dark:hover:bg-gray-600"
+            className="dark:text-gray-200 dark:hover:bg-[#272727]"
             title="Insert Link"
           >
             <Link className="h-4 w-4" />
@@ -265,7 +265,7 @@ export default function RichTextEditor() {
             variant="outline"
             size="sm"
             onClick={saveContent}
-            className="ml-auto dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-700"
+            className="ml-auto dark:border dark:text-gray-200 dark:hover:bg-[#272727]"
           >
             Save
           </Button>
@@ -273,7 +273,7 @@ export default function RichTextEditor() {
             variant="outline"
             size="sm"
             onClick={loadContent}
-            className="dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-700"
+            className="dark:border dark:text-gray-200 dark:hover:bg-[#272727]"
           >
             Load
           </Button>
@@ -281,7 +281,7 @@ export default function RichTextEditor() {
             variant="ghost"
             size="icon"
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="dark:text-gray-200 dark:hover:bg-gray-600"
+            className="dark:text-gray-200 dark:hover:bg-[#272727]"
             title="Toggle theme"
           >
             {theme === "dark" ? (
@@ -292,9 +292,9 @@ export default function RichTextEditor() {
           </Button>
         </div>
 
-        <CardContent className="p-4 dark:bg-gray-800">
+        <CardContent className="rounded-lg p-4 dark:bg-gray-800">
           <div
-            className="min-h-[300px] rounded-md border p-3 focus-within:ring-1 focus-within:ring-ring dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
+            className="min-h-[300px] rounded-md border p-3 focus-within:ring-1 focus-within:ring-ring dark:border dark:bg-black dark:text-gray-200"
             onClick={() => {
               if (editorRef.current) {
                 editorRef.current.focus();
