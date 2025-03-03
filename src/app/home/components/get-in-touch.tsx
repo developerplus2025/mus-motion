@@ -9,7 +9,7 @@ const GetInTouch = () => {
       </div>
       <div className="flex items-center justify-center">
         <RichTextEditor />
-        <YouTubeTextEditor />
+        {/* <YouTubeTextEditor /> */}
       </div>
     </div>
   );
