@@ -150,16 +150,17 @@ import { TextEffect } from "@/components/ui/text-effect";
 import { TextScramble } from "@/components/ui/text-scramble";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import CookieAlert from "./components/cookie-alert";
-import {  PeopleSay } from "./components/people-say";
-import  WatchDemo  from "./components/watch-demo";
+import { PeopleSay } from "./components/people-say";
+import WatchDemo from "./components/watch-demo";
 import VideoModal from "./components/modal-video";
 import Modal from "./components/Modal";
-import {CircularProgress} from "@heroui/react";
+import { CircularProgress } from "@heroui/react";
 import SocialProof from "./components/social-proof";
 import Metric from "./components/metric";
+import GetInTouch from "./components/get-in-touch";
 export default function Home() {
   const { theme, systemTheme, setTheme } = useTheme();
- const [open ,setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
   const [position, setPosition] = React.useState("benoit");
   // State quản lý giá trị "close"
   const [close, setClose] = useState<boolean>(false);
@@ -250,7 +251,6 @@ export default function Home() {
     <main className="GeistSans relative flex min-h-screen w-full flex-col items-center justify-between gap-[1rem] overflow-x-hidden pb-[1rem] pt-[6rem] dark:bg-black dark:[color-scheme:dark]">
       {/* <TailwindcssButton /> */}
 
-
       <div className="group relative grid overflow-hidden rounded-full px-3 py-1 shadow-[0_1000px_0_0_hsl(0_0%_20%)_inset] transition-colors duration-200">
         <span>
           <span className="spark mask-gradient absolute inset-0 h-[100%] w-[100%] animate-flip overflow-hidden rounded-full [mask:linear-gradient(white,_transparent_50%)] before:absolute before:aspect-square before:w-[200%] before:rotate-[-90deg] before:animate-rotate before:bg-[conic-gradient(from_0deg,transparent_0_340deg,white_360deg)] before:content-[''] before:[inset:0_auto_auto_50%] before:[translate:-50%_-15%]" />
@@ -337,7 +337,7 @@ export default function Home() {
           >
             The next generation of audio collaboration.
           </TextScramble> */}
-          <h1 className="w-[520px] text-xl text-center">
+          <h1 className="w-[520px] text-center text-xl">
             Dive into a seamless music experience with our cutting-edge
             software. Unleash your creativity, manage your playlists, and
             explore a universe of sounds.
@@ -345,28 +345,28 @@ export default function Home() {
         </div>
         <div className="flex gap-[2rem]">
           <DownloadButton />
-          <Modal isOpen={open} onClose={ () => setOpen(false)}/>
+          <Modal isOpen={open} onClose={() => setOpen(false)} />
           {/* <WatchDemo/> */}
           <Button onClick={() => setOpen(true)}>
-                  <svg
-                    className="mr-2 h-4 w-4"
-                    data-testid="geist-icon"
-                    height={16}
-                    strokeLinejoin="round"
-                    viewBox="0 0 16 16"
-                    width={16}
-                    style={{ color: "currentcolor" }}
-                  >
-                    <path
-                      fill="#666"
-                      fillRule="evenodd"
-                      d="M14.5 8a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0ZM16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM6 11l5.5-3L6 5v6Z"
-                      clipRule="evenodd"
-                      style={{ fill: "currentColor" }}
-                    />
-                  </svg>
-                  Watch Demo Now
-                </Button>
+            <svg
+              className="mr-2 h-4 w-4"
+              data-testid="geist-icon"
+              height={16}
+              strokeLinejoin="round"
+              viewBox="0 0 16 16"
+              width={16}
+              style={{ color: "currentcolor" }}
+            >
+              <path
+                fill="#666"
+                fillRule="evenodd"
+                d="M14.5 8a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0ZM16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM6 11l5.5-3L6 5v6Z"
+                clipRule="evenodd"
+                style={{ fill: "currentColor" }}
+              />
+            </svg>
+            Watch Demo Now
+          </Button>
           {/* <VideoModal/> */}
         </div>
       </motion.div>
@@ -384,23 +384,24 @@ export default function Home() {
             <div className="text-sm">Countries</div>
           </div>
         </div> */}
-      
-      <div className="mx-auto mt-[6rem] mb-[4rem] w-[700px]  h-px bg-gradient-to-r from-transparent via-zinc-700 dark:via-zinc-300 to-transparent"></div>
+
+      <div className="mx-auto mb-[4rem] mt-[6rem] h-px w-[700px] bg-gradient-to-r from-transparent via-zinc-700 to-transparent dark:via-zinc-300"></div>
       <div className="w-full">
         <PhotoFeatures />
       </div>
-      <div className="mx-auto my-[4rem] w-[700px]  h-px bg-gradient-to-r from-transparent via-zinc-700 dark:via-zinc-300 to-transparent"></div>
+      <div className="mx-auto my-[4rem] h-px w-[700px] bg-gradient-to-r from-transparent via-zinc-700 to-transparent dark:via-zinc-300"></div>
 
-     <SocialProof/>
-     <div className="mx-auto my-[4rem] w-[700px]  h-px bg-gradient-to-r from-transparent via-zinc-700 dark:via-zinc-300 to-transparent"></div>
-     <Metric/>
-     <div className="mx-auto my-[4rem] w-[700px]  h-px bg-gradient-to-r from-transparent via-zinc-700 dark:via-zinc-300 to-transparent"></div>
-     <AccordionFAQ/>
-     <div className="mx-auto my-[4rem] w-[700px]  h-px bg-gradient-to-r from-transparent via-zinc-700 dark:via-zinc-300 to-transparent"></div>
+      <SocialProof />
+      <div className="mx-auto my-[4rem] h-px w-[700px] bg-gradient-to-r from-transparent via-zinc-700 to-transparent dark:via-zinc-300"></div>
+      <Metric />
+      <div className="mx-auto my-[4rem] h-px w-[700px] bg-gradient-to-r from-transparent via-zinc-700 to-transparent dark:via-zinc-300"></div>
+      <AccordionFAQ />
+      <div className="mx-auto my-[4rem] h-px w-[700px] bg-gradient-to-r from-transparent via-zinc-700 to-transparent dark:via-zinc-300"></div>
       <PeopleSay />
-      <div className="mx-auto my-[4rem] w-[700px]  h-px bg-gradient-to-r from-transparent via-zinc-700 dark:via-zinc-300 to-transparent"></div>
-      
-     
+      <div className="mx-auto my-[4rem] h-px w-[700px] bg-gradient-to-r from-transparent via-zinc-700 to-transparent dark:via-zinc-300"></div>
+      <GetInTouch />
+      <div className="mx-auto my-[4rem] h-px w-[700px] bg-gradient-to-r from-transparent via-zinc-700 to-transparent dark:via-zinc-300"></div>
+
       {/* <div className="mt-[2rem] flex w-full items-center justify-center gap-[4rem] px-[2rem]">
         <ChartFirstYear />
         <ChartLastYear />
@@ -429,7 +430,7 @@ export default function Home() {
                       Hide Other<MenubarShortcut>⌘H</MenubarShortcut>
                     </MenubarItem>
                     <MenubarItem>
-                      Quit Flora                   <MenubarShortcut>⌘Q</MenubarShortcut>
+                      Quit Flora <MenubarShortcut>⌘Q</MenubarShortcut>
                     </MenubarItem>
                   </MenubarContent>
                 </MenubarMenu>
