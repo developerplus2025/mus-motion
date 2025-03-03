@@ -1,5 +1,6 @@
 "use client";
-
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { useState, useEffect, useRef } from "react";
 import {
   Editor,
@@ -7,6 +8,7 @@ import {
   RichUtils,
   convertToRaw,
   convertFromRaw,
+  ContentBlock,
 } from "draft-js";
 import "draft-js/dist/Draft.css";
 import {
@@ -46,7 +48,6 @@ export default function RichTextEditor() {
       }
     }, 100);
   }, []);
-
   const handleKeyCommand = (command: string, editorState: EditorState) => {
     const newState = RichUtils.handleKeyCommand(editorState, command);
     if (newState) {
@@ -54,6 +55,17 @@ export default function RichTextEditor() {
       return "handled";
     }
     return "not-handled";
+  };
+
+  // Kiểm tra block có phải code không
+  const blockRendererFn = (block: ContentBlock) => {
+    if (block.getType() === "code-block") {
+      return {
+        component: CodeBlock,
+        editable: false, // Không cho chỉnh sửa trực tiếp code
+      };
+    }
+    return null;
   };
 
   const toggleInlineStyle = (style: string) => {
@@ -303,11 +315,12 @@ export default function RichTextEditor() {
           >
             <Editor
               ref={editorRef}
+              blockRendererFn={blockRendererFn}
               editorState={editorState}
               onChange={setEditorState}
               handleKeyCommand={handleKeyCommand}
               placeholder="Start typing..."
-              spellCheck={true}
+              spellCheck={false}
             />
           </div>
         </CardContent>
@@ -315,3 +328,11 @@ export default function RichTextEditor() {
     </div>
   );
 }
+const CodeBlock = ({ block }: { block: ContentBlock }) => {
+  const text = block.getText();
+  return (
+    <SyntaxHighlighter language="javascript" style={atomDark}>
+      {text}
+    </SyntaxHighlighter>
+  );
+};
