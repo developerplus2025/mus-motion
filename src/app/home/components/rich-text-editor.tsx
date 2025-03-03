@@ -9,7 +9,10 @@ import {
   convertToRaw,
   convertFromRaw,
   ContentBlock,
+  ContentState,
 } from "draft-js";
+import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
+import rawContent from "./content.json"; // Import file JSON
 import "draft-js/dist/Draft.css";
 import {
   Bold,
@@ -30,15 +33,30 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Card, CardContent } from "@/components/ui/card";
 import { useTheme } from "next-themes";
+const blockRendererFn = (block: ContentBlock) => {
+  if (block.getType() === "code-block") {
+    return { component: CodeBlock, editable: false };
+  }
+  return null;
+};
+const CodeBlock: React.FC<{ block: ContentBlock }> = ({ block }) => {
+  const text = block.getText();
+  const language = block.getData().get("language") || "json"; // Mặc định JSON
+  return (
+    <SyntaxHighlighter language={language} style={vscDarkPlus}>
+      {text}
+    </SyntaxHighlighter>
+  );
+};
 
 export default function RichTextEditor() {
-  const [editorState, setEditorState] = useState(() =>
-    EditorState.createEmpty(),
-  );
   const [editorLoaded, setEditorLoaded] = useState(false);
   const editorRef = useRef<Editor>(null);
   const { theme, setTheme } = useTheme();
-
+  const initialContent = "";
+  const [editorState, setEditorState] = useState(
+    EditorState.createWithContent(convertFromRaw(rawContent)),
+  );
   useEffect(() => {
     setEditorLoaded(true);
 
@@ -328,11 +346,3 @@ export default function RichTextEditor() {
     </div>
   );
 }
-const CodeBlock = ({ block }: { block: ContentBlock }) => {
-  const text = block.getText();
-  return (
-    <SyntaxHighlighter language="javascript" style={atomDark}>
-      {text}
-    </SyntaxHighlighter>
-  );
-};

@@ -1,0 +1,23 @@
+{
+  "blocks": [
+    {
+      "key": "1",
+      "text": "Đây là đoạn JSON:",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "2",
+      "text": "{\n  \"name\": \"Draft.js\",\n  \"version\": \"0.11.7\",\n  \"features\": [\"Editor\", \"Rich Text\", \"Plugins\"]\n}",
+      "type": "code-block",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": { "language": "json" }
+    }
+  ],
+  "entityMap": {}
+}
