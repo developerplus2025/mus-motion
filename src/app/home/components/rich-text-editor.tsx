@@ -113,8 +113,8 @@ export default function RichTextEditor() {
 
   return (
     <div className="mx-auto max-w-4xl p-4">
-      <Card className="rounded-t-lg border shadow-sm dark:bg-black">
-        <div className="flex flex-wrap items-center gap-1 border-b bg-muted/50 p-2 dark:border dark:bg-black">
+      <Card className="rounded-lg border shadow-sm dark:bg-black">
+        <div className="flex flex-wrap items-center gap-1 rounded-t-lg border-b bg-muted/50 p-2 dark:border dark:bg-black">
           <Button
             variant="ghost"
             size="icon"
@@ -292,7 +292,7 @@ export default function RichTextEditor() {
           </Button>
         </div>
 
-        <CardContent className="rounded-lg p-4 dark:bg-gray-800">
+        <CardContent className="rounded-lg p-4 dark:bg-black">
           <div
             className="min-h-[300px] rounded-md border p-3 focus-within:ring-1 focus-within:ring-ring dark:border dark:bg-black dark:text-gray-200"
             onClick={() => {
