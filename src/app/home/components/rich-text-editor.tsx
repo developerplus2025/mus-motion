@@ -11,6 +11,7 @@ import {
   ContentBlock,
   ContentState,
 } from "draft-js";
+import { toast } from "sonner";
 import { darcula } from "react-syntax-highlighter/dist/esm/styles/prism";
 import rawContent from "./content.json"; // Import file JSON
 import "draft-js/dist/Draft.css";
@@ -54,6 +55,20 @@ const CodeBlock: React.FC<{ block: ContentBlock }> = ({ block }) => {
 };
 
 export default function RichTextEditor() {
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    const promise = () =>
+      new Promise((resolve) =>
+        setTimeout(() => resolve({ name: "Sonner" }), 2000),
+      );
+    toast.promise(promise, {
+      loading: "Loading...",
+      success: (data) => {
+        return `Thanks for subscribing!`;
+      },
+      error: "Error",
+    });
+  };
   const [editorLoaded, setEditorLoaded] = useState(false);
   const editorRef = useRef<Editor>(null);
   const { theme, setTheme } = useTheme();
@@ -110,11 +125,23 @@ export default function RichTextEditor() {
     return currentStyle.has(style);
   };
 
-  const saveContent = () => {
+  const saveContent = (e: React.FormEvent) => {
+    e.preventDefault();
+    const promise = () =>
+      new Promise((resolve) =>
+        setTimeout(() => resolve({ name: "Sonner" }), 2000),
+      );
+    toast.promise(promise, {
+      loading: "Loading...",
+      success: (data) => {
+        return `Thanks for subscribing!`;
+      },
+      error: "Error",
+    });
     const contentState = editorState.getCurrentContent();
     const rawContent = convertToRaw(contentState);
     localStorage.setItem("draftEditorContent", JSON.stringify(rawContent));
-    alert("Content saved!");
+    // alert("Content saved!");
   };
 
   const loadContent = () => {
