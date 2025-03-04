@@ -11,7 +11,7 @@ import {
   ContentBlock,
   ContentState,
 } from "draft-js";
-import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { darcula } from "react-syntax-highlighter/dist/esm/styles/prism";
 import rawContent from "./content.json"; // Import file JSON
 import "draft-js/dist/Draft.css";
 import {
@@ -46,7 +46,7 @@ const CodeBlock: React.FC<{ block: ContentBlock }> = ({ block }) => {
     <SyntaxHighlighter
       className="rounded-lg"
       language={language}
-      style={vscDarkPlus}
+      style={darcula}
     >
       {text}
     </SyntaxHighlighter>
