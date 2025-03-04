@@ -2,7 +2,7 @@
   "blocks": [
     {
       "key": "1",
-      "text": "Đây là đoạn JSON:",
+      "text": "Đây là đoạn TSX:",
       "type": "unstyled",
       "depth": 0,
       "inlineStyleRanges": [],
@@ -16,7 +16,7 @@
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": { "language": "json" }
+      "data": { "language": "tsx" }
     }
   ],
   "entityMap": {}
