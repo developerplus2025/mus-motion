@@ -41,9 +41,13 @@ const blockRendererFn = (block: ContentBlock) => {
 };
 const CodeBlock: React.FC<{ block: ContentBlock }> = ({ block }) => {
   const text = block.getText();
-  const language = block.getData().get("language") || "json"; // Mặc định JSON
+  const language = block.getData().get("language") || "tsx"; // Mặc định JSON
   return (
-    <SyntaxHighlighter language={language} style={vscDarkPlus}>
+    <SyntaxHighlighter
+      className="rounded-lg"
+      language={language}
+      style={vscDarkPlus}
+    >
       {text}
     </SyntaxHighlighter>
   );
