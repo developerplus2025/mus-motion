@@ -13,7 +13,7 @@ import {
   convertFromHTML,
 } from "draft-js";
 import { toast } from "sonner";
-import { darcula } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism";
 import rawContent from "./content.json"; // Import file JSON
 import "draft-js/dist/Draft.css";
 import {
@@ -49,7 +49,7 @@ const CodeBlock: React.FC<{ block: ContentBlock }> = ({ block }) => {
     <SyntaxHighlighter
       className="rounded-lg !bg-black"
       language={language}
-      style={darcula}
+      style={dracula}
     >
       {text}
     </SyntaxHighlighter>
