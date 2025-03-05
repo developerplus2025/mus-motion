@@ -58,31 +58,31 @@ const CodeBlock: React.FC<{ block: ContentBlock }> = ({ block }) => {
 
 export default function RichTextEditor() {
   const [highlightedCode, setHighlightedCode] = useState("");
-  useEffect(() => {
-    async function loadHighlighter() {
-      const highlighter = await createHighlighter({
-        themes: ["geist-dark"],
-        langs: ["tsx"],
-      });
+  // useEffect(() => {
+  //   async function loadHighlighter() {
+  //     const highlighter = await createHighlighter({
+  //       themes: ["geist-dark"],
+  //       langs: ["tsx"],
+  //     });
 
-      const jsonString = JSON.stringify(rawContent, null, 2); // Format JSON
-      const highlighted = highlighter.codeToHtml(jsonString, {
-        lang: "tsx",
-        theme: "geist-dark",
-      });
+  //     const jsonString = JSON.stringify(rawContent, null, 2); // Format JSON
+  //     const highlighted = highlighter.codeToHtml(jsonString, {
+  //       lang: "tsx",
+  //       theme: "geist-dark",
+  //     });
 
-      // Convert HTML của Shiki thành content Draft.js
-      const blocksFromHTML = convertFromHTML(highlighted);
-      const contentState = ContentState.createFromBlockArray(
-        blocksFromHTML.contentBlocks,
-        blocksFromHTML.entityMap,
-      );
+  //     // Convert HTML của Shiki thành content Draft.js
+  //     const blocksFromHTML = convertFromHTML(highlighted);
+  //     const contentState = ContentState.createFromBlockArray(
+  //       blocksFromHTML.contentBlocks,
+  //       blocksFromHTML.entityMap,
+  //     );
 
-      setEditorState(EditorState.createWithContent(contentState));
-    }
+  //     setEditorState(EditorState.createWithContent(contentState));
+  //   }
 
-    loadHighlighter();
-  }, []);
+  //   loadHighlighter();
+  // }, []);
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
