@@ -61,14 +61,14 @@ export default function RichTextEditor() {
   useEffect(() => {
     async function loadHighlighter() {
       const highlighter = await createHighlighter({
-        themes: ["slack-dark"],
+        themes: ["geist-dark"],
         langs: ["tsx"],
       });
 
       const jsonString = JSON.stringify(rawContent, null, 2); // Format JSON
       const highlighted = highlighter.codeToHtml(jsonString, {
         lang: "tsx",
-        theme: "slack-dark",
+        theme: "geist-dark",
       });
 
       // Convert HTML của Shiki thành content Draft.js

@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Play, Pause } from "lucide-react";
+import Image from "next/image";
 
 export default function AudioPlayerCard() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -64,7 +65,9 @@ export default function AudioPlayerCard() {
     <Card className="w-[350px]">
       <CardContent className="p-6">
         <div className="mb-4 aspect-square w-full overflow-hidden rounded-md bg-neutral-200">
-          <img
+          <Image
+            width={"300"}
+            height={"300"}
             src="/placeholder.svg?height=300&width=300"
             alt="Album Cover"
             className="h-full w-full object-cover"
