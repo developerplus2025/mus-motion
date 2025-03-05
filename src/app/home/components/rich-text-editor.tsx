@@ -10,6 +10,7 @@ import {
   convertFromRaw,
   ContentBlock,
   ContentState,
+  convertFromHTML,
 } from "draft-js";
 import { toast } from "sonner";
 import { darcula } from "react-syntax-highlighter/dist/esm/styles/prism";
@@ -34,6 +35,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Card, CardContent } from "@/components/ui/card";
 import { useTheme } from "next-themes";
+import { createHighlighter } from "shiki";
 const blockRendererFn = (block: ContentBlock) => {
   if (block.getType() === "code-block") {
     return { component: CodeBlock, editable: false };
@@ -55,6 +57,33 @@ const CodeBlock: React.FC<{ block: ContentBlock }> = ({ block }) => {
 };
 
 export default function RichTextEditor() {
+  const [highlightedCode, setHighlightedCode] = useState("");
+  useEffect(() => {
+    async function loadHighlighter() {
+      const highlighter = await createHighlighter({
+        themes: ["slack-dark"],
+        langs: ["tsx"],
+      });
+
+      const jsonString = JSON.stringify(rawContent, null, 2); // Format JSON
+      const highlighted = highlighter.codeToHtml(jsonString, {
+        lang: "tsx",
+        theme: "slack-dark",
+      });
+
+      // Convert HTML của Shiki thành content Draft.js
+      const blocksFromHTML = convertFromHTML(highlighted);
+      const contentState = ContentState.createFromBlockArray(
+        blocksFromHTML.contentBlocks,
+        blocksFromHTML.entityMap,
+      );
+
+      setEditorState(EditorState.createWithContent(contentState));
+    }
+
+    loadHighlighter();
+  }, []);
+
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
     const promise = () =>
