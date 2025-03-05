@@ -47,7 +47,7 @@ const CodeBlock: React.FC<{ block: ContentBlock }> = ({ block }) => {
   const language = block.getData().get("language") || "tsx"; // Mặc định JSON
   return (
     <SyntaxHighlighter
-      className="rounded-lg bg-black"
+      className="rounded-lg !bg-black"
       language={language}
       style={darcula}
     >
