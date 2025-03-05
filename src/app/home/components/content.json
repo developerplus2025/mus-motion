@@ -1,0 +1,23 @@
+{
+  "blocks": [
+    {
+      "key": "1",
+      "text": "Đây là đoạn TSX:",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "2",
+      "text": "import { Prism as SyntaxHighlighter } from \"react-syntax-highlighter\";\nimport { atomDark } from \"react-syntax-highlighter/dist/esm/styles/prism\";\nimport { useState, useEffect, useRef } from \"react\";\nimport {\n  Editor,\n  EditorState,\n  RichUtils,\n  convertToRaw,\n  convertFromRaw,\n  ContentBlock,\n  ContentState\n} from \"draft-js\";\nimport { vscDarkPlus } from \"react-syntax-highlighter/dist/esm/styles/prism\";\nimport rawContent from \"./content.json\";\nimport \"draft-js/dist/Draft.css\";\nimport {\n  Bold,\n  Italic,\n  Underline,\n  List,\n  ListOrdered,\n  AlignLeft,\n  AlignCenter,\n  AlignRight,\n  Link,\n  Heading1,\n  Heading2,\n  Sun,\n  Moon\n} from \"lucide-react\";\nimport { Button } from \"@/components/ui/button\";\nimport { Separator } from \"@/components/ui/separator\";\nimport { Card, CardContent } from \"@/components/ui/card\";\nimport { useTheme } from \"next-themes\";\n\nconst blockRendererFn = (block: ContentBlock) => {\n  if (block.getType() === \"code-block\") {\n    return { component: CodeBlock, editable: false };\n  }\n  return null;\n};\n\nconst CodeBlock: React.FC<{ block: ContentBlock }> = ({ block }) => {\n  const text = block.getText();\n  const language = block.getData().get(\"language\") || \"json\";\n  return (\n    <SyntaxHighlighter language={language} style={vscDarkPlus}>\n      {text}\n    </SyntaxHighlighter>\n  );\n};\n\nexport default function RichTextEditor() {\n  const [editorLoaded, setEditorLoaded] = useState(false);\n  const editorRef = useRef<Editor>(null);\n  const { theme, setTheme } = useTheme();\n  const [editorState, setEditorState] = useState(\n    EditorState.createWithContent(convertFromRaw(rawContent))\n  );\n\n  useEffect(() => {\n    setEditorLoaded(true);\n    setTimeout(() => {\n      if (editorRef.current) {\n        editorRef.current.focus();\n      }\n    }, 100);\n  }, []);\n\n  const handleKeyCommand = (command: string, editorState: EditorState) => {\n    const newState = RichUtils.handleKeyCommand(editorState, command);\n    if (newState) {\n      setEditorState(newState);\n      return \"handled\";\n    }\n    return \"not-handled\";\n  };\n\n  if (!editorLoaded) {\n    return <div>Loading editor...</div>;\n  }\n\n  return (\n    <div className=\"mx-auto max-w-4xl p-4\">\n      <Card className=\"rounded-lg border shadow-sm dark:bg-black\">\n        <CardContent className=\"rounded-lg p-4 dark:bg-[#131313]\">\n          <div\n            className=\"min-h-[300px] rounded-md border p-3 focus-within:ring-1 focus-within:ring-ring dark:border dark:bg-black dark:text-gray-200\"\n            onClick={() => {\n              if (editorRef.current) {\n                editorRef.current.focus();\n              }\n            }}\n          >\n            <Editor\n              ref={editorRef}\n              blockRendererFn={blockRendererFn}\n              editorState={editorState}\n              onChange={setEditorState}\n              handleKeyCommand={handleKeyCommand}\n              placeholder=\"Start typing...\"\n              spellCheck={false}\n            />\n          </div>\n        </CardContent>\n      </Card>\n    </div>\n  );\n}",
+      "type": "code-block",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": { "language": "tsx" }
+    }
+  ],
+  "entityMap": {}
+}

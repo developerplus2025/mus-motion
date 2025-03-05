@@ -1,0 +1,33 @@
+@import './shiki.css';
+@import './animations.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@plugin '../dist/theme/docs-ui.js';
+@plugin '../dist/theme/typography/index.js';
+
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-fd-border, currentColor);
+  }
+
+  body {
+    background-color: var(--color-fd-background);
+    color: var(--color-fd-foreground);
+  }
+
+  [data-rmiz-modal-overlay='visible'] {
+    background-color: var(--color-fd-background);
+  }
+}
+.container {
+  margin-inline: auto;
+  padding-inline: 1rem;
+  max-width: 1400px; /* Không dùng @apply trong @utility */
+}

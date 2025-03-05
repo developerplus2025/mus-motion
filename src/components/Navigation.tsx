@@ -1,6 +1,21 @@
 "use client";
 import classNames from "classnames";
+import { motion, useInView } from "framer-motion";
 import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import React, {
   PointerEvent,
   FocusEvent,
   useEffect,
@@ -9,6 +24,7 @@ import {
   CSSProperties,
 } from "react";
 import Image from "next/image";
+import { LinkPreview } from "@/components/ui/link-preview";
 import { Toaster, toast } from "sonner";
 import { usePathname } from "next/navigation";
 import NextLink from "next/link";
@@ -100,6 +116,7 @@ import {
 } from "@/components/ui/menubar";
 import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   ResizableHandle,
   ResizablePanel,
@@ -108,158 +125,209 @@ import {
 import { ScrollAreaCorner } from "@radix-ui/react-scroll-area";
 import { CommandMenu } from "./CommandMenu";
 import LogoImage from "./LogoImage";
-import { ThemeToggle } from "./mode-toggle";
+import { useTheme } from "next-themes";
+import ShinyButton from "@/components/magicui/shiny-button";
+import ShineBorder from "@/components/magicui/shine-border";
+import Sparkles from "./Sparkles";
+import GitHub from "./GitHub";
+import Discord from "./Discord";
+import X from "./x";
+import Linkedin from "./Linkedin";
+import { ThemeToggle } from "./ThemeToggle";
+import { cn } from "@/lib/utils";
+import PopoverNotifications from "./popover-notifications";
+import TextHoverEnter from "./TextHoverEnter";
+import FeedBack from "./feedback";
+const components: { title: string; href: string; description: string }[] = [
+  {
+    title: "Alert Dialog",
+    href: "/docs/primitives/alert-dialog",
+    description:
+      "A modal dialog that interrupts the user with important content and expects a response.",
+  },
+  {
+    title: "Hover Card",
+    href: "/docs/primitives/hover-card",
+    description:
+      "For sighted users to preview content available behind a link.",
+  },
+  {
+    title: "Progress",
+    href: "/docs/primitives/progress",
+    description:
+      "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
+  },
+  {
+    title: "Scroll-area",
+    href: "/docs/primitives/scroll-area",
+    description: "Visually or semantically separates content.",
+  },
+  {
+    title: "Tabs",
+    href: "/docs/primitives/tabs",
+    description:
+      "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
+  },
+  {
+    title: "Tooltip",
+    href: "/docs/primitives/tooltip",
+    description:
+      "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
+  },
+];
 export const Navigation = (): JSX.Element => {
   const buttonRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const pathname = usePathname();
+  const isWebfilmPath = pathname === "/webfilm";
+  const isWebAppPath = pathname === "/webapp";
+  const isDocsPath = pathname === "/docs";
+  const isAi = pathname === "/ai";
+  const isChatV2 = pathname === "/chat-v2";
+  const isHelp = pathname === "/help";
+  const isDocs = pathname === "/docs";
+  const isGuides = pathname === "/guides";
+  const isSignIn = pathname === "/signin";
+  const isCreative = pathname === "/creative";
+  const isGeneration = pathname === "/generation";
+  const theme = useTheme();
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isBottom, setIsBottom] = useState(false);
 
   useEffect(() => {
-    buttonRefs.current = buttonRefs.current.slice(0, 5); // Điều chỉnh số lượng cho phù hợp với số tab
+    const handleScroll = () => {
+      setIsScrolled(
+        window.scrollY > 60 ||
+          window.scrollY + window.innerHeight >=
+            document.documentElement.scrollHeight,
+      );
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const [hoveredTabIndex, setHoveredTabIndex] = useState<number | null>(null);
-  const [hoveredRect, setHoveredRect] = useState<DOMRect | null>(null);
-
-  const navRef = useRef<HTMLDivElement>(null);
-  const navRect = navRef.current?.getBoundingClientRect();
-
-  const [isInitialHoveredElement, setIsInitialHoveredElement] = useState(true);
-
-  const onLeaveTabs = () => {
-    setIsInitialHoveredElement(true);
-    setHoveredTabIndex(null);
-  };
-
-  const onEnterTab = (
-    e: PointerEvent<HTMLButtonElement> | FocusEvent<HTMLButtonElement>,
-    i: number
-  ) => {
-    if (!e.target || !(e.target instanceof HTMLButtonElement)) return;
-
-    setHoveredTabIndex((prev) => {
-      if (prev != null && prev !== i) {
-        setIsInitialHoveredElement(false);
-      }
-      return i;
-    });
-    setHoveredRect(e.target.getBoundingClientRect());
-  };
-
-  let hoverStyles: CSSProperties = { opacity: 0 };
-  if (navRect && hoveredRect) {
-    hoverStyles.transform = `translate3d(${hoveredRect.left - navRect.left}px,${
-      hoveredRect.top - navRect.top
-    }px,0px)`;
-    hoverStyles.width = hoveredRect.width;
-    hoverStyles.height = hoveredRect.height;
-    hoverStyles.opacity = hoveredTabIndex != null ? 1 : 0;
-    hoverStyles.transition = isInitialHoveredElement
-      ? `opacity 150ms`
-      : `transform 150ms 0ms, opacity 150ms 0ms, width 150ms`;
-  }
-
   return (
-    <div className="sticky top-0 z-[20]">
-      <nav
-        ref={navRef}
-        onPointerLeave={onLeaveTabs}
-        className="flex flex-shrink-0 justify-center   items-center relative z-[4] "
-      >
+    <motion.div
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className={`${
+        isWebfilmPath ||
+        isWebAppPath ||
+        isAi ||
+        isChatV2 ||
+        isSignIn ||
+        isGuides ||
+        isDocs ||
+        isHelp ||
+        pathname.startsWith("/docs")
+          ? "webfilm-class"
+          : ""
+      } sticky top-0 z-[20]`}
+    >
+      <nav className="relative z-[4] flex-shrink-0 items-center justify-center min-[375px]:hidden sm:hidden md:hidden lg:flex xl:flex">
         <nav
-          ref={navRef}
-          onPointerLeave={onLeaveTabs}
-          className="w-full  px-[2rem]  relative border-b bg-white dark:bg-[#000000] dark:border-[#202020]  items-center  flex justify-between gap-[2rem] z-[1]"
+          className={`${isScrolled || isBottom ? "border-b bg-[#0c0c0c]" : "border-b"} ${isDocsPath || isCreative || isGeneration ? "border-b bg-[#0c0c0c]" : "border-b"} relative z-[1] flex w-full items-center justify-between gap-[2rem] bg-white px-[2rem] dark:border-[#292929] dark:bg-[#000000]`}
         >
-          <div className="h-[56px] text-sm    w-fit items-center  flex gap-[2rem] ">
-            <Link
-              href="/"
-              className="dark:text-white text-[1.5rem] duration-300 transition-colors ease-out"
-            >
-              <p className="font-bold">LostMotion</p>
-            </Link>
+          <div className="flex h-[58px] w-fit items-center gap-[1rem] text-sm">
+            <div className="flex items-center gap-4">
+              <Link
+                href="/"
+                className="text-[1.1rem] font-bold transition-colors duration-300 ease-out dark:text-white"
+              >
+                Flora VF
+              </Link>
+              <Link
+                href="/"
+                className="rounded-full border px-4 py-1 text-xs font-bold transition-colors duration-300 ease-out dark:text-white"
+              >
+                v10.9.5
+              </Link>
+            </div>
             <NavigationMenu>
-              <NavigationMenuList>
+              <NavigationMenuList className="font-medium">
                 <NavigationMenuItem className="">
-                  <NavigationMenuTrigger className="text-[0.9rem] relative rounded-full flex items-center h-7 px-3 duration-300 ease-out  dark:text-[#9b9b9b] dark:hover:text-white  cursor-pointer select-none transition-colors">
+                  <NavigationMenuTrigger className="pr-3 text-[#9b9b9b]">
                     Feature
                   </NavigationMenuTrigger>
-                  <NavigationMenuContent className="w-[30rem] data-[motion=from-start]:animate-enterFromLeft data-[motion=from-end]:animate-enterFromRight data-[motion=to-start]:animate-exitToLeft data-[motion=to-end]:animate-exitToRight   py-[1rem] px-[1rem] flex  gap-[2.5rem]">
+                  <NavigationMenuContent className="flex w-[30rem] gap-[2.5rem] px-[1rem] py-[1rem] data-[motion=from-end]:animate-enterFromRight data-[motion=from-start]:animate-enterFromLeft data-[motion=to-end]:animate-exitToRight data-[motion=to-start]:animate-exitToLeft">
                     <div className="flex flex-col gap-[2rem]">
-                      <div className="flex items-center cursor-pointer group  gap-[0.5rem]">
+                      <div className="group flex cursor-pointer items-center gap-[0.5rem]">
                         <div>
-                          <Lightbulb className="text-[#a1a1a1] dark:group-hover:text-black group-hover:text-white dark:group-hover:bg-white group-hover:bg-black duration-300 ease-out transition-colors  border w-[2rem] h-[2rem] p-1 rounded-sm" />
+                          <Lightbulb className="h-[2rem] w-[2rem] rounded-sm border p-1 text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:bg-white group-hover:text-black" />
                         </div>
-                        <div className="flex justify-start items-start flex-col">
+                        <div className="flex flex-col items-start justify-start">
                           <NavigationMenuLink className="text-nowrap text-sm font-bold">
                             Smart Recommendations
                           </NavigationMenuLink>
-                          <p className="text-xs dark:group-hover:text-white group-hover:text-black duration-300 ease-out transition-colors text-[#a1a1a1] text-nowrap">
+                          <p className="text-nowrap text-xs text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:text-white">
                             Discover music curated just for you.
                           </p>
                         </div>
                       </div>
-                      <div className="flex items-center cursor-pointer group  gap-[0.5rem]">
+                      <div className="group flex cursor-pointer items-center gap-[0.5rem]">
                         <div>
-                          <WifiOff className="text-[#a1a1a1] dark:group-hover:text-black group-hover:text-white dark:group-hover:bg-white group-hover:bg-black duration-300 ease-out transition-colors  border w-[2rem] h-[2rem] p-1 rounded-sm" />
+                          <WifiOff className="h-[2rem] w-[2rem] rounded-sm border p-1 text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:bg-white group-hover:text-black" />
                         </div>
-                        <div className="flex justify-start items-start flex-col">
+                        <div className="flex flex-col items-start justify-start">
                           <NavigationMenuLink className="text-nowrap text-sm font-bold">
                             Offline Mode
                           </NavigationMenuLink>
-                          <p className="text-xs dark:group-hover:text-white group-hover:text-black duration-300 ease-out transition-colors text-[#a1a1a1] text-nowrap">
+                          <p className="text-nowrap text-xs text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:text-white">
                             Download songs and listen offline.
                           </p>
                         </div>
                       </div>
-                      <div className="flex items-center cursor-pointer group  gap-[0.5rem]">
+                      <div className="group flex cursor-pointer items-center gap-[0.5rem]">
                         <div>
-                          <Podcast className="text-[#a1a1a1] dark:group-hover:text-black group-hover:text-white dark:group-hover:bg-white group-hover:bg-black duration-300 ease-out transition-colors  border w-[2rem] h-[2rem] p-1 rounded-sm" />
+                          <Podcast className="h-[2rem] w-[2rem] rounded-sm border p-1 text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:bg-white group-hover:text-black" />
                         </div>
-                        <div className="flex justify-start items-start flex-col">
+                        <div className="flex flex-col items-start justify-start">
                           <NavigationMenuLink className="text-nowrap text-sm font-bold">
                             Podcasts
                           </NavigationMenuLink>
-                          <p className="text-xs dark:group-hover:text-white group-hover:text-black duration-300 ease-out transition-colors text-[#a1a1a1] text-nowrap">
+                          <p className="text-nowrap text-xs text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:text-white">
                             Access a wide range of podcasts.
                           </p>
                         </div>
                       </div>
                     </div>
                     <div className="flex flex-col items-start justify-between">
-                      <div className="flex items-center cursor-pointer group  gap-[0.5rem]">
+                      <div className="group flex cursor-pointer items-center gap-[0.5rem]">
                         <div>
-                          <NotebookText className="text-[#a1a1a1] dark:group-hover:text-black group-hover:text-white dark:group-hover:bg-white group-hover:bg-black duration-300 ease-out transition-colors  border w-[2rem] h-[2rem] p-1 rounded-sm" />
+                          <NotebookText className="h-[2rem] w-[2rem] rounded-sm border p-1 text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:bg-white group-hover:text-black" />
                         </div>
-                        <div className="flex justify-start items-start flex-col">
+                        <div className="flex flex-col items-start justify-start">
                           <NavigationMenuLink className="text-nowrap text-sm font-bold">
                             Lyrics Display
                           </NavigationMenuLink>
-                          <p className="text-xs dark:group-hover:text-white group-hover:text-black duration-300 ease-out transition-colors text-[#a1a1a1] text-nowrap">
+                          <p className="text-nowrap text-xs text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:text-white">
                             Sing along with on-screen lyrics.
                           </p>
                         </div>
                       </div>
-                      <div className="flex items-center cursor-pointer group  gap-[0.5rem]">
+                      <div className="group flex cursor-pointer items-center gap-[0.5rem]">
                         <div>
-                          <Medal className="text-[#a1a1a1] dark:group-hover:text-black group-hover:text-white dark:group-hover:bg-white group-hover:bg-black duration-300 ease-out transition-colors  border w-[2rem] h-[2rem] p-1 rounded-sm" />
+                          <Medal className="h-[2rem] w-[2rem] rounded-sm border p-1 text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:bg-white group-hover:text-black" />
                         </div>
-                        <div className="flex justify-start items-start flex-col">
+                        <div className="flex flex-col items-start justify-start">
                           <NavigationMenuLink className="text-nowrap text-sm font-bold">
                             High-Quality Audio
                           </NavigationMenuLink>
-                          <p className="text-xs dark:group-hover:text-white group-hover:text-black duration-300 ease-out transition-colors text-[#a1a1a1] text-nowrap">
+                          <p className="text-nowrap text-xs text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:text-white">
                             Enjoy lossless audio streaming.
                           </p>
                         </div>
                       </div>
-                      <div className="flex items-center cursor-pointer group  gap-[0.5rem]">
+                      <div className="group flex cursor-pointer items-center gap-[0.5rem]">
                         <div>
-                          <Share2 className="text-[#a1a1a1] dark:group-hover:text-black group-hover:text-white dark:group-hover:bg-white group-hover:bg-black duration-300 ease-out transition-colors  border w-[2rem] h-[2rem] p-1 rounded-sm" />
+                          <Share2 className="h-[2rem] w-[2rem] rounded-sm border p-1 text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:bg-white group-hover:text-black" />
                         </div>
-                        <div className="flex justify-start items-start flex-col">
+                        <div className="flex flex-col items-start justify-start">
                           <NavigationMenuLink className="text-nowrap text-sm font-bold">
                             Social Sharing
                           </NavigationMenuLink>
-                          <p className="text-xs dark:group-hover:text-white group-hover:text-black duration-300 ease-out transition-colors text-[#a1a1a1] text-nowrap">
+                          <p className="text-nowrap text-xs text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:text-white">
                             Share your favorite tracks on social media.
                           </p>
                         </div>
@@ -268,11 +336,11 @@ export const Navigation = (): JSX.Element => {
                   </NavigationMenuContent>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="text-[0.9rem] relative rounded-full flex items-center h-7 px-3 duration-300 ease-out  dark:text-[#9b9b9b] dark:hover:text-white  cursor-pointer select-none transition-colors">
+                  <NavigationMenuTrigger className="text-[#9b9b9b]">
                     Library
                   </NavigationMenuTrigger>
-                  <NavigationMenuContent className="w-[37rem]    py-[1rem] px-[1rem] flex justify-between  gap-[2.5rem]">
-                    <div className="grid grid-cols-2 w-[37rem] place-content-between gap-[2rem]">
+                  <NavigationMenuContent className="flex w-[37rem] justify-between gap-[2.5rem] px-[1rem] py-[1rem]">
+                    <div className="grid w-[37rem] grid-cols-2 place-content-between gap-[2rem]">
                       <div className="flex flex-col gap-[1.5rem]">
                         <div>
                           <h1 className="text-[1rem] text-[#a1a1a1]">
@@ -280,41 +348,41 @@ export const Navigation = (): JSX.Element => {
                           </h1>
                         </div>
                         <div className="flex flex-col gap-[1.8rem]">
-                          <div className="flex items-center cursor-pointer group  gap-[0.5rem]">
+                          <div className="group flex cursor-pointer items-center gap-[0.5rem]">
                             <div>
-                              <ListPlus className="text-[#a1a1a1] dark:group-hover:text-black group-hover:text-white dark:group-hover:bg-white group-hover:bg-black duration-300 ease-out transition-colors  border w-[2rem] h-[2rem] p-1 rounded-sm" />
+                              <ListPlus className="h-[2rem] w-[2rem] rounded-sm border p-1 text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:bg-white group-hover:text-black" />
                             </div>
-                            <div className="flex justify-start items-start flex-col">
+                            <div className="flex flex-col items-start justify-start">
                               <NavigationMenuLink className="text-nowrap text-sm font-bold">
                                 Create New
                               </NavigationMenuLink>
-                              <p className="text-xs dark:group-hover:text-white group-hover:text-black duration-300 ease-out transition-colors text-[#a1a1a1] text-nowrap">
+                              <p className="text-nowrap text-xs text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:text-white">
                                 Start personalized playlists here.
                               </p>
                             </div>
                           </div>
-                          <div className="flex items-center cursor-pointer group  gap-[0.5rem]">
+                          <div className="group flex cursor-pointer items-center gap-[0.5rem]">
                             <div>
-                              <Heart className="text-[#a1a1a1] dark:group-hover:text-black group-hover:text-white dark:group-hover:bg-white group-hover:bg-black duration-300 ease-out transition-colors  border w-[2rem] h-[2rem] p-1 rounded-sm" />
+                              <Heart className="h-[2rem] w-[2rem] rounded-sm border p-1 text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:bg-white group-hover:text-black" />
                             </div>
-                            <div className="flex justify-start items-start flex-col">
+                            <div className="flex flex-col items-start justify-start">
                               <NavigationMenuLink className="text-nowrap text-sm font-bold">
                                 Favorites
                               </NavigationMenuLink>
-                              <p className="text-xs dark:group-hover:text-white group-hover:text-black duration-300 ease-out transition-colors text-[#a1a1a1] text-nowrap">
+                              <p className="text-nowrap text-xs text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:text-white">
                                 Manage curated favorite playlists.
                               </p>
                             </div>
                           </div>
-                          <div className="flex items-center cursor-pointer group  gap-[0.5rem]">
+                          <div className="group flex cursor-pointer items-center gap-[0.5rem]">
                             <div>
-                              <Play className="text-[#a1a1a1] dark:group-hover:text-black group-hover:text-white dark:group-hover:bg-white group-hover:bg-black duration-300 ease-out transition-colors  border w-[2rem] h-[2rem] p-1 rounded-sm" />
+                              <Play className="h-[2rem] w-[2rem] rounded-sm border p-1 text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:bg-white group-hover:text-black" />
                             </div>
-                            <div className="flex justify-start items-start flex-col">
+                            <div className="flex flex-col items-start justify-start">
                               <NavigationMenuLink className="text-nowrap text-sm font-bold">
                                 Currently Playing
                               </NavigationMenuLink>
-                              <p className="text-xs dark:group-hover:text-white group-hover:text-black duration-300 ease-out transition-colors text-[#a1a1a1] text-nowrap">
+                              <p className="text-nowrap text-xs text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:text-white">
                                 View active playlists now.
                               </p>
                             </div>
@@ -323,33 +391,33 @@ export const Navigation = (): JSX.Element => {
                       </div>
                       <div className="flex flex-col gap-[1.5rem]">
                         <div>
-                          <h1 className="text-[1rem] text-[#a1a1a1] ">
+                          <h1 className="text-[1rem] text-[#a1a1a1]">
                             Listening History
                           </h1>
                         </div>
                         <div className="flex flex-col gap-[1.8rem]">
-                          <div className="flex items-center cursor-pointer group  gap-[0.5rem]">
+                          <div className="group flex cursor-pointer items-center gap-[0.5rem]">
                             <div>
-                              <Clock className="text-[#a1a1a1] dark:group-hover:text-black group-hover:text-white dark:group-hover:bg-white group-hover:bg-black duration-300 ease-out transition-colors  border w-[2rem] h-[2rem] p-1 rounded-sm" />
+                              <Clock className="h-[2rem] w-[2rem] rounded-sm border p-1 text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:bg-white group-hover:text-black" />
                             </div>
-                            <div className="flex justify-start items-start flex-col">
+                            <div className="flex flex-col items-start justify-start">
                               <NavigationMenuLink className="text-nowrap text-sm font-bold">
                                 Recent
                               </NavigationMenuLink>
-                              <p className="text-xs dark:group-hover:text-white group-hover:text-black duration-300 ease-out transition-colors text-[#a1a1a1] text-nowrap">
+                              <p className="text-nowrap text-xs text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:text-white">
                                 Review recently played songs and albums.
                               </p>
                             </div>
                           </div>
-                          <div className="flex items-center cursor-pointer group  gap-[0.5rem]">
+                          <div className="group flex cursor-pointer items-center gap-[0.5rem]">
                             <div>
-                              <Save className="text-[#a1a1a1] dark:group-hover:text-black group-hover:text-white dark:group-hover:bg-white group-hover:bg-black duration-300 ease-out transition-colors  border w-[2rem] h-[2rem] p-1 rounded-sm" />
+                              <Save className="h-[2rem] w-[2rem] rounded-sm border p-1 text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:bg-white group-hover:text-black" />
                             </div>
-                            <div className="flex justify-start items-start flex-col">
+                            <div className="flex flex-col items-start justify-start">
                               <NavigationMenuLink className="text-nowrap text-sm font-bold">
                                 Saved
                               </NavigationMenuLink>
-                              <p className="text-xs dark:group-hover:text-white group-hover:text-black duration-300 ease-out transition-colors text-[#a1a1a1] text-nowrap">
+                              <p className="text-nowrap text-xs text-[#a1a1a1] transition-colors duration-300 ease-out group-hover:text-white">
                                 Access saved songs and albums.
                               </p>
                             </div>
@@ -359,99 +427,417 @@ export const Navigation = (): JSX.Element => {
                     </div>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
-                <NavigationMenuIndicator className="" />
                 <NavigationMenuItem>
-                  <Link href="/docs" legacyBehavior passHref>
-                    <NavigationMenuLink className="text-[0.9rem] relative rounded-full flex items-center h-7 px-3 duration-300 ease-out  dark:text-[#9b9b9b] dark:hover:text-white  cursor-pointer select-none transition-colors">
-                      Docs
+                  <Link href="/creative" legacyBehavior passHref>
+                    <NavigationMenuLink
+                      className={`relative flex h-7 items-center rounded-full px-3 text-sm duration-300 ease-out ${
+                        pathname === "/creative"
+                          ? "dark:text-white"
+                          : "dark:text-[#9b9b9b]"
+                      } cursor-pointer select-none transition-colors dark:hover:text-white`}
+                    >
+                      <TextHoverEnter
+                        className={`${
+                          pathname === "/creative"
+                            ? "dark:text-white"
+                            : "dark:text-[#9b9b9b]"
+                        }`}
+                      >
+                        Creative
+                      </TextHoverEnter>
                     </NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
                   <Link href="/pricing" legacyBehavior passHref>
-                    <NavigationMenuLink className="text-[0.9rem] relative rounded-full flex items-center h-7 px-3 duration-300 ease-out  dark:text-[#9b9b9b] dark:hover:text-white  cursor-pointer select-none transition-colors">
-                      Pricing
+                    <NavigationMenuLink
+                      className={`relative flex h-7 items-center rounded-full px-3 text-sm duration-300 ease-out ${
+                        pathname === "/pricing"
+                          ? "dark:text-white"
+                          : "dark:text-[#9b9b9b]"
+                      } cursor-pointer select-none transition-colors dark:hover:text-white`}
+                    >
+                      <TextHoverEnter
+                        className={`${
+                          pathname === "/pricing"
+                            ? "dark:text-white"
+                            : "dark:text-[#9b9b9b]"
+                        }`}
+                      >
+                        Pricing
+                      </TextHoverEnter>
                     </NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
+
                 <NavigationMenuItem>
-                  <Link href="/resources" legacyBehavior passHref>
-                    <NavigationMenuLink className="text-[0.9rem] relative rounded-full flex items-center h-7 px-3 duration-300 ease-out  dark:text-[#9b9b9b] dark:hover:text-white  cursor-pointer select-none transition-colors">
-                      Resources
+                  <Link href="/docs" legacyBehavior passHref>
+                    <NavigationMenuLink
+                      className={`relative flex h-7 items-center rounded-full px-3 text-sm duration-300 ease-out ${
+                        pathname === "/docs"
+                          ? "dark:text-white"
+                          : "dark:text-[#9b9b9b]"
+                      } cursor-pointer select-none transition-colors dark:hover:text-white`}
+                    >
+                      Docs
+                      {pathname != "/docs" && (
+                        <sup>
+                          <svg
+                            data-testid="geist-icon"
+                            height={12}
+                            strokeLinejoin="round"
+                            viewBox="0 0 15 15"
+                            width={12}
+                            style={{ color: "currentcolor" }}
+                          >
+                            <path
+                              fillRule="evenodd"
+                              clipRule="evenodd"
+                              d="M6.75011 4H6.00011V5.5H6.75011H9.43945L5.46978 9.46967L4.93945 10L6.00011 11.0607L6.53044 10.5303L10.499 6.56182V9.25V10H11.999V9.25V5C11.999 4.44772 11.5512 4 10.999 4H6.75011Z"
+                              fill="currentColor"
+                            />
+                          </svg>
+                        </sup>
+                      )}
                     </NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
+
                 <NavigationMenuItem>
-                  <Link href="/enterprise" legacyBehavior passHref>
-                    <NavigationMenuLink className="text-[0.9rem] relative rounded-full flex items-center h-7 px-3 duration-300 ease-out  dark:text-[#9b9b9b] dark:hover:text-white  cursor-pointer select-none transition-colors">
-                      Enterprise
+                  <Link href="/radio" legacyBehavior passHref>
+                    <NavigationMenuLink
+                      className={`relative flex h-7 items-center rounded-full px-3 text-sm duration-300 ease-out ${
+                        pathname === "/radio"
+                          ? "dark:text-white"
+                          : "dark:text-[#9b9b9b]"
+                      } cursor-pointer select-none transition-colors dark:hover:text-white`}
+                    >
+                      Radio
+                      <sup>
+                        <svg
+                          data-testid="geist-icon"
+                          height={12}
+                          strokeLinejoin="round"
+                          viewBox="0 0 15 15"
+                          width={12}
+                          style={{ color: "currentcolor" }}
+                        >
+                          <path
+                            fillRule="evenodd"
+                            clipRule="evenodd"
+                            d="M6.75011 4H6.00011V5.5H6.75011H9.43945L5.46978 9.46967L4.93945 10L6.00011 11.0607L6.53044 10.5303L10.499 6.56182V9.25V10H11.999V9.25V5C11.999 4.44772 11.5512 4 10.999 4H6.75011Z"
+                            fill="currentColor"
+                          />
+                        </svg>
+                      </sup>
                     </NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
+                <NavigationMenuItem className="hidden">
+                  <Link href="/blog" legacyBehavior passHref>
+                    <NavigationMenuLink
+                      className={`relative flex h-7 items-center rounded-full px-3 text-sm duration-300 ease-out ${
+                        pathname === "/blog"
+                          ? "dark:text-white"
+                          : "dark:text-[#9b9b9b]"
+                      } cursor-pointer select-none transition-colors dark:hover:text-white`}
+                    >
+                      <TextHoverEnter
+                        className={`${
+                          pathname === "/blog"
+                            ? "dark:text-white"
+                            : "dark:text-[#9b9b9b]"
+                        }`}
+                      >
+                        Blog
+                      </TextHoverEnter>
+                    </NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
+                {/* <NavigationMenuItem>
+                  <Link href="/aboutus" legacyBehavior passHref>
+                    <NavigationMenuLink
+                      className={`relative flex h-7 items-center rounded-full px-3 text-sm duration-300 ease-out ${
+                        pathname === "/aboutus"
+                          ? "dark:text-white"
+                          : "dark:text-[#9b9b9b]"
+                      } cursor-pointer select-none transition-colors dark:hover:text-white`}
+                    >
+                      About Us
+                    </NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem> */}
+                <NavigationMenuItem className="hidden">
+                  <Link href="/generation" legacyBehavior passHref>
+                    <NavigationMenuLink
+                      className={`relative flex h-7 items-center rounded-full px-3 text-sm duration-300 ease-out ${
+                        pathname === "/generation"
+                          ? "dark:text-white"
+                          : "dark:text-[#9b9b9b]"
+                      } ${
+                        pathname === "/docs" ||
+                        pathname === "/help" ||
+                        pathname === "/guides"
+                          ? "hidden"
+                          : ""
+                      } cursor-pointer select-none transition-colors dark:hover:text-white`}
+                    >
+                      <TextHoverEnter
+                        className={`${
+                          pathname === "/generation"
+                            ? "dark:text-white"
+                            : "dark:text-[#9b9b9b]"
+                        }`}
+                      >
+                        Generation
+                      </TextHoverEnter>
+                    </NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
+                {/* <NavigationMenuItem>
+                  <NavigationMenuTrigger>Support</NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[1320px]">
+                      {components.map((component) => (
+                        <ListItem
+                          key={component.title}
+                          title={component.title}
+                          href={component.href}
+                        >
+                          {component.description}
+                        </ListItem>
+                      ))}
+                    </ul>
+                  </NavigationMenuContent>
+                </NavigationMenuItem> */}
+                <NavigationMenuIndicator />
               </NavigationMenuList>
             </NavigationMenu>
           </div>
-          <div className="flex gap-[2rem] items-center">
-            <CommandMenu />
-            <div className="flex gap-[1rem] items-center">
+          <div className="flex items-center gap-[1rem]">
+            {/* <div className="flex items-center justify-center gap-[1rem]">
+              <LinkPreview
+                className="flex cursor-pointer items-center gap-4 rounded-lg border px-3 py-1"
+                url="https://github.com/devplus2024"
+                isStatic
+                imageSrc="/Opera Snapshot_2024-10-31_172630_github.com.png"
+              >
+                <GitHub />
+                <span className="text-sm">Github</span>
+              </LinkPreview>
+              <LinkPreview
+                imageSrc="/Opera Snapshot_2024-10-31_172414_x.com.png"
+                isStatic
+                className="flex cursor-pointer items-center gap-4 rounded-lg border px-3 py-1"
+                url="https://x.com/DeveloperPlus24"
+              >
+                <X />
+                <span className="text-sm">Twitter</span>
+              </LinkPreview>
+            </div> */}
+            <div className="h-[1.2rem] border-r"></div>
+            <motion.div
+              initial={{ opacity: 0 }} // Trạng thái ban đầu: mờ và di chuyển xuống
+              animate={{ opacity: 1 }} // Trạng thái sau khi hoàn thành: rõ và về vị trí ban đầu
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="flex items-center justify-center gap-2"
+            >
+              <div className="flex h-[30px] w-[37px] cursor-pointer items-center justify-center rounded-md border transition-all duration-200 ease-out hover:bg-muted dark:hover:bg-[#101010]">
+                <GitHub />
+              </div>
+              <div className="flex h-[30px] w-[37px] cursor-pointer items-center justify-center rounded-md border transition-all duration-200 ease-out hover:bg-muted dark:hover:bg-[#101010]">
+                <X />
+              </div>
+
+              {/* <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className="flex h-[30px] w-[37px] cursor-pointer items-center justify-center rounded-md border transition-all duration-200 ease-out hover:bg-muted dark:hover:bg-[#101010]"
+                  >
+                    <svg
+                      data-testid="geist-icon"
+                      height={16}
+                      strokeLinejoin="round"
+                      viewBox="0 0 16 16"
+                      width={16}
+                      style={{ color: "currentcolor" }}
+                    >
+                      <path
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        d="M8.46968 1.46968C10.1433 -0.203925 12.8567 -0.203923 14.5303 1.46968C16.2039 3.14329 16.2039 5.85674 14.5303 7.53034L12.0303 10.0303L10.9697 8.96968L13.4697 6.46968C14.5575 5.38186 14.5575 3.61816 13.4697 2.53034C12.3819 1.44252 10.6182 1.44252 9.53034 2.53034L7.03034 5.03034L5.96968 3.96968L8.46968 1.46968ZM11.5303 5.53034L5.53034 11.5303L4.46968 10.4697L10.4697 4.46968L11.5303 5.53034ZM1.46968 14.5303C3.14329 16.2039 5.85673 16.204 7.53034 14.5303L10.0303 12.0303L8.96968 10.9697L6.46968 13.4697C5.38186 14.5575 3.61816 14.5575 2.53034 13.4697C1.44252 12.3819 1.44252 10.6182 2.53034 9.53034L5.03034 7.03034L3.96968 5.96968L1.46968 8.46968C-0.203923 10.1433 -0.203925 12.8567 1.46968 14.5303Z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-[9rem]">
+                  <DropdownMenuLabel className="text-center">
+                    Social Media
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuGroup style={{ display: "flex" }}>
+                    <DropdownMenuItem className="gap-4 text-xs">
+                      <GitHub />
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="gap-4 text-xs">
+                      <X />
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="gap-4 text-xs">
+                      <svg
+                        data-testid="geist-icon"
+                        height={16}
+                        strokeLinejoin="round"
+                        viewBox="0 0 16 16"
+                        width={16}
+                        style={{ color: "currentcolor" }}
+                      >
+                        <g clipPath="url(#clip0_872_3152)">
+                          <path
+                            d="M3.42681 10.0787C3.42681 10.9984 2.68351 11.7417 1.76382 11.7417C0.844137 11.7417 0.10083 10.9984 0.10083 10.0787C0.10083 9.15906 0.844137 8.41575 1.76382 8.41575H3.42681V10.0787ZM4.25831 10.0787C4.25831 9.15906 5.00162 8.41575 5.9213 8.41575C6.84099 8.41575 7.58429 9.15906 7.58429 10.0787V14.2362C7.58429 15.1559 6.84099 15.8992 5.9213 15.8992C5.00162 15.8992 4.25831 15.1559 4.25831 14.2362V10.0787Z"
+                            fill="currentColor"
+                          />
+                          <path
+                            d="M5.92121 3.40158C5.00152 3.40158 4.25821 2.65827 4.25821 1.73858C4.25821 0.818899 5.00152 0.075592 5.92121 0.075592C6.84089 0.075592 7.5842 0.818899 7.5842 1.73858V3.40158H5.92121ZM5.92121 4.24567C6.84089 4.24567 7.5842 4.98898 7.5842 5.90866C7.5842 6.82835 6.84089 7.57165 5.92121 7.57165H1.75113C0.831442 7.57165 0.0881348 6.82835 0.0881348 5.90866C0.0881348 4.98898 0.831442 4.24567 1.75113 4.24567H5.92121Z"
+                            fill="currentColor"
+                          />
+                          <path
+                            d="M12.5858 5.90866C12.5858 4.98898 13.3291 4.24567 14.2488 4.24567C15.1685 4.24567 15.9118 4.98898 15.9118 5.90866C15.9118 6.82835 15.1685 7.57165 14.2488 7.57165H12.5858V5.90866ZM11.7543 5.90866C11.7543 6.82835 11.011 7.57165 10.0913 7.57165C9.17165 7.57165 8.42834 6.82835 8.42834 5.90866V1.73858C8.42834 0.818899 9.17165 0.075592 10.0913 0.075592C11.011 0.075592 11.7543 0.818899 11.7543 1.73858V5.90866Z"
+                            fill="currentColor"
+                          />
+                          <path
+                            d="M10.0913 12.5732C11.011 12.5732 11.7543 13.3165 11.7543 14.2362C11.7543 15.1559 11.011 15.8992 10.0913 15.8992C9.17165 15.8992 8.42834 15.1559 8.42834 14.2362V12.5732H10.0913ZM10.0913 11.7417C9.17165 11.7417 8.42834 10.9984 8.42834 10.0787C8.42834 9.15906 9.17165 8.41575 10.0913 8.41575H14.2614C15.1811 8.41575 15.9244 9.15906 15.9244 10.0787C15.9244 10.9984 15.1811 11.7417 14.2614 11.7417H10.0913Z"
+                            fill="currentColor"
+                          />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_872_3152">
+                            <rect width={16} height={16} fill="white" />
+                          </clipPath>
+                        </defs>
+                      </svg>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="gap-4 text-xs">
+                      <svg
+                        data-testid="geist-icon"
+                        height={16}
+                        strokeLinejoin="round"
+                        viewBox="0 0 16 16"
+                        width={16}
+                        style={{ color: "currentcolor" }}
+                      >
+                        <g clipPath="url(#clip0_3908_2369)">
+                          <path
+                            d="M15.5273 6.68664L15.5054 6.63069L13.3858 1.0989C13.3427 0.990478 13.2663 0.898505 13.1676 0.836175C13.0689 0.774904 12.9538 0.745394 12.8378 0.751629C12.7218 0.757865 12.6105 0.799545 12.5189 0.871043C12.4284 0.944593 12.3627 1.04426 12.3308 1.15647L10.8996 5.53519H5.10431L3.67312 1.15647C3.64208 1.04365 3.57625 0.943483 3.485 0.870232C3.39343 0.798734 3.28213 0.757054 3.16613 0.750818C3.05012 0.744583 2.935 0.774093 2.8363 0.835364C2.73788 0.897946 2.66158 0.989838 2.61817 1.09809L0.49449 6.62744L0.473407 6.68339C0.168277 7.48065 0.130614 8.3555 0.366096 9.17603C0.601578 9.99656 1.09744 10.7183 1.77892 11.2324L1.78621 11.2381L1.80567 11.2519L5.03458 13.6699L6.632 14.8789L7.60505 15.6136C7.71887 15.7 7.85785 15.7468 8.00076 15.7468C8.14366 15.7468 8.28264 15.7 8.39646 15.6136L9.36951 14.8789L10.9669 13.6699L14.2153 11.2373L14.2234 11.2308C14.9034 10.7166 15.3981 9.99558 15.6332 9.17616C15.8683 8.35673 15.8312 7.48313 15.5273 6.68664Z"
+                            fill="white"
+                            style={{ fill: "white", fillOpacity: 1 }}
+                          />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_3908_2369">
+                            <rect
+                              width={16}
+                              height={16}
+                              fill="white"
+                              style={{ fill: "white", fillOpacity: 1 }}
+                            />
+                          </clipPath>
+                        </defs>
+                      </svg>
+                    </DropdownMenuItem>
+                  </DropdownMenuGroup>
+                </DropdownMenuContent>
+              </DropdownMenu>
+              <PopoverNotifications /> */}
               <ThemeToggle />
-              <div className="cursor-pointer hidden h-[24px] border-r"></div>
-              <Link href="https://github.com/devplus2024/music-app">
-                <svg
-                  width="21"
-                  height="21"
-                  viewBox="0 0 15 15"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+              {/* <CommandMenu /> */}
+              <FeedBack />
+            </motion.div>
+            <div className="flex items-center gap-[1rem]">
+              <Link
+                className="flex items-center justify-center gap-3"
+                href="/signin"
+              >
+                <motion.div
+                  initial={{ opacity: 0 }} // Trạng thái ban đầu: mờ và di chuyển xuống
+                  animate={{ opacity: 1 }} // Trạng thái sau khi hoàn thành: rõ và về vị trí ban đầu
+                  transition={{ duration: 0.5, ease: "easeOut" }}
                 >
-                  <path
-                    d="M7.49933 0.25C3.49635 0.25 0.25 3.49593 0.25 7.50024C0.25 10.703 2.32715 13.4206 5.2081 14.3797C5.57084 14.446 5.70302 14.2222 5.70302 14.0299C5.70302 13.8576 5.69679 13.4019 5.69323 12.797C3.67661 13.235 3.25112 11.825 3.25112 11.825C2.92132 10.9874 2.44599 10.7644 2.44599 10.7644C1.78773 10.3149 2.49584 10.3238 2.49584 10.3238C3.22353 10.375 3.60629 11.0711 3.60629 11.0711C4.25298 12.1788 5.30335 11.8588 5.71638 11.6732C5.78225 11.205 5.96962 10.8854 6.17658 10.7043C4.56675 10.5209 2.87415 9.89918 2.87415 7.12104C2.87415 6.32925 3.15677 5.68257 3.62053 5.17563C3.54576 4.99226 3.29697 4.25521 3.69174 3.25691C3.69174 3.25691 4.30015 3.06196 5.68522 3.99973C6.26337 3.83906 6.8838 3.75895 7.50022 3.75583C8.1162 3.75895 8.73619 3.83906 9.31523 3.99973C10.6994 3.06196 11.3069 3.25691 11.3069 3.25691C11.7026 4.25521 11.4538 4.99226 11.3795 5.17563C11.8441 5.68257 12.1245 6.32925 12.1245 7.12104C12.1245 9.9063 10.4292 10.5192 8.81452 10.6985C9.07444 10.9224 9.30633 11.3648 9.30633 12.0413C9.30633 13.0102 9.29742 13.7922 9.29742 14.0299C9.29742 14.2239 9.42828 14.4496 9.79591 14.3788C12.6746 13.4179 14.75 10.7025 14.75 7.50024C14.75 3.49593 11.5036 0.25 7.49933 0.25Z"
-                    fill="currentColor"
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
+                  <Button
+                    variant={"outline"}
+                    className="flex h-fit items-center px-3 py-1 hover:bg-accent dark:hover:bg-[#1a1a1a]"
+                  >
+                    {/* <Image
+                      src={"/windows11.svg"}
+                      className="mr-2 h-[16px] w-[16px] dark:invert-[1]"
+                      width={"16"}
+                      height={"16"}
+                      alt="window-logo"
+                    ></Image> */}
+                    {/* Install */}
+                    Sign In
+                  </Button>
+                </motion.div>
               </Link>
-              <Link href="https://x.com/DeveloperPlus24">
-                <svg
-                  width="21"
-                  height="21"
-                  viewBox="0 0 15 15"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+              <Link href="/ai">
+                <motion.div
+                  initial={{ opacity: 0 }} // Trạng thái ban đầu: mờ và di chuyển xuống
+                  animate={{ opacity: 1 }} // Trạng thái sau khi hoàn thành: rõ và về vị trí ban đầu
+                  transition={{ duration: 0.5, ease: "easeOut" }}
                 >
-                  <path
-                    d="M7.23336 4.69629C7.23336 2.96884 8.63335 1.56857 10.36 1.56857C11.3736 1.56857 12.183 2.04804 12.7254 2.74385C13.3079 2.62467 13.8557 2.40913 14.3513 2.11508C14.1559 2.72598 13.7424 3.2396 13.2033 3.56463C13.2038 3.56568 13.2042 3.56674 13.2047 3.56779C13.7334 3.50361 14.2364 3.36302 14.7048 3.15546L14.7037 3.15715C14.3667 3.66183 13.9431 4.10736 13.4561 4.47034C13.4823 4.64672 13.4956 4.82427 13.4956 5.00079C13.4956 8.6871 10.6873 12.9746 5.52122 12.9746C3.93906 12.9746 2.46544 12.511 1.22505 11.7152C0.992632 11.5661 0.925108 11.2568 1.07423 11.0244C1.0874 11.0038 1.10183 10.9846 1.11734 10.9666C1.20582 10.8202 1.37438 10.7309 1.5554 10.7522C2.47066 10.8601 3.38568 10.7485 4.19219 10.3962C3.39226 10.0434 2.77129 9.35975 2.50204 8.51974C2.45359 8.3686 2.48835 8.20311 2.59351 8.08422C2.59716 8.0801 2.60087 8.07606 2.60464 8.0721C1.96391 7.50819 1.55973 6.68208 1.55973 5.76143V5.72759C1.55973 5.56814 1.64411 5.42059 1.78155 5.33974C1.82671 5.31317 1.87537 5.29511 1.92532 5.28558C1.70549 4.86154 1.58116 4.37984 1.58116 3.86958C1.58116 3.40165 1.58384 2.81192 1.91332 2.28081C1.98718 2.16175 2.10758 2.08915 2.2364 2.07195C2.42588 2.01237 2.64087 2.06969 2.77406 2.23302C3.86536 3.57126 5.44066 4.49583 7.23366 4.73961L7.23336 4.69629ZM5.52122 11.9746C4.73387 11.9746 3.97781 11.8435 3.27248 11.6023C4.13012 11.4538 4.95307 11.1159 5.66218 10.5602C5.81211 10.4427 5.87182 10.2435 5.81126 10.0629C5.7507 9.88234 5.583 9.75943 5.39255 9.75607C4.68968 9.74366 4.06712 9.39716 3.67793 8.86845C3.86828 8.85306 4.05428 8.82039 4.23445 8.77167C4.43603 8.71716 4.57363 8.53114 4.56674 8.32243C4.55985 8.11372 4.41029 7.93718 4.20555 7.89607C3.42694 7.73977 2.79883 7.16764 2.56169 6.42174C2.76255 6.47025 2.97102 6.4991 3.18482 6.5061C3.38563 6.51267 3.56646 6.38533 3.62795 6.19405C3.68943 6.00277 3.61666 5.79391 3.44963 5.68224C2.86523 5.29155 2.48116 4.62464 2.48116 3.86958C2.48116 3.70213 2.48352 3.55268 2.49355 3.41719C3.85115 4.79913 5.70873 5.68931 7.77588 5.79338C7.93225 5.80126 8.08328 5.73543 8.18395 5.61553C8.28463 5.49562 8.32332 5.33548 8.28851 5.18284C8.25255 5.02517 8.23336 4.86284 8.23336 4.69629C8.23336 3.52085 9.18591 2.56857 10.36 2.56857C11.5943 2.56857 12.4956 3.71208 12.4956 5.00079C12.4956 8.25709 10.0202 11.9746 5.52122 11.9746Z"
-                    fill="currentColor"
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-              </Link>
-              <Link href="https://discord.gg/WhZAF8Dz">
-                <svg
-                  width="21"
-                  height="21"
-                  viewBox="0 0 15 15"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M5.07451 1.82584C5.03267 1.81926 4.99014 1.81825 4.94803 1.82284C4.10683 1.91446 2.82673 2.36828 2.07115 2.77808C2.02106 2.80525 1.97621 2.84112 1.93869 2.88402C1.62502 3.24266 1.34046 3.82836 1.11706 4.38186C0.887447 4.95076 0.697293 5.55032 0.588937 5.98354C0.236232 7.39369 0.042502 9.08728 0.0174948 10.6925C0.0162429 10.7729 0.0351883 10.8523 0.0725931 10.9234C0.373679 11.496 1.02015 12.027 1.66809 12.4152C2.32332 12.8078 3.08732 13.1182 3.70385 13.1778C3.85335 13.1922 4.00098 13.1358 4.10282 13.0255C4.2572 12.8581 4.5193 12.4676 4.71745 12.1643C4.80739 12.0267 4.89157 11.8953 4.95845 11.7901C5.62023 11.9106 6.45043 11.9801 7.50002 11.9801C8.54844 11.9801 9.37796 11.9107 10.0394 11.7905C10.1062 11.8957 10.1903 12.0269 10.2801 12.1643C10.4783 12.4676 10.7404 12.8581 10.8947 13.0255C10.9966 13.1358 11.1442 13.1922 11.2937 13.1778C11.9102 13.1182 12.6742 12.8078 13.3295 12.4152C13.9774 12.027 14.6239 11.496 14.925 10.9234C14.9624 10.8523 14.9813 10.7729 14.9801 10.6925C14.9551 9.08728 14.7613 7.39369 14.4086 5.98354C14.3003 5.55032 14.1101 4.95076 13.8805 4.38186C13.6571 3.82836 13.3725 3.24266 13.0589 2.88402C13.0214 2.84112 12.9765 2.80525 12.9264 2.77808C12.1708 2.36828 10.8907 1.91446 10.0495 1.82284C10.0074 1.81825 9.96489 1.81926 9.92305 1.82584C9.71676 1.85825 9.5391 1.96458 9.40809 2.06355C9.26977 2.16804 9.1413 2.29668 9.0304 2.42682C8.86968 2.61544 8.71437 2.84488 8.61428 3.06225C8.27237 3.03501 7.90138 3.02 7.5 3.02C7.0977 3.02 6.72593 3.03508 6.38337 3.06244C6.28328 2.84501 6.12792 2.61549 5.96716 2.42682C5.85626 2.29668 5.72778 2.16804 5.58947 2.06355C5.45846 1.96458 5.2808 1.85825 5.07451 1.82584ZM11.0181 11.5382C11.0395 11.5713 11.0615 11.6051 11.0838 11.6392C11.2169 11.843 11.3487 12.0385 11.4508 12.1809C11.8475 12.0916 12.352 11.8818 12.8361 11.5917C13.3795 11.2661 13.8098 10.8918 14.0177 10.5739C13.9852 9.06758 13.7993 7.50369 13.4773 6.21648C13.38 5.82759 13.2038 5.27021 12.9903 4.74117C12.7893 4.24326 12.5753 3.82162 12.388 3.5792C11.7376 3.24219 10.7129 2.88582 10.0454 2.78987C10.0308 2.79839 10.0113 2.81102 9.98675 2.82955C9.91863 2.881 9.84018 2.95666 9.76111 3.04945C9.71959 3.09817 9.68166 3.1471 9.64768 3.19449C9.953 3.25031 10.2253 3.3171 10.4662 3.39123C11.1499 3.6016 11.6428 3.89039 11.884 4.212C12.0431 4.42408 12.0001 4.72494 11.788 4.884C11.5759 5.04306 11.2751 5.00008 11.116 4.788C11.0572 4.70961 10.8001 4.4984 10.1838 4.30877C9.58933 4.12585 8.71356 3.98 7.5 3.98C6.28644 3.98 5.41067 4.12585 4.81616 4.30877C4.19988 4.4984 3.94279 4.70961 3.884 4.788C3.72494 5.00008 3.42408 5.04306 3.212 4.884C2.99992 4.72494 2.95694 4.42408 3.116 4.212C3.35721 3.89039 3.85011 3.6016 4.53383 3.39123C4.77418 3.31727 5.04571 3.25062 5.35016 3.19488C5.31611 3.14738 5.27808 3.09831 5.23645 3.04945C5.15738 2.95666 5.07893 2.881 5.01081 2.82955C4.98628 2.81102 4.96674 2.79839 4.95217 2.78987C4.28464 2.88582 3.25999 3.24219 2.60954 3.5792C2.42226 3.82162 2.20825 4.24326 2.00729 4.74117C1.79376 5.27021 1.61752 5.82759 1.52025 6.21648C1.19829 7.50369 1.01236 9.06758 0.97986 10.5739C1.18772 10.8918 1.61807 11.2661 2.16148 11.5917C2.64557 11.8818 3.15003 12.0916 3.5468 12.1809C3.64885 12.0385 3.78065 11.843 3.9138 11.6392C3.93626 11.6048 3.95838 11.5708 3.97996 11.5375C3.19521 11.2591 2.77361 10.8758 2.50064 10.4664C2.35359 10.2458 2.4132 9.94778 2.63377 9.80074C2.85435 9.65369 3.15236 9.71329 3.29941 9.93387C3.56077 10.3259 4.24355 11.0201 7.50002 11.0201C10.7565 11.0201 11.4392 10.326 11.7006 9.93386C11.8477 9.71329 12.1457 9.65369 12.3663 9.80074C12.5869 9.94779 12.6465 10.2458 12.4994 10.4664C12.2262 10.8762 11.8041 11.2598 11.0181 11.5382ZM4.08049 7.01221C4.32412 6.74984 4.65476 6.60162 5.00007 6.59998C5.34538 6.60162 5.67603 6.74984 5.91966 7.01221C6.16329 7.27459 6.30007 7.62974 6.30007 7.99998C6.30007 8.37021 6.16329 8.72536 5.91966 8.98774C5.67603 9.25011 5.34538 9.39833 5.00007 9.39998C4.65476 9.39833 4.32412 9.25011 4.08049 8.98774C3.83685 8.72536 3.70007 8.37021 3.70007 7.99998C3.70007 7.62974 3.83685 7.27459 4.08049 7.01221ZM9.99885 6.59998C9.65354 6.60162 9.3229 6.74984 9.07926 7.01221C8.83563 7.27459 8.69885 7.62974 8.69885 7.99998C8.69885 8.37021 8.83563 8.72536 9.07926 8.98774C9.3229 9.25011 9.65354 9.39833 9.99885 9.39998C10.3442 9.39833 10.6748 9.25011 10.9184 8.98774C11.1621 8.72536 11.2989 8.37021 11.2989 7.99998C11.2989 7.62974 11.1621 7.27459 10.9184 7.01221C10.6748 6.74984 10.3442 6.60162 9.99885 6.59998Z"
-                    fill="currentColor"
-                  ></path>
-                </svg>
+                  <Button className="h-fit gap-1 px-3 py-1 [&_svg]:size-2">
+                    Sign Up
+                    <svg
+                      data-testid="geist-icon"
+                      height={12}
+                      strokeLinejoin="round"
+                      viewBox="0 0 16 16"
+                      width={12}
+                      style={{ color: "currentcolor" }}
+                    >
+                      <path
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        d="M5.50001 1.93933L6.03034 2.46966L10.8536 7.29288C11.2441 7.68341 11.2441 8.31657 10.8536 8.7071L6.03034 13.5303L5.50001 14.0607L4.43935 13L4.96968 12.4697L9.43935 7.99999L4.96968 3.53032L4.43935 2.99999L5.50001 1.93933Z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                    {/* <Sparkles />
+                    Ask Ai */}
+                  </Button>
+                </motion.div>
               </Link>
             </div>
           </div>
-          <div
-            className="absolute z-[3] top-0 left-0 rounded-full bg-slate-100 dark:bg-[#000000] transition-[width]"
-            style={hoverStyles}
-          />
+          <div className="absolute left-0 top-0 z-[3] rounded-full bg-slate-100 transition-[width] dark:bg-[#000000]" />
         </nav>
       </nav>
-    </div>
+    </motion.div>
   );
 };
+const ListItem = React.forwardRef<
+  React.ElementRef<"a">,
+  React.ComponentPropsWithoutRef<"a">
+>(({ className, title, children, ...props }, ref) => {
+  return (
+    <li>
+      <NavigationMenuLink asChild>
+        <a
+          ref={ref}
+          className={cn(
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            className,
+          )}
+          {...props}
+        >
+          <div className="text-sm font-medium leading-none">{title}</div>
+          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+            {children}
+          </p>
+        </a>
+      </NavigationMenuLink>
+    </li>
+  );
+});
+ListItem.displayName = "ListItem";

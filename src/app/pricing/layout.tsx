@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 export const metadata: Metadata = {
-  title: "Pricing",
-  description: "MusicHub App",
+  title: "Pricing | Flora",
+  description: "Flora - Pricing",
 };
-export default function ResourcesLayout({
+export default function PricingLayout({
   children,
 }: {
   children: React.ReactNode;
